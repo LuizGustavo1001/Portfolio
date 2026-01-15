@@ -51,29 +51,13 @@ svg{
     color: var(--lm-purple);
 }
 
-
-
-
-img, svg{
-    width: 50px;
-}
-
-video{
-    width: 400px;
-}
-
-
-
-
 .desktop{
     display: none;
 }
 
-.toggle .inactive{
+.inactive{
     display: none;
 }
-
-
 
 .card-button{
     display: flex;
@@ -168,7 +152,7 @@ video{
 
 .mobile.card .toggle-lang svg,
 .desktop.card .toggle-lang svg{
-    width: 26px;
+    width: 20px;
 }
 
 .desktop.card{
@@ -186,7 +170,7 @@ video{
     border-radius:  0 var(--rounded-border-alt) var(--rounded-border-alt) 0;
 }
 .desktop.card svg{
-    width: 30px;
+    width: 25px;
 }
 .desktop.card .title{
     display: flex;
