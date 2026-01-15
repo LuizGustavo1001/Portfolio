@@ -1,22 +1,10 @@
 const body = document.body
 const availableLang = ["BR", "EN"]
 
-// Verify last theme
-const savedTheme = localStorage.getItem("theme")
+// Toggle theme
+const savedTheme = localStorage.getItem("theme") || "light"
 if(savedTheme == "dark"){toggleTheme()}
 
-
-// Default language
-if(! localStorage.getItem("lang")){
-    const defaultLang = navigator.language
-    if(defaultLang == "pt-BR"){
-        localStorage.setItem("lang", "BR")
-    }else{
-        localStorage.setItem("lang", "EN")
-    }
-}
-
-// Toggle theme
 const toggleThemeIcon = document.querySelectorAll(".toggle-theme")
 toggleThemeIcon.forEach(icon => {
     icon.addEventListener("click", () => {
@@ -30,38 +18,56 @@ function toggleTheme(){
     const isDark = body.classList.contains("dark-mode")
     localStorage.setItem("theme", isDark ? "dark" : "light")
 
-    const toggleItems = document.querySelectorAll(".toggle-theme-icon")
-    toggleItems.forEach(icon => {icon.classList.toggle("inactive")})
+    const icons = document.querySelectorAll(".toggle-theme-icon")
+    icons.forEach(icon => {icon.classList.toggle("inactive")})
 }
 
 
 // Toggle language
-const savedLang = localStorage.getItem("lang")
+const toggleLangIcon = document.querySelectorAll(".toggle-lang-icon")
+
+// Default language
+if(! localStorage.getItem("lang")){
+    const defaultLang = navigator.language
+    if(defaultLang == "pt-BR"){
+        localStorage.setItem("lang", "BR")
+    }else{
+        localStorage.setItem("lang", "EN")
+    }
+}
+
+const savedLang = localStorage.getItem("lang") || "BR"
 if(availableLang.includes(savedLang)){
+    toggleLanguage(savedLang)
     loadLanguage(savedLang)
 }
 
-const toggleLangIcon = document.querySelectorAll(".toggle-lang")
 toggleLangIcon.forEach(icon => {
     icon.addEventListener("click", () => {
-        const lang = icon.innerHTML
-        if(availableLang.includes(lang)){
-            if(lang == "EN"){
-                loadLanguage("BR")
-                localStorage.setItem("lang", "BR")
-            }else{
-                loadLanguage("EN")
-                localStorage.setItem("lang", "EN")
-            }
-        }    
+        const nextLang = icon.dataset.nextLang
+
+        if(availableLang.includes(nextLang)){
+            toggleLanguage(nextLang)
+        }
     })
 })
+
+function toggleLanguage(lang){
+    toggleLangIcon.forEach(icon => {
+        icon.classList.toggle("inactive", icon.dataset.nextLang === lang)
+    })
+
+    localStorage.setItem("lang", lang)
+    loadLanguage(lang)
+}
+
 
 async function loadLanguage(lang){
     const res = await fetch(`lang/${lang}.json`)
     const data = await res.json()
 
     const translateContent = document.querySelectorAll("[data-i18n]")
+
     translateContent.forEach(item => {
         const key = item.dataset.i18n
         const value = data[key]
@@ -69,3 +75,16 @@ async function loadLanguage(lang){
         if(value !== undefined){item.innerHTML = value}
     })
 }
+
+
+// Section click highlight effect
+const cardNavIcons = document.querySelectorAll(".page-nav")
+cardNavIcons.forEach(item => {
+    item.addEventListener("click", () => {
+        const selectedSection = document.getElementById(item.dataset.id)
+
+        selectedSection.classList.add("highlight-border")
+
+        setTimeout(() => {selectedSection.classList.remove("highlight-border")}, 2000)
+    })
+})
