@@ -6,18 +6,18 @@
     "section-title-2": "Skills",
     "section-title-3": "Highlight Projects",
     "section-title-4": "Contact Me",
-    "section-text-1": "Estudante de Ciência da Computação com foco em Front-End. Projeto e desenvolvo páginas web utilizando JavaScript e/ou PHP focadas em responsividade, modernidade e facilidade de uso para todos.",
+    "section-text-1": "Science Computer student focused on Front-End development, building modern, responsive and accessible web applications. I design and develop interfaces using JavaScript and PHP, prioritizing usability, responsiveness and intuitive user experience.",
     "education-title-1": "Escola Educação Criativa",
-    "education-subtitle-1": "Ensino Médio Completo",
-    "education-title-2": "Universidade Federal de Lavras(UFLA)",
-    "education-subtitle-2": "Bacharelado em Ciência da Computação - Em andamento",
+    "education-subtitle-1": "Completed High School",
+    "education-title-2": "Universidade Federal de Lavras (UFLA)",
+    "education-subtitle-2": "Bachelor's Degree in Computer Science - In progress",
 
     "project-title-1": "Projeto Açaí 2.0",
-    "project-description-1": "Plataforma de e-commerce completa, com gerenciamento de usuários, controle de vendas e painel administrativo com suporte a operações CRUD. Aplicação desenvolvida inteiramente em PHP, garantindo organização e segurança no fluxo de informações. A cada pedido realizado, os dados da transação são automaticamente registrados em uma planilha online, incluindo informações do cliente, produtos adquiridos e data da compra, facilitando o acompanhamento e a gestão das vendas.",
+    "project-description-1": "Complete e-commerce plataform, with user management, sales control and administrative panel supporting CRUD operations. Application developed entirely using PHP, ensuring organization and security at data flow. With each order placed, the transaction data is automatically recorded in an online spreadsheet, including client data, the acquired products and buying date, making it easier to track and manage sales.",
     "project-title-2": "AnimeVault",
-    "project-description-2": "Site para exemplificar um bot do Discord que permite aos usuários explorar, pesquisar e receber recomendações de animes em tempo real utilizando a API  Jikan (MyAnimeList). A aplicação web também conta com um recurso de torneios no estilo mata-mata, atualmente em desenvolvimento.",
+    "project-description-2": "Demonstration website for a Discord bot that allows users to explore, search, and receive real-time anime recommendations using the Jikan API (MyAnimeList). The web application also includes a playoff-style tournament feature, currently under development, highlighting ongoing work with dynamic logic and external API integration.",
     "project-title-3": "ToDo List",
-    "project-description-3": "Lista de tarefas online contendo filtros e tema escuro utilizando JavaScript. A aplicação recebe dados a partir de um arquivo JSON, responsável por armazenar informações sobre cada tarefa. Implementa um CRUD simples, permitindo criar, visualizar, atualizar e remover tarefas, além de gerenciar seus estados entre concluída e em andamento.",
+    "project-description-3": "Online To-Do List featuring filters and dark mode, developed using JavaScript. The application retrieves data from a JSON file responsible for storing task information. It implements a simple CRUD system, allowing users to create, view, update, and delete tasks, as well as manage their status between completed and in progress.",
 
     "web-page": "Web Page",
     "project-repository": "Repository",
@@ -25,5 +25,4 @@
     "contact-input-1": "Your email address: ",
     "contact-input-2": "Message: ",
     "contact-submit-btn": "Submit"
-    
 }
