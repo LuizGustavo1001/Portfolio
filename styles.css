@@ -385,7 +385,6 @@ svg{
     }
     #projects-list video{
         width: 450px;
-
     }
     #projects-list .project-main{
         display: flex;
@@ -515,7 +514,6 @@ input, textarea{
     font-family: var(--font-2);
 }
 
-
 #contact form{
     margin-block: 2em;
 
@@ -546,19 +544,11 @@ input, textarea{
     transition: all var(--quick-transition) linear;
 }
 #contact input, textarea{
-    display: none;
     transition: all var(--quick-transition) linear;
 }
 #contact label:hover span,
 #contact label:focus-within span{
     margin-bottom: 0.5em;
-}
-
-#contact label:hover input,
-#contact label:focus-within input,
-#contact label:hover textarea,
-#contact label:focus-within textarea{
-    display: block;
 }
 
 @media(min-width: 1600px){
