@@ -38,13 +38,13 @@
 }
 
 body{
-    font-family: var(--font-2);
     padding: 0.5em 0.5em 20vh 0.5em;
+
+    font-family: var(--font-2);
 
     background: var(--lm-beige-light);
     color: var(--lm-purple);
 }
-
 ul{
     list-style-type: none;
 }
@@ -59,31 +59,54 @@ svg{
 .desktop{
     display: none;
 }
-
 .inactive{
     display: none;
+}
+
+.light-text{
+    color: var(--lm-lighter-purple);
 }
 
 .card-button{
     display: flex;
     align-items: center;
     justify-content: center;
+
     padding: 0.5em;
 
     border-radius: var(--rounded-border-alt);
     transition: all var(--quick-transition) linear;
 }
 .card-button:hover{
-    cursor: pointer;
     transform: scale(1.1);
+    cursor: pointer;
+
     background-color: var(--lm-beige);
 }
 .card-button:hover svg{
     color: var(--lm-red); 
 }
 
-.light-text{
-    color: var(--lm-lighter-purple);
+body.dark-mode{
+    background: var(--dm-darker-blue);
+    color: var(--white);
+}
+.dark-mode a{
+    color: var(--white);
+}
+.dark-mode svg{
+    color: var(--white);
+}
+
+.dark-mode .card-button:hover{
+    background-color: var(--dm-dark-blue);
+}
+.dark-mode .card-button:hover svg{
+    color: var(--dm-cyan); 
+}
+
+.dark-mode .light-text{
+    color: var(--dm-light-blue);
 }
 
 @media(min-width: 1024px){
@@ -95,7 +118,6 @@ svg{
         max-width: 2100px;
         margin: 0 auto;
     }
-
     body{
         padding: 1em;
     }
@@ -126,6 +148,7 @@ svg{
     font-weight: normal;
 }
 .card .title img{
+    object-fit: cover;
     border-radius: var(--rounded-border);
 }
 
@@ -144,28 +167,29 @@ svg{
     font-size: 0.9em;
 }
 .mobile.card nav{
-    min-width: 300px;
-    max-width: 500px;
-    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 0.5em;
 
     position: fixed;
     bottom: 0px;
     left: 50vw;
     transform: translate(-50%, -50%);
+    
+    min-width: 300px;
+    max-width: 500px;
 
+    margin: 0 auto;
     padding: 0.3em;
 
     border-radius: var(--rounded-border-alt);
-    background: var(--white);
     border: 1px solid var(--lm-beige-dark);
-
-    display: flex;
-    justify-content: space-between;
-    gap: 0.5em;
+    background: var(--white);
 }
 .mobile.card hr{
     height: 25px;
     margin: auto 0;
+
     color: var(--lm-beige-dark);
     opacity: 30%;
 }
@@ -179,18 +203,21 @@ svg{
 }
 .mobile.card .title img{
     width: 100px;
+    height: 100px;
+
+    object-position: 0px -1.35em;  
 }
 
 .desktop.card{
+    flex-direction: column;
+    justify-content: space-between;
+
     position: sticky;
     top: 1em;
 
     height: calc(100vh - 2em);
 
     padding: 1em;
-
-    flex-direction: column;
-    justify-content: space-between;
 
     background: var(--white);
     border-radius: var(--rounded-border-alt);
@@ -206,6 +233,12 @@ svg{
 }
 .desktop.card .title img{
     width: 300px;
+    height: 300px;
+
+    object-fit: cover;
+    object-position: 0px -4em;                                                                                                                                                                   em;
+    aspect-ratio: 1/1;
+
     margin: 1em auto 0 auto;
 }
 .desktop.card .toggle,
@@ -223,6 +256,21 @@ svg{
     border-radius: var(--rounded-border);
 }
 
+.dark-mode .mobile.card nav{
+    background: var(--dm-dark-purple);
+    border: 1px solid var(--dm-light-blue);
+}
+.dark-mode .mobile.card hr{
+    color: var(--dm-light-blue);
+}
+
+.dark-mode .desktop.card{
+    background: var(--dm-dark-blue);
+}
+.dark-mode .desktop.card .navigation nav{
+    background: var(--dm-dark-purple);
+}
+
 @media(max-width: 380px){
     .mobile.card nav{
         justify-content: center;
@@ -238,7 +286,7 @@ svg{
 /* CARD */
 
 
-/* HERO CONTAINER */
+/* HERO CONTAINER(GENERAL) */
 .hero{
     display: flex;
     flex-direction: column;
@@ -246,6 +294,7 @@ svg{
 }
 .hero .container{
     padding: 1em;
+
     border: 2px solid transparent;
     background: var(--lm-beige-lighter);
     box-shadow: 0px 4px 4px #ada19736;
@@ -260,20 +309,30 @@ svg{
     margin-bottom: 1em;
 
     border-radius: var(--squared-border-alt) 0 0 var(--squared-border-alt);
-    border-left: 4px solid var(--lm-red);
     font-family: var(--font-1);
     font-size: 0.6em;
+
+    border-left: 4px solid var(--lm-red);
 }
 .container .section-title svg{
     width: 25px;
 }
 
-.content{
+.container .content{
     display: flex;
     flex-direction: column;
     gap: 1em;
 }
-/* HERO CONTAINER */
+
+.dark-mode .hero .container{
+    background: var(--dm-dark-purple);
+    box-shadow: 0px 4px 4px rgba(65, 62, 90, 0.557)
+}
+.dark-mode .container .section-title{
+    border-left: 4px solid var(--dm-cyan);
+}
+
+/* HERO CONTAINER(GENERAL) */
 
 /* ABOUT ME */
 #about .education{
@@ -288,19 +347,18 @@ svg{
     align-items: center;
     justify-content: space-between;
     
-    background: var(--white);
     border-radius: var(--rounded-border);
+    background: var(--white);
 }
-
-#about .education .badge-alt{
-    text-align: center;
-    font-size: 0.em;
-}
-
 #about .education li .education-label{
     display: flex;
     align-items: center;
     gap: 1em;
+}
+
+#about .badge-alt{
+    text-align: center;
+    font-size: 0.em;
 }
 
 #about .education img{
@@ -319,6 +377,13 @@ svg{
     font-size: 0.7em;
 }
 
+.dark-mode #about .education li{
+    background: var(--dm-dark-blue);
+}
+.dark-mode #about .education img{
+    border: 1px solid var(--dm-cyan);
+}
+
 @media(min-width: 1024px){
     #about .education .badge{
         min-width: 120px;
@@ -333,6 +398,7 @@ svg{
 }
 /* ABOUT ME */
 
+
 /* SKILLS */
 .skills-list{
     display: flex;
@@ -344,31 +410,29 @@ svg{
 
 /* HIGHLIGHT PROJECTS */
 #projects-list{
-    width: 100%;
-
     display: flex;
     flex-direction: column;
     gap: 3em;
+
+    width: 100%;
 }
 #projects-list video{
     width: 100%;
     border-radius: var(--squared-border);
 }
 
+#projects-list .project-title{
+    margin-block: 0.5em 1em;
+    padding-left: 0.5em;
+    
+    border-left: 3px solid var(--lm-beige-dark);
+}
 #projects-list li h1{
     font-size: 1.3em;
 }
 #projects-list li p{
     font-size: 0.95em;
 }
-
-#projects-list .project-title{
-    margin-block: 0.5em 1em;
-
-    padding-left: 0.5em;
-    border-left: 3px solid var(--lm-beige-dark);
-}
-
 #projects-list nav{
     display: flex;
     justify-content: space-between;
@@ -377,41 +441,48 @@ svg{
     margin-top: 1em;
 }
 
+.dark-mode #projects-list .project-title{
+    border-color: var(--dm-light-blue);
+}
+
 @media(min-width: 1600px){
-    #projects-list li{
-        display: flex;
-        gap: 1em;
-        height: fit-content;
-    }
-    #projects-list video{
-        width: 450px;
-    }
     #projects-list .project-main{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
     }
+    #projects-list video{
+        width: 450px;
+    }
+    #projects-list li{
+        display: flex;
+        gap: 1em;
+
+        height: fit-content;
+    }
 }
 
 /* HIGHLIGHT PROJECTS */
 
+
 /* BADGE */
 .badge{
-    padding: 0.5em;
-    height: fit-content;
-    width: fit-content;
-    
-    background: var(--white);
-    border-radius: var(--squared-border);
-    border: 1px solid var(--white);
-
-    transition: all var(--quick-transition) linear;
-
-    cursor: default;
-
     display: flex;
     align-items: center;
     gap: 0.3em;
+
+    height: fit-content;
+    width: fit-content;
+    
+    padding: 0.5em;
+    
+    border-radius: var(--squared-border);
+
+    background: var(--white);
+    border: 1px solid var(--white);
+
+    transition: all var(--quick-transition) linear;
+    cursor: default;
 }
 .badge:hover{
     color: var(--lm-red);
@@ -419,28 +490,47 @@ svg{
 }
 
 .badge-alt{
-    padding: 0.2em;
     min-width: 100px;
+
+    padding: 0.2em;
+
+    border-radius: var(--rounded-border);
+
     background: var(--lm-lighter-purple);
     color: var(--lm-beige-light);
-
     border: 1px solid var(--lm-lighter-purple);
-    border-radius: var(--rounded-border);
+}
+
+.dark-mode .badge{
+    background: var(--dm-dark-blue);
+    border-color: var(--dm-dark-blue);
+}
+.dark-mode .badge:hover{
+    color: var(--dm-cyan);
+    border-color: var(--dm-cyan);
+}
+
+.dark-mode .badge-alt{
+    background: var(--dm-dark-purple);
+    color: var(--white);
+
+    border-color: var(--dm-dark-purple);
 }
 /* BADGE */
 
 
 /* LINK BUTTON STYLED */
 .button-styled{
-    padding: 0.3em 0.5em;
-    width: fit-content;
-
     display: flex;
     align-items: center;
     gap: 0.3em;
 
-    border: 1px solid transparent;
+    width: fit-content;
+    padding: 0.3em 0.5em;
+
     border-radius: var(--rounded-border);
+    
+    border: 1px solid transparent;
     background: var(--lm-lighter-purple);
     color: var(--lm-beige-light);
 
@@ -448,8 +538,8 @@ svg{
 }
 .button-styled svg{
     width: 25px;
-    color: var(--lm-beige-light);
     stroke-width: 1px;
+    color: var(--lm-beige-light);
 }
 .button-styled:hover{
     background: transparent;
@@ -458,6 +548,22 @@ svg{
 }
 .button-styled:hover svg{
     color: var(--lm-red);
+}
+
+.dark-mode .button-styled{
+    background: var(--dm-light-blue);
+    color: var(--dm-dark-purple);
+}
+.dark-mode .button-styled svg{
+    color: var(--dm-dark-purple);
+}
+.dark-mode .button-styled:hover{
+    background: transparent;
+    color: var(--dm-cyan);
+    border-color: var(--dm-cyan);
+}
+.dark-mode .button-styled:hover svg{
+    color: var(--dm-cyan);
 }
 /* LINK BUTTON STYLED */
 
@@ -468,20 +574,18 @@ svg{
     align-items: center;
     justify-content: center;
     gap: 0.5em;
-    font-size: 1.2em;
-
-    font-family: var(--font-2);
-    color: var(--lm-beige-light);
-    border: 1px solid transparent;
-
-    border-radius: var(--rounded-border);
 
     padding-block: 0.5em;
 
+    font-size: 1.2em;
+    font-family: var(--font-2);
+    border-radius: var(--rounded-border);
+
+    color: var(--lm-beige-light);
+    border: 1px solid transparent;
     background: var(--lm-lighter-purple);
 
     transition: all var(--quick-transition) linear;
-
     cursor: pointer;
 }
 .regular-button:hover{
@@ -494,38 +598,53 @@ svg{
 .regular-button svg{
     width: 30px;
     color: var(--lm-beige-light);
-
     transition: all var(--quick-transition) linear;
 }
 .regular-button:hover svg{
     color: var(--lm-red);
+}
+
+.dark-mode .regular-button{
+    color: var(--white);
+    background: var(--dm-light-purple);
+}
+.dark-mode .regular-button:hover{
+    background: transparent;
+    border-color: var(--dm-cyan);
+    color: var(--dm-cyan);
+}
+.dark-mode .regular-button svg{
+    color: var(--white);
+}
+.dark-mode .regular-button:hover svg{
+    color: var(--dm-cyan);
 }
 /* REGULAR BUTTON */
 
 
 /* FORM */
 input, textarea{
+    font-family: var(--font-2);
+
     background: transparent;
     border: none;
     outline: none;
 
     color: var(--lm-purple);
-
-    font-family: var(--font-2);
 }
 
 #contact form{
-    margin-block: 2em;
-
     display: flex;
     flex-direction: column;
     gap: 1em;
+
+    margin-block: 2em;
 }
 #contact label{
-    height: fit-content;
-
     display: flex;
     flex-direction: column;
+
+    height: fit-content;
 
     padding: 1em;
 
@@ -539,16 +658,30 @@ input, textarea{
     border-color: var(--lm-red);
     color: var(--lm-red);
 }
-
-#contact label span{
-    transition: all var(--quick-transition) linear;
-}
-#contact input, textarea{
+#contact label span, 
+#contact input, 
+#contact textarea{
     transition: all var(--quick-transition) linear;
 }
 #contact label:hover span,
 #contact label:focus-within span{
     margin-bottom: 0.5em;
+}
+
+.dark-mode #contact label{
+    border-color: var(--dm-light-blue);
+    color: var(--dm-light-blue);
+
+    cursor: pointer;
+}
+.dark-mode #contact label:hover,
+.dark-mode #contact label:focus-within{
+    border-color: var(--dm-cyan);
+    color: var(--dm-cyan);
+}
+.dark-mode input,
+.dark-mode textarea{
+    color: var(--white);
 }
 
 @media(min-width: 1600px){
@@ -598,128 +731,3 @@ input, textarea{
 }
 /* EFFECTS */
 
-
-/* DARK MODE */
-body.dark-mode {
-    background: var(--dm-darker-blue);
-    color: var(--white);
-}
-.dark-mode a{
-    color: var(--white);
-}
-.dark-mode svg{
-    color: var(--white);
-}
-
-.dark-mode .card-button:hover{
-    background-color: var(--dm-dark-blue);
-}
-.dark-mode .card-button:hover svg{
-    color: var(--dm-cyan); 
-}
-
-.dark-mode .light-text{
-    color: var(--dm-light-blue);
-}
-
-.dark-mode .mobile.card nav{
-    background: var(--dm-dark-purple);
-    border: 1px solid var(--dm-light-blue);
-}
-.dark-mode .mobile.card hr{
-    color: var(--dm-light-blue);
-}
-
-.dark-mode .desktop.card{
-    background: var(--dm-dark-blue);
-}
-.dark-mode .desktop.card .navigation nav{
-    background: var(--dm-dark-purple);
-}
-
-.dark-mode .hero .container{
-    background: var(--dm-dark-purple);
-    box-shadow: 0px 4px 4px rgba(65, 62, 90, 0.557)
-}
-
-.dark-mode .container .section-title{
-    border-left: 4px solid var(--dm-cyan);
-}
-
-.dark-mode #about .education li{
-    background: var(--dm-dark-blue);
-}
-.dark-mode #about .education img{
-    border: 1px solid var(--dm-cyan);
-}
-
-
-.dark-mode #projects-list .project-title{
-    border-color: var(--dm-light-blue);
-}
-
-.dark-mode .badge{
-    background: var(--dm-dark-blue);
-    border-color: var(--dm-dark-blue);
-}
-.dark-mode .badge:hover{
-    color: var(--dm-cyan);
-    border-color: var(--dm-cyan);
-}
-
-.dark-mode .badge-alt{
-    background: var(--dm-dark-purple);
-    color: var(--white);
-
-    border-color: var(--dm-dark-purple);
-}
-
-.dark-mode .button-styled{
-    background: var(--dm-light-blue);
-    color: var(--dm-dark-purple);
-}
-.dark-mode .button-styled svg{
-    color: var(--dm-dark-purple);
-}
-.dark-mode .button-styled:hover{
-    background: transparent;
-    color: var(--dm-cyan);
-    border-color: var(--dm-cyan);
-}
-.dark-mode .button-styled:hover svg{
-    color: var(--dm-cyan);
-}
-
-.dark-mode .regular-button{
-    color: var(--white);
-    background: var(--dm-light-purple);
-}
-.dark-mode .regular-button:hover{
-    background: transparent;
-    border-color: var(--dm-cyan);
-    color: var(--dm-cyan);
-}
-.dark-mode .regular-button svg{
-    color: var(--white);
-}
-.dark-mode .regular-button:hover svg{
-    color: var(--dm-cyan);
-}
-
-.dark-mode #contact label{
-    border-color: var(--dm-light-blue);
-    color: var(--dm-light-blue);
-
-    cursor: pointer;
-}
-.dark-mode #contact label:hover,
-.dark-mode #contact label:focus-within{
-    border-color: var(--dm-cyan);
-    color: var(--dm-cyan);
-}
-
-.dark-mode input,
-.dark-mode textarea{
-    color: var(--white);
-}
-/* DARK MODE */
