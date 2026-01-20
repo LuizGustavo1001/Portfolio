@@ -18,6 +18,7 @@
     --lm-beige: #EDDFD4;
     --lm-beige-dark: #ADA197;
     --lm-red: #B4637A;
+
     --white: #FFFFFF;
     --black: #000000;
 
@@ -35,6 +36,7 @@
     padding: 0;
     box-sizing: border-box;
     scroll-behavior: smooth;
+    transition: all var(--quick-transition) linear;
 }
 
 body{
@@ -65,6 +67,7 @@ svg{
 
 .light-text{
     color: var(--lm-lighter-purple);
+    font-weight: 300;
 }
 
 .card-button{
@@ -85,6 +88,9 @@ svg{
 }
 .card-button:hover svg{
     color: var(--lm-red); 
+}
+.toggle-lang svg{
+    cursor: pointer;
 }
 
 body.dark-mode{
@@ -147,9 +153,41 @@ body.dark-mode{
     font-family: var(--font-1);
     font-weight: normal;
 }
-.card .title img{
-    object-fit: cover;
+
+.card .profile-picture{
+    position: relative;
+    min-width: 100px;
+    height: 100px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.desktop.card .profile-picture{
+    min-width: 300px;
+    height: 300px;
+    margin: 1em auto;
+}
+
+.profile-picture img{
+    position: relative;
+    width: 100%;
+    height: 100%;
+
+    z-index: 2;
+}
+
+.profile-picture img,
+.profile-picture .object-border{
     border-radius: var(--rounded-border);
+}
+.profile-picture .object-border{
+    position: absolute;
+    inset: -2px;
+
+    background: linear-gradient(180deg, var(--lm-red), transparent 70%);
+    animation: spin 4s linear infinite;
+    z-index: 1;
 }
 
 .mobile.card .toggle-lang svg,
@@ -200,12 +238,8 @@ body.dark-mode{
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-.mobile.card .title img{
-    width: 100px;
-    height: 100px;
-
-    object-position: 0px -1.35em;  
+    margin-inline: 1em;
+    gap: 0.5em;
 }
 
 .desktop.card{
@@ -231,16 +265,7 @@ body.dark-mode{
     flex-direction: column;
     text-align: left;
 }
-.desktop.card .title img{
-    width: 300px;
-    height: 300px;
 
-    object-fit: cover;
-    object-position: 0px -4em;                                                                                                                                                                   em;
-    aspect-ratio: 1/1;
-
-    margin: 1em auto 0 auto;
-}
 .desktop.card .toggle,
 .desktop.card .navigation,
 .desktop.card .navigation nav{
@@ -256,6 +281,9 @@ body.dark-mode{
     border-radius: var(--rounded-border);
 }
 
+.dark-mode .profile-picture .object-border{
+    background: linear-gradient(180deg, var(--dm-cyan), transparent 70%);
+}
 .dark-mode .mobile.card nav{
     background: var(--dm-dark-purple);
     border: 1px solid var(--dm-light-blue);
@@ -452,12 +480,11 @@ body.dark-mode{
         justify-content: space-between;
     }
     #projects-list video{
-        width: 450px;
+        width: 400px;
     }
     #projects-list li{
         display: flex;
         gap: 1em;
-
         height: fit-content;
     }
 }
@@ -731,10 +758,10 @@ input, textarea{
 }
 
 .quick-fade{
-    animation: fade-in-out 1s ease-in-out;
+    animation: fade-in-out 0.5s ease-in-out;
 }
 .slow-fade{
-    animation: fade-in-out  1.5s ease-in-out;
+    animation: fade-in-out  1s ease-in-out;
 }
 @keyframes fade-in-out{
     from{
@@ -744,6 +771,15 @@ input, textarea{
     to{
         opacity: 1;
         translate: 0 0;
+    }
+}
+
+@keyframes spin{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
     }
 }
 /* EFFECTS */
