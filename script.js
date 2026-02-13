@@ -1,17 +1,7 @@
-const body = document.body
+const body          = document.body
 const availableLang = ["BR", "EN"]
 
 // Toggle theme
-const savedTheme = localStorage.getItem("theme") || "light"
-if(savedTheme == "dark"){toggleTheme()}
-
-const toggleThemeIcon = document.querySelectorAll(".toggle-theme")
-toggleThemeIcon.forEach(icon => {
-    icon.addEventListener("click", () => {
-        toggleTheme()
-    })
-})
-
 function toggleTheme(){
     body.classList.toggle("dark-mode")
 
@@ -26,41 +16,22 @@ function toggleTheme(){
 // Toggle language
 const toggleLangIcon = document.querySelectorAll(".toggle-lang-icon")
 
-// Default language
-if(! localStorage.getItem("lang")){
-    const defaultLang = navigator.language
-    if(defaultLang == "pt-BR"){
-        localStorage.setItem("lang", "BR")
-    }else{
-        localStorage.setItem("lang", "EN")
-    }
-}
+const toggleLangBox = document.querySelectorAll(".toggle-lang")
+toggleLangBox.forEach(box => {
+    box.addEventListener("click", () => {
+        const nextLangIcon  = box.querySelector(".toggle-lang-icon:not(.inactive)")
+        const nextLang      = nextLangIcon.dataset.nextLang
 
-const savedLang = localStorage.getItem("lang") || "BR"
-if(availableLang.includes(savedLang)){
-    toggleLanguage(savedLang)
-    loadLanguage(savedLang)
-}
-
-toggleLangIcon.forEach(icon => {
-    icon.addEventListener("click", () => {
-        const nextLang = icon.dataset.nextLang
-
-        if(availableLang.includes(nextLang)){
-            toggleLanguage(nextLang)
-        }
+        if(availableLang.includes(nextLang)){toggleLanguage(nextLang)}
     })
 })
 
 function toggleLanguage(lang){
-    toggleLangIcon.forEach(icon => {
-        icon.classList.toggle("inactive", icon.dataset.nextLang === lang)
-    })
+    toggleLangIcon.forEach(icon => {icon.classList.toggle("inactive", icon.dataset.nextLang === lang)})
 
     localStorage.setItem("lang", lang)
     loadLanguage(lang)
 }
-
 
 async function loadLanguage(lang){
     const res = await fetch(`lang/${lang}.json`)
@@ -88,3 +59,15 @@ cardNavIcons.forEach(item => {
         setTimeout(() => {selectedSection.classList.remove("highlight-border")}, 2000)
     })
 })
+
+
+// Local Storage
+const savedTheme = localStorage.getItem("theme") || "light"
+if(savedTheme == "dark"){toggleTheme()}
+
+const toggleThemeIcon = document.querySelectorAll(".toggle-theme")
+toggleThemeIcon.forEach(icon => {icon.addEventListener("click", () => {toggleTheme()})})
+
+
+const savedLang = localStorage.getItem("lang") || "BR"
+if(availableLang.includes(savedLang)){toggleLanguage(savedLang)}
