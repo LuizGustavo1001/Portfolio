@@ -13,6 +13,7 @@
 
     --white: #FFFFFF;
     --black: #000000;
+    --black-alt: #0000003a;
 
     --blue-900: #2E3440;
     --blue-800: #3B4252;
@@ -92,7 +93,7 @@ svg{
 
 
 .dark-mode{
-    background: var(--black);
+    background: var(--blue-900);
     color: var(--white);
 }
 .dark-mode a{
@@ -103,7 +104,7 @@ svg{
 }
 
 .dark-mode .card-button:hover{
-    background-color: var(--blue-900);
+    background-color: var(--blue-800);
 }
 .dark-mode .card-button:hover svg{
     color: var(--blue-400);
@@ -144,8 +145,6 @@ svg{
         grid-template-columns: 28% auto;
     }
 }
-
-
 
 /* -=-=-=-=-=-=-=-= CARD -=-=-=-=-=-=-=-= */
 .card .title h1{
@@ -218,15 +217,16 @@ svg{
     min-width: 300px;
     max-width: 500px;
 
-    border: 1px solid var(--blue-300);
     background: var(--blue-100);
     border-radius: var(--border-50);
+    box-shadow: 0px 4px 10px var(--blue-200);
 }
-.mobile.card hr{
+.mobile.card .vertical-line{
+    width: 2px;
     height: 25px;
     margin: auto 0;
 
-    color: var(--blue-700);
+    background: var(--blue-300);
     opacity: 50%;
 }
 .mobile.card nav svg{
@@ -287,17 +287,17 @@ svg{
 }
 .dark-mode .mobile.card nav{
     background: var(--blue-700);
-    border-color: transparent;
+    box-shadow: 0px 4px 10px var(--black-alt);
 }
-.dark-mode .mobile.card hr{
-    color: var(--blue-200);
+.dark-mode .mobile.card .vertical-line{
+    background: var(--blue-300);
 }
 
 .dark-mode .desktop.card{
-    background: var(--blue-900);
+    background: var(--blue-800);
 }
 .dark-mode .desktop.card .navigation nav{
-    background: var(--blue-800);
+    background: var(--blue-700);
 }
 
 
@@ -355,8 +355,8 @@ svg{
 
 
 .dark-mode .hero .container{
-    background: var(--blue-900);
-    box-shadow: 0px 4px 4px var(--blue-900)
+    background: var(--blue-800);
+    box-shadow: 0px 4px 4px var(--black-alt)
 }
 .dark-mode .container .section-title{
     border-left: 4px solid var(--blue-400);
@@ -410,7 +410,7 @@ svg{
 
 
 .dark-mode #about .education li{
-    background: var(--blue-800);
+    background: var(--blue-700);
 }
 .dark-mode #about .education img{
     border-color: var(--blue-400);
@@ -532,7 +532,7 @@ svg{
 
 
 .dark-mode .badge{
-    background: var(--blue-800);
+    background: var(--blue-700);
 }
 .dark-mode .badge:hover{
     color: var(--blue-400);
@@ -540,7 +540,7 @@ svg{
 }
 
 .dark-mode .badge-alt{
-    background: var(--blue-700);
+    background: var(--blue-800);
 }
 
 
