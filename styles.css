@@ -215,6 +215,8 @@ svg{
     left: 50vw;
     transform: translate(-50%, -50%);
 
+    display: grid;
+
     display: flex;
     justify-content: space-between;
     gap: 0.5em;
@@ -241,7 +243,8 @@ svg{
     width: 20px;
 }
 .mobile.card .title{
-    display: flex;
+    display: grid;
+    grid-template-columns: auto 100px;
     justify-content: space-between;
     align-items: center;
     gap: 0.5em;
