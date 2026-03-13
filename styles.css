@@ -163,7 +163,7 @@ svg{
     justify-content: center;
 
     border-radius: var(--border-150);
-    overflow: hidden;
+  
 }
 .desktop.card .profile-picture{
     min-width: 300px;
