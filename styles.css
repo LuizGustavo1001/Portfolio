@@ -694,6 +694,11 @@ input, textarea{
     border-color: var(--blue-350);
 }
 
+.dark-mode .container .section-title h1,
+.container .section-title svg{
+    color: var(--blue-200);
+}
+
 
 .dark-mode #about .education li{
     background: var(--blue-900);
