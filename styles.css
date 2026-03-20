@@ -144,6 +144,7 @@ img{
     padding: 1em;
 
     background: var(--white);
+    border-right: 4px solid var(--blue-350);
 
     transition-timing-function: ease;
     z-index: 4;
@@ -549,6 +550,7 @@ input, textarea{
         padding: 0;
 
         background: transparent;
+        border: none;
     }
 
     .toggle-nav{
@@ -601,17 +603,6 @@ input, textarea{
         height: fit-content;
     }
 
-    .dark-mode .badge{
-        background: var(--blue-700);
-    }
-    .dark-mode .badge:hover{
-        color: var(--blue-400);
-        border-color: var(--blue-400);
-    }
-
-    .dark-mode .badge-alt{
-        background: var(--blue-800);
-    }
 
 
     /* OTHERS*/
@@ -659,6 +650,7 @@ input, textarea{
 /* CARD */
 .dark-mode .card-nav{
     background: var(--blue-900);
+    border-color: var(--blue-600);
 }
 
 .dark-mode .card-nav-section .card-button:hover{
@@ -695,7 +687,7 @@ input, textarea{
 }
 
 .dark-mode .container .section-title h1,
-.container .section-title svg{
+.dark-mode .container .section-title svg{
     color: var(--blue-200);
 }
 
@@ -705,6 +697,19 @@ input, textarea{
 }
 .dark-mode #about .education img{
     border-color: var(--blue-400);
+}
+
+.dark-mode .badge{
+    background: var(--blue-700);
+}
+.dark-mode .badge:hover{
+    color: var(--blue-400);
+    border-color: var(--blue-400);
+}
+
+.dark-mode .badge-alt{
+    background: var(--blue-800);
+    color: var(--blue-200);
 }
 
 
