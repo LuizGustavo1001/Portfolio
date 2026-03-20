@@ -71,3 +71,29 @@ toggleThemeIcon.forEach(icon => {icon.addEventListener("click", () => {toggleThe
 
 const savedLang = localStorage.getItem("lang") || "BR"
 if(availableLang.includes(savedLang)){toggleLanguage(savedLang)}
+
+
+
+// Mobile sidebar toggle
+const toggleSidebarButton = document.querySelector(".toggle-sidebar span")
+const dazzlesBg = document.querySelector(".dazzles-bg")
+const cardNav = document.querySelector(".card-nav")
+
+document.addEventListener("click", (e) => {
+    const clickedInsideNav = e.target.closest(".card-nav")
+    const clickedToggle = e.target.closest(".toggle-sidebar span")
+
+    if(! clickedInsideNav && !clickedToggle){
+        if(cardNav.classList.contains("open")){
+            toggleSidebar()
+        }
+    }
+})
+
+toggleSidebarButton.addEventListener("click", toggleSidebar)
+
+function toggleSidebar(){
+    dazzlesBg.classList.toggle("open")
+    cardNav.classList.toggle("open")
+}
+
