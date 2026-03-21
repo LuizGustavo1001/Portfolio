@@ -40,7 +40,7 @@
 }
 
 body{
-    padding: 0.5em 0.5em 20vh 0.5em;
+    padding: 8vh 0.5em 20vh 0.5em;
 
     font-family: var(--font-2);
 
@@ -105,10 +105,10 @@ img{
 }
 .card-title .profile-picture .object-border{
     position: absolute;
-    top: -2px;
-    right: -2px;
-    bottom: -2px;
-    left: -2px;
+    top: -3px;
+    right: -3px;
+    bottom: -3px;
+    left: -3px;
 
     border-radius: var(--radius-xxg);
 
@@ -368,8 +368,8 @@ input, textarea{
 
 .toggle-sidebar{
     position: fixed;
-    bottom: 2em;
-    right: 50%;
+    top: 1em;
+    left: 1em;
 
     padding: 0.3em;
 
@@ -377,11 +377,10 @@ input, textarea{
     box-shadow: 0px 0px 10px var(--light-shadow);
     border-radius: var(--radius-lg);
 
-    transform: translateX(50%);
     z-index: 2;
 }
 .toggle-sidebar span{
-    padding: 1em 2em;
+    padding: 0.5em 1em;
 }
 
 
