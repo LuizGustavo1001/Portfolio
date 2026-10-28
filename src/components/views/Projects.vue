@@ -1,12 +1,14 @@
 <template>
   <!-- Latest Projects Section -->
-  <section class="section-box flex-05 align-center  justify-center">
-    <div class="container flex-05 flex-column" style="gap: 2em;">
+  <section class="section-box flex gap-05 align-center  justify-center">
+    <div class="container flex gap-2 flex-column">
       <!-- Section Title -->
-      <div class="section-title flex-05 justify-between flex-wrap">
+      <div class="section-title flex gap-05 justify-between flex-wrap">
         <h1 class="medium-weight uppercase">
           {{ $t("projectsSection.title.medium") }}
+
           <br>
+
           <strong>{{ $t("projectsSection.title.bold") }}</strong>.
         </h1>
 
@@ -24,12 +26,12 @@
       <ul class="projects-container">
         <li v-for="project in projects"
             :key="project.id"
-            class="project flex-05 flex-column"
+            class="project flex gap-05 flex-column"
             :style="{ '--image': project.href ? project.href : '' }"
         >
-          <div class="flex-05 align-center">
+          <div class="flex gap-05 align-center">
             <p class="project-subtitle text-muted medium-weight flex-grow-1 uppercase"> {{ $t(`projects.${project.id}.subtitle`) }} </p>
-            <span class="actions flex-05" style="justify-content: flex-end">
+            <span class="actions flex gap-05" style="justify-content: flex-end">
               <IconBtn
                   v-if="project.demo"
                   tag="a"
@@ -51,7 +53,7 @@
           </div>
 
           <!-- Project Title -->
-          <div class="flex-05 flex-column flex-grow-1">
+          <div class="flex gap-05 flex-column flex-grow-1">
             <h2 class="project-title">
               {{ $t(`projects.${project.id}.title`) }}
             </h2>
@@ -62,17 +64,17 @@
           </div>
 
           <!-- Project Stacks + Image -->
-          <div class="flex-05 flex-column">
-            <ul class="stacks flex-05 align-center flex-wrap">
+          <div class="flex gap-05 flex-column">
+            <ul class="stacks flex gap-05 align-center flex-wrap">
               <li v-for="stack in project.stacks"
                   :key="stack.id"
-                  class="medium-weight text-muted"
+                  class="badge medium-weight text-muted"
               >
                 {{ stack }}
               </li>
             </ul>
 
-            <div class="project-image relative"></div>
+            <div class="project-image relative overflow-hidden"></div>
           </div>
         </li>
       </ul>
@@ -81,89 +83,70 @@
 </template>
 
 <style scoped>
-  .container{
+  .container {
     padding: 0;
   }
 
-  .section-title{
+  .section-title {
     align-items: flex-end;
   }
-  .section-title h1{
+  .section-title h1 {
     font-size: clamp(3em, 4dvw, 4em);
   }
 
-  .projects-container{
+  .projects-container {
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 550px), 1fr));
     gap: 2em;
   }
 
-  .project{
-    background: var(--cream-200);
+  .project {
     padding: 1em 1em 0 1em;
-
-    border: 1px solid var(--cream-400);
-
-    border-radius: 16px;
-
     min-height: 550px;
+
+    background: var(--color-bg-subtle);
+    border: 2px solid var(--color-border-secondary);
+
+    border-radius: var(--radius-md);
   }
 
-  .project .stacks li{
+  .project .stacks .badge {
     padding: 0.3em;
-    border-radius: 8px;
-
-    background: var(--cream-300);
+    background: var(--badge-bg-primary);
+    border-radius: var(--radius-2xs);
+    font-size: clamp(0.8em, 1.5dvw, 0.9em);
   }
-  .project .action-btn{
+  .project .action-btn {
     font-size: 0.9em;
   }
 
-  .project-title{
+  .project-title {
     font-size: 1.3em;
   }
 
-  .project-subtitle{
-    font-size: clamp(0.8em, 2dvw, 0.9em);
-  }
-
-  .project-desc{
+  .project-subtitle {
     font-size: clamp(0.85em, 1.5dvw, 0.95em)
   }
 
-  .project .stacks li{
-    font-size: clamp(0.8em, 1.5dvw, 0.9em);
+  .project-desc {
+    font-size: clamp(0.85em, 1.5dvw, 0.95em)
   }
 
-  .project-image{
+  .project-image {
     height: 250px;
     width: 100%;
+
     background: var(--image) top left;
     background-size: cover;
 
-    border: 1px solid var(--cream-400);
+    border: 2px solid var(--color-border-secondary);
     border-bottom: none;
-
-    border-radius: 16px 16px 0 0;
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
   }
 
   /* DARK MODE */
-  .dark-theme .project{
-    background: var(--slate-800);
-    border-color: var(--slate-700);
-  }
-
-  .dark-theme .project .stacks li{
-    background: var(--slate-900);
-  }
-
-  .dark-theme .project-image{
-    border-color: var(--slate-700);
-
-    overflow: hidden;
-  }
-  .dark-theme .project-image::after{
+  .dark-theme .project-image::after {
     content: "";
     position: absolute;
 
@@ -175,8 +158,9 @@
 </style>
 
 <script setup>
-  import { icons } from "/src/locales/icons.js"
+  import { icons } from "/src/assets/icons/icons.js"
   import { personalLinks, projects } from "/src/locales/portfolioConfig.js"
-  import IconBtn from "/src/components/buttons/iconBtn.vue"
-  import ActionButton from "/src/components/buttons/actionButton.vue"
+
+  import IconBtn from "/src/components/buttons/IconBtn.vue"
+  import ActionButton from "/src/components/buttons/ActionButton.vue"
 </script>

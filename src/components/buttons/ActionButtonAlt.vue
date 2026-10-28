@@ -6,11 +6,11 @@
     :rel="target === '__blank' ? 'external' : 'internal'"
     :disabled="isButton ? props.disabled : undefined"
     :aria-disabled="isButton ? props.disabled : undefined"
-    class="action-btn flex-05 align-center"
+    class="action-btn flex gap-05 align-center"
     :class="reverseClr ? 'reverse' : ''"
   >
     <!-- Left Icon -->
-    <div class="flex-grow-1 flex-05 align-center">
+    <div class="flex-grow-1 flex gap-05 align-center">
       <slot name="leftIcon">
         <Icon v-if="leftIcon" :icon="leftIcon" />
       </slot>
@@ -29,67 +29,62 @@
 </template>
 
 <style scoped>
-  .action-btn{
-    padding: 0.5em;
+  a {
+    text-decoration: none;
+  }
+
+  .action-btn {
+    padding: 0.8em;
+
     border: none;
     background: transparent;
 
     border-radius: 8px;
-
     cursor: pointer;
     transition: 0.2s ease;
   }
-  .action-btn:hover{
-    background: var(--cream-200);
-  }
-
-  a{
-    text-decoration: none;
-  }
-
-  /* DARK MODE */
-  .dark-theme .action-btn:hover{
-    background: var(--slate-800);
+  .action-btn:hover {
+    background: var(--color-bg-primary-hover);
   }
 </style>
 
 <script setup>
   import { computed } from "vue"
-  import Icon from "/src/components/icon.vue"
+  import Icon from "/src/components/common/Icon.vue"
 
   const props = defineProps({
     leftIcon: {
       type: String,
-      default: '',
+      default: ''
     },
     label: {
       type: String,
       default: '',
-      required: 'true',
+      required: 'true'
     },
     rightIcon: {
       type: String,
-      default: '',
+      default: ''
     },
     disabled: {
       type: Boolean,
-      default: false,
+      default: false
     },
     reverseClr: {
       type: Boolean,
-      default: false,
+      default: false
     },
     tag: {
       type: String,
-      default: 'a',
+      default: 'a'
     },
     link: {
       type: String,
-      default: '#',
+      default: '#'
     },
     target: {
       type: String,
-      default: 'external',
+      default: 'external'
     }
   })
 

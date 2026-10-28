@@ -1,5 +1,8 @@
 <template>
-  <i class="icon-wrapper" v-html="props.icon"></i>
+  <i
+      class="icon-wrapper"
+      v-html="props.icon"
+  />
 </template>
 
 <style scoped>
@@ -8,16 +11,18 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    width: fit-content;
 
+    width: fit-content;
     padding: v-bind(resolvedPadding);
+
     transition: all 0.3s ease;
   }
 
   .icon-wrapper :deep(svg){
+    display: block;
+
     width: v-bind(size);
     height: v-bind(size);
-    display: block;
 
     transition: all 0.3s ease;
   }

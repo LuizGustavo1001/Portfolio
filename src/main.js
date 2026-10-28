@@ -1,7 +1,8 @@
 import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import './assets/styles/style.css'
 import { i18n } from './locales/i18n'
+
+import App from './App.vue'
 
 const app = createApp(App)
 

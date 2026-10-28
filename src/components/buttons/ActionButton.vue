@@ -29,32 +29,33 @@
 </template>
 
 <style scoped>
-  a{
+  a {
     text-decoration: none;
   }
 
-  .action-btn{
+  .action-btn {
+    position: relative;
+
     display: inline-flex;
     align-items: center;
     justify-content: center;
 
     padding: 0.85em 1.25em;
-    border-radius: 12px;
-    border: none;
 
-    background: var(--slate-800);
-    color: var(--cream-100);
-    box-shadow: 0 10px 15px var(--lighter-shadow);
+    background: var(--color-bg-reverse);
+    color: var(--color-text-reverse);
+
+    border: none;
     font-weight: bolder;
     font-size: 1.1em;
+    border-radius: var(--radius-xs);
 
     cursor: pointer;
     overflow: hidden;
-    position: relative;
     transition: all 0.3s ease;
   }
 
-  .btn-content{
+  .btn-content {
     display: inline-flex;
     align-items: center;
     gap: 0.5em;
@@ -63,58 +64,47 @@
     will-change: transform;
   }
 
-  .icon-right{
+  .icon-right {
     margin-right: -1.8em;
     opacity: 0;
     filter: blur(5px);
   }
 
-  @media(min-width: 600px){ /* animations not available for mobile */
+  /* MEDIA QUERIES */
+  @media(min-width: 600px) { /* animations not available for mobile */
     .action-btn:hover .btn-content,
-    .action-btn:active .btn-content{
+    .action-btn:active .btn-content {
       transform: translateX(-1.8em);
     }
 
     .action-btn:hover .icon-right,
-    .action-btn:active .icon-right{
+    .action-btn:active .icon-right {
       opacity: 1;
       filter: blur(0);
     }
 
     .action-btn:hover .icon-left,
-    .action-btn:active .icon-left{
+    .action-btn:active .icon-left {
       opacity: 0;
       filter: blur(5px);
     }
   }
 
-  .action-btn.reverse{
-    background: var(--cream-200);
-    color: var(--slate-800);
+  .action-btn.reverse {
+    background: var(--color-bg-subtle);
+    color: var(--color-text-primary);
   }
 
-  .action-btn:disabled{
+  .action-btn:disabled {
     opacity: 0.5;
     cursor: not-allowed;
-  }
-
-  /* DARK MODE */
-  .dark-theme .action-btn{
-    background: var(--cream-100);
-    color: var(--slate-900);
-    box-shadow: 0 4px 20px var(--shadow);
-  }
-
-  .dark-theme .action-btn.reverse{
-    background: var(--slate-900);
-    color: var(--cream-100);
   }
 </style>
 
 <script setup>
   import { computed } from 'vue'
-  import { icons } from "/src/locales/icons.js"
-  import Icon from "/src/components/icon.vue"
+  import { icons } from "/src/assets/icons/icons.js"
+  import Icon from "/src/components/common/Icon.vue"
 
   const props = defineProps({
     leftIcon: {

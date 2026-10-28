@@ -1,12 +1,12 @@
 <template>
-  <!-- Footer -->
+  <!-- AppFooter -->
   <footer class="footer reverse">
-    <div class="container flex-05 flex-column" style="gap: 2em">
+    <div class="container flex gap-2 flex-column">
       <!-- Top Div -->
-      <div class="top flex-05 flex-wrap justify-between" style="gap: 2em">
+      <div class="top flex gap-2 flex-wrap justify-between">
         <!-- Left -->
-        <div class="left flex-05 flex-column">
-          <div class="flex-05 flex-column" style="gap: 0">
+        <div class="left flex gap-05 flex-column">
+          <div class="flex flex-column">
             <h1 class="medium-weight"><strong>Luiz Gustavo</strong> <br> de Almeida Lopes</h1>
 
             <i18n-t keypath="home.role"
@@ -20,7 +20,7 @@
             </i18n-t>
           </div>
 
-          <nav class="nav flex-05 align-center" style="gap: 1em">
+          <nav class="nav flex gap-1 align-center">
             <IconBtn v-for="link in footer.personal"
                      :key="link.id"
                      :icon="personalLinks[link].icon"
@@ -32,11 +32,11 @@
         </div>
 
         <!-- Right -->
-        <div class="right flex-05 justify-between flex-wrap" style="gap: 2em">
-          <nav v-for="section in footer.section" :key="section.id" class="flex-05 flex-column">
+        <div class="right flex gap-2 justify-between flex-wrap">
+          <nav v-for="section in footer.section" :key="section.id" class="flex gap-05 flex-column">
             <h2>{{ $t(`footer.section.${section.id}.title`) }}</h2>
 
-            <span class="flex-05 flex-column">
+            <span class="flex gap-05 flex-column">
             <a v-for="link in section.links" :href="link.href"
                class="text-muted">{{ $t(`footer.section.${section.id}.links.${link.id}.label`) }}</a>
           </span>
@@ -55,44 +55,34 @@
 </template>
 
 <style scoped>
-  footer{
+  footer {
     padding: 2em;
-    background: var(--slate-800);
-
     margin-top: 256px;
   }
 
-  a{
+  a {
     text-decoration: none;
     font-size: 0.9em;
   }
-  a:hover{
+  a:hover {
     text-decoration: underline;
   }
 
-  hr{
-    color: var(--slate-700);
+  hr {
+    color: var(--horizontal-line-color);
   }
 
-  h2{
+  h2 {
     font-size: 1em;
   }
 
-  .container{
+  .container {
     max-width: 1500px;
     margin: 0 auto;
-  }
-
-  /* DARK MODE */
-  .dark-theme footer{
-    background: var(--cream-100);
-  }
-  .dark-theme hr{
-    color: var(--cream-100);
   }
 </style>
 
 <script setup>
   import { footer, personalLinks } from "/src/locales/portfolioConfig.js"
-  import IconBtn from "/src/components/buttons/iconBtn.vue"
+  import IconBtn from "/src/components/buttons/IconBtn.vue"
 </script>

@@ -1,23 +1,52 @@
+<template>
+  <Overlay :class="overlayIsOpen ? 'active' : ''"/>
+
+  <NavBar/>
+
+  <Sidebar
+      @toggle-language="handleToggleLanguage"
+      @toggle-theme="handleToggleTheme"
+      :theme="currentTheme"
+      :class="asideIsOpen ? 'active' : ''"
+      id="sidebar"
+  />
+
+  <AppHeader @toggle-aside="handleToggleAside"/>
+
+  <main>
+    <Home id="home" />
+
+    <AboutMe id="aboutMe" class="scroll-trigger-section" />
+
+    <Projects id="projects" class="scroll-trigger-section" />
+
+    <Contact id="contact" class="scroll-trigger-section" />
+  </main>
+
+  <AppFooter/>
+</template>
+
 <script setup>
-  import {ref, watch, onMounted, onUnmounted, nextTick} from "vue"
-  import { useI18n } from 'vue-i18n'
+  import { ref, watch, onMounted, onUnmounted, nextTick } from "vue"
   import { gsap } from "gsap"
   import { ScrollTrigger } from "gsap/ScrollTrigger"
 
+  import { useI18n } from 'vue-i18n'
+
+  import Overlay from "./components/common/Overlay.vue"
+  import Sidebar from "./components/Sidebar.vue"
+  import AppHeader from "./components/AppHeader.vue"
+  import Home from "./components/views/Home.vue"
+  import NavBar from "./components/NavBar.vue"
+  import AboutMe from "./components/views/AboutMe.vue"
+  import Projects from "./components/views/Projects.vue"
+  import Contact from "./components/views/Contact.vue"
+  import AppFooter from "./components/AppFooter.vue"
+
   gsap.registerPlugin(ScrollTrigger)
 
+  // COMPOSABLES
   const { locale } = useI18n()
-
-  // Components
-  import Overlay from "./components/overlay.vue"
-  import Sidebar from "./components/sidebar.vue"
-  import Header from "./components/sections/header.vue"
-  import Home from "./components/sections/home.vue"
-  import NavBar from "./components/navBar.vue"
-  import AboutMe from "./components/sections/aboutMe.vue"
-  import Projects from "./components/sections/projects.vue"
-  import Contact from "./components/sections/contact.vue"
-  import Footer from "./components/sections/footer.vue";
 
   // Toggle overlay
   const overlayIsOpen = ref(false)
@@ -112,7 +141,7 @@
 
     await nextTick()
 
-    // scroll trigger main sections animation
+    // scroll trigger main views animation
     context = gsap.context( () => {
       const mainSections = gsap.utils.toArray('.scroll-trigger-section')
 
@@ -150,41 +179,3 @@
     if(context) context.revert()
   })
 </script>
-
-<template>
-  <Overlay :class="overlayIsOpen ? 'active' : ''"/>
-
-  <NavBar/>
-
-  <Sidebar
-      @toggle-language="handleToggleLanguage"
-      @toggle-theme="handleToggleTheme"
-      :theme="currentTheme"
-      :class="asideIsOpen ? 'active' : ''" id="sidebar"
-  />
-
-  <Header @toggle-aside="handleToggleAside"/>
-
-  <main>
-    <Home id="home"/>
-
-    <AboutMe id="aboutMe" class="scroll-trigger-section"/>
-
-    <Projects id="projects" class="scroll-trigger-section"/>
-
-    <Contact id="contact" class="scroll-trigger-section"/>
-  </main>
-
-  <Footer/>
-
-  <!-- Empty State Container -->
-  <!--
-  <template>
-    <div class="flex-05 flex-column justify-center align-center" style="height: 100dvh;">
-      <h1>Error trying to load modules</h1>
-      <small>Reload the page and try again...</small>
-      <button @click="reloadPage">Reload Page</button>
-    </div>
-  </template>
-  -->
-</template>

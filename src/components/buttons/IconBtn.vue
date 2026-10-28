@@ -12,7 +12,7 @@
 </template>
 
 <style scoped>
-  .icon-wrapper{
+  .icon-wrapper {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -21,7 +21,7 @@
     padding: 0.5em;
     border-radius: 8px;
 
-    color: var(--slate-800);
+    color: var(--color-text-primary);
 
     border: none;
     background: transparent;
@@ -30,44 +30,22 @@
     width: fit-content;
     transition: 0.2s cubic-bezier(1, -0.56, 0.33, 0.94);
   }
-  .icon-wrapper:hover{
-    background: var(--cream-200);
+  .icon-wrapper:hover {
+    background: var(--color-bg-primary-hover);
     transform: scale(1.1);
   }
 
-  .icon-wrapper.reverse{
-    background: var(--slate-800);
-    color: var(--cream-100);
+  .icon-wrapper.reverse {
+    background: var(--color-bg-reverse);
+    color: var(--color-text-reverse);
+  }
+  .icon-wrapper.reverse:hover {
+    background: var(--color-bg-reverse-hover);
   }
 
   .icon-wrapper :deep(svg) {
     width: v-bind(size);
     height: v-bind(size);
-  }
-
-  .icon-wrapper.reverse:hover{
-    background: var(--slate-700);
-  }
-
-  /* DARK MODE*/
-  .dark-theme .icon-wrapper{
-    color: var(--cream-100);
-  }
-  .dark-theme .icon-wrapper:hover{
-    background: var(--slate-800);
-  }
-
-  .dark-theme .reverse .icon-wrapper:hover{
-    background: var(--cream-200);
-  }
-
-  .dark-theme .icon-wrapper.reverse{
-    background: var(--cream-100);
-    color: var(--slate-800);
-  }
-
-  .dark-theme .icon-wrapper.reverse:hover{
-    background: var(--cream-200);
   }
 </style>
 
@@ -77,7 +55,7 @@
   const props = defineProps({
     tag: {
       type: String,
-      default: 'a',
+      default: 'a'
     },
     icon: {
       type: String,
@@ -85,19 +63,19 @@
     },
     link: {
       type: String,
-      default: '#',
+      default: '#'
     },
     reverseClr: {
       type: Boolean,
-      default: false,
+      default: false
     },
     target: {
       type: String,
-      default: 'external',
+      default: 'external'
     },
     size: {
       type: [String, Number],
-      default: '20px',
+      default: '20px'
     }
   })
 

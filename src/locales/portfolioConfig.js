@@ -1,4 +1,4 @@
-import { icons } from "/src/locales/icons.js"
+import { icons } from "/src/assets/icons/icons.js"
 
 export const personalLinks = {
     mail: {
@@ -65,6 +65,17 @@ export const projects = [
 ]
 
 export const aboutMe = {
+    controllers: [
+        {
+            color: "#a3be8c"
+        },
+        {
+            color: "#ebcb8b"
+        },
+        {
+            color: "#bf616a"
+        }
+    ],
     sections: [
         {
             id: "profile",

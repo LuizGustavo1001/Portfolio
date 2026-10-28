@@ -4,20 +4,19 @@
 </template>
 
 <style scoped>
-  #overlay{
+  #overlay {
+    display: none;
     position: fixed;
 
     height: 100dvh;
     width: 100dvw;
-    background: var(--transparent-30);
 
-    z-index: 4;
+    background: var(--shadow);
 
     backdrop-filter: blur(10px);
-
-    display: none;
+    z-index: 4;
   }
-  #overlay.active{
+  #overlay.active {
     display: block;
     animation: fade-in 0.3s ease-in-out
   }

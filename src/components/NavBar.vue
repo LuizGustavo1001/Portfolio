@@ -1,71 +1,75 @@
 <template>
   <!-- Main Nav Bar -->
-  <nav class="flex-05" style="gap: 1em;">
+  <nav class="flex gap-1">
     <button v-for="item in navbar.items"
             :key="item.id"
-            class="medium-weight flex-05 align-center"
+            class="medium-weight flex align-center text-muted"
             :class="[item.id === selectedItem ? 'active' : '']"
             :data-id="item.id"
             style="gap: 0.2em"
             @click="toggleSelected(item.id)"
     >
-      <Icon :icon="item.id === selectedItem ? item.iconActive : item.icon"/>
+      <Icon
+          :icon="item.id === selectedItem
+              ? item.iconActive
+              : item.icon"
+      />
       <span class="label">{{ $t(`navbar.items.${item.id}.label`) }}</span>
     </button>
   </nav>
 </template>
 
 <style scoped>
-  nav{
+  nav {
     position: fixed;
     bottom: 1.5em;
     left: 50%;
     transform: translateX(-50%);
 
-    background: var(--cream-100);
-
+    width: max-content;
     padding: 0.5em;
 
-    border-radius: 16px;
-    width: max-content;
-    box-shadow: 0 0 10px var(--light-shadow);
+    background: var(--color-bg-primary);
+    box-shadow: 0 0 5px 3px var(--shadow-lighter);
+
+    border-radius: var(--radius-md);
 
     z-index: 3;
     animation: fade-in-upper 1s ease;
   }
 
-  button{
-    color: var(--slate-700);
+  button {
     text-decoration: none;
     border: none;
     background: none;
 
     padding: 0.8em;
-    border-radius: 8px;
 
+    border-radius: 8px;
     font-size: 0.8em;
+
     transition: 0.2s ease;
     cursor: pointer;
   }
 
   button.active,
   button:hover,
-  button:active{
-    background: var(--cream-200);
+  button:active {
+    background: var(--color-bg-primary-hover);
   }
 
   button:hover,
-  button:active{
+  button:active {
     transform: scale(1.05);
   }
 
-  @media(max-width: 768px){
+  @media(max-width: 768px) {
     nav button .label{
       display: none;
     }
   }
 
-  @keyframes fade-in-upper{
+  @keyframes fade-in-upper {
     from{
       opacity: 0;
       transform: translate(-50%, 10dvh);
@@ -77,19 +81,8 @@
   }
 
   /* DARK MODE */
-  .dark-theme nav{
-    background: var(--slate-900);
-    box-shadow: 0 0 10px var(--shadow);
-  }
-
-  .dark-theme button{
-    color: var(--slate-500);
-  }
-
-  .dark-theme button.active,
-  .dark-theme button:hover,
-  .dark-theme button:active{
-    background: var(--slate-800);
+  .dark-theme nav {
+    box-shadow: 0 0 5px 3px var(--shadow);
   }
 </style>
 
@@ -98,8 +91,10 @@
   import { gsap } from "gsap"
   import { ScrollToPlugin } from "gsap/ScrollToPlugin"
   import { ScrollTrigger } from "gsap/ScrollTrigger"
+
   import { navbar } from "/src/locales/portfolioConfig.js"
-  import Icon from "/src/components/icon.vue"
+
+  import Icon from "/src/components/common/Icon.vue"
 
   const selectedItem = ref(navbar.items[0].id)
 

@@ -1,4 +1,7 @@
 export default {
+    utils: {
+        certificate: "Certificate"
+    },
     personalLinks: {
         mail: "E-mail",
         resume: "Resume",
