@@ -122,7 +122,7 @@
     --horizontal-line-color: var(--slate-700);
 }
 
-body.dark-theme{
+body.dark{
     /* Background Color */
     --color-bg-primary: var(--slate-900);
     --color-bg-primary-hover: var(--slate-800);
@@ -164,7 +164,7 @@ body.dark-theme{
 body {
     min-height: 100dvh;
 
-    background: var(--color-bg-primary) url("/public/images/lm-body-bg.svg") no-repeat top right;
+    background: var(--color-bg-primary) url("/src/assets/images/lm-body-bg.svg") no-repeat top right;
     background-size: contain;
     color: var(--color-text-primary);
 
@@ -350,7 +350,7 @@ a {
 
 
 /* DARK MODE */
-.dark-theme {
-    background: var(--color-bg-primary) url("/public/images/dm-body-bg.svg") no-repeat top right;
+.dark {
+    background: var(--color-bg-primary) url("/src/assets/images/dm-body-bg.svg") no-repeat top right;
     background-size: contain;
 }

@@ -21,12 +21,13 @@
           </div>
 
           <nav class="nav flex gap-1 align-center">
-            <IconBtn v-for="link in footer.personal"
-                     :key="link.id"
-                     :icon="personalLinks[link].icon"
-                     :link="personalLinks[link].href"
-                     size="25px"
-                     :reverseClr="true"
+            <IconBtn
+              v-for="item in footer.personal"
+              :key="item.id"
+              :icon="item.icon"
+              :link="item.href"
+              size="25px"
+              :reverseClr="true"
             />
           </nav>
         </div>

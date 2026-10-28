@@ -1,13 +1,17 @@
+import {SOCIAL} from "./portfolioConfig.js";
+import {THEME_PREFERENCES} from "../composables/useTheme.js";
+
 export default {
     utils: {
-        certificate: "Certificate"
+        certificate: "Certificate",
+        currentLanguage: "English (US)",
     },
     personalLinks: {
-        mail: "E-mail",
-        resume: "Resume",
-        linkedin: "LinkedIn",
-        github: "GitHub",
-        instagram: "Instagram"
+        [SOCIAL.EMAIL]: "E-mail",
+        [SOCIAL.RESUME]: "Resume",
+        [SOCIAL.LINKEDIN]: "LinkedIn",
+        [SOCIAL.GITHUB]: "GitHub",
+        [SOCIAL.INSTAGRAM]: "Instagram"
     },
     skills: {
         title: "Skills",
@@ -174,8 +178,9 @@ export default {
     sidebar: {
         resume: "View Resume",
         language: "Language - English",
-        lightTheme: "Theme - Light",
-        darkTheme: "Theme - Dark",
+        [THEME_PREFERENCES.LIGHT]: "Theme - Light",
+        [THEME_PREFERENCES.DARK]: "Theme - Dark",
+        [THEME_PREFERENCES.SYSTEM]: "Theme - System",
         sections: {
             social: {
                 title: "Social Media"
@@ -196,7 +201,7 @@ export default {
             projects: {
                 label: "Projects"
             },
-            contact:{
+            contact: {
                 label: "Contact"
             }
         }
@@ -223,19 +228,19 @@ export default {
             others: {
                 title: "Others",
                 links: {
-                    mail: {
+                    [SOCIAL.EMAIL]: {
                         label: "E-mail"
                     },
-                    resume: {
+                    [SOCIAL.RESUME]: {
                         label: "Resume"
                     },
-                    linkedin: {
+                    [SOCIAL.LINKEDIN]: {
                         label: "LinkedIn"
                     },
-                    github: {
+                    [SOCIAL.GITHUB]: {
                         label: "GitHub"
                     },
-                    instagram: {
+                    [SOCIAL.INSTAGRAM]: {
                         label: "Instagram"
                     }
                 }

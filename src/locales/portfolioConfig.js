@@ -1,63 +1,87 @@
 import { icons } from "/src/assets/icons/icons.js"
+import {THEME_PREFERENCES} from "../composables/useTheme.js";
+
+export const SOCIAL = {
+    GITHUB: 'github',
+    RESUME: 'resume',
+    EMAIL: 'email',
+    INSTAGRAM: 'instagram',
+    LINKEDIN: 'linkedin'
+}
 
 export const personalLinks = {
-    mail: {
-        id: "mail",
+    [SOCIAL.EMAIL]: {
+        id: SOCIAL.EMAIL,
         href: "mailto:gustavw1001@gmail.com",
         value: "gustavw1001@gmail.com",
-        icon: icons.mailFilled,
+        icon: icons.mailFilled
     },
-    resume: {
-        id: "resume",
+    [SOCIAL.RESUME]: {
+        id: SOCIAL.RESUME,
         href: "https://drive.google.com/drive/folders/1fGPZ3UlCj2dS8TwgPCCtXVZUbmM8z3sJ?usp=drive_link",
         value: "Portfolio",
-        icon: icons.documentFilled,
+        icon: icons.documentFilled
     },
-    github: {
-        id: "github",
+    [SOCIAL.GITHUB]: {
+        id: SOCIAL.GITHUB,
         href: "https://github.com/LuizGustavo1001",
         value: "LuizGustavo1001",
-        icon: icons.github,
+        icon: icons.github
     },
-    instagram: {
-        id: "instagram",
+    [SOCIAL.INSTAGRAM]: {
+        id: SOCIAL.INSTAGRAM,
         href: "https://www.instagram.com/luiz_g1001/",
         value: "luiz_g1001",
-        icon: icons.instagram,
+        icon: icons.instagram
     },
-    linkedin: {
-        id: "linkedin",
+    [SOCIAL.LINKEDIN]: {
+        id: SOCIAL.LINKEDIN,
         href: "https://www.linkedin.com/in/luizgustavo1001/",
         value: "LuizGustavo1001",
-        icon: icons.linkedinFilled,
+        icon: icons.linkedinFilled
+    }
+}
+
+export const themes = {
+    [THEME_PREFERENCES.LIGHT]: {
+        id: THEME_PREFERENCES.LIGHT,
+        icon: icons.moonFilled
+    },
+    [THEME_PREFERENCES.DARK]: {
+        id: THEME_PREFERENCES.DARK,
+        icon: icons.sunFilled
+    },
+    [THEME_PREFERENCES.SYSTEM]: {
+        id: THEME_PREFERENCES.SYSTEM,
+        icon: icons["desktop-fill"]
     }
 }
 
 export const projects = [
     {
         id: "dictionary",
-        href: "url(/images/dicionario.png)",
+        href: "url(/src/assets/images/dicionario.png)",
         stacks: ["Node.js", "Javascript", "Docker", "npm", "JWT", "Sass", "Express.js", "MySQL", "Figma", "Cloudinary API", "RESTful API"],
         repository: "https://github.com/LuizGustavo1001/Dicionario_Estudos",
         demo: ""
     },
     {
         id: "acai",
-        href: "url(/images/acai.webp)",
+        href: "url(/src/assets/images/acai.webp)",
         stacks: ["PHP OOP", "MySQL", "HTML5", "CSS3", "Cloudinary API", "Composer", "Google Cloud API", "Figma"],
         repository: "https://github.com/LuizGustavo1001/Projeto-Acai-2.0",
         demo: ""
     },
     {
         id: "todo",
-        href: "url(/images/todo.webp)",
+        href: "url(/src/assets/images/todo.webp)",
         stacks: ["JavaScript", "JSON", "Node.js", "Scrapping", "CRUD"],
         repository: "https://github.com/LuizGustavo1001/TODO-WebPage-JS",
         demo: "https://vercel-todo-list-js.vercel.app/"
     },
     {
         id: "animeList",
-        href: "url(/images/cpp.png)",
+        href: "url(/src/assets/images/cpp.png)",
         stacks: ["C++", "CSV Scrapping"],
         repository: "https://github.com/LuizGustavo1001/Anime-Catalog-in-cpp",
         demo: ""
@@ -127,81 +151,110 @@ export const skills = [
     {
         id: "js",
         name: "JavaScript",
-        icon: "js.svg",
+        icon: icons.js
     },
     {
         id: "node",
         name: "Node.js",
-        icon: "node.svg",
+        icon: icons.nodejs,
     },
     {
         id: "docker",
         name: "Docker",
-        icon: "docker.svg"
+        icon: icons.docker
     },
     {
         id: "php",
         name: "PHP",
-        icon: "php.svg"
+        icon: icons.php
     },
     {
         id: "scss",
         name: "Scss/Sass",
-        icon: "scss.svg"
+        icon: icons.scss
     },
     {
         id: "figma",
         name: "Figma",
-        icon: "figma.svg"
+        icon: icons.figma
     },
     {
         id: "mysql",
         name: "MySQL",
-        icon: "mysql.svg"
+        icon: icons.mysql
     },
     {
         id: "html",
         name: "HTML & CSS",
-        icon: "html.svg"
+        icon: icons.html
     },
     {
         id: "cpp",
         name: "C++",
-        icon: "cpp.svg"
+        icon: icons.cpp
     },
     {
         id: "vue",
         name: "Vue.js",
-        icon: "vue.svg"
+        icon: icons.vue
     },
     {
         id: "illustrator",
         name: "Adobe Illustrator",
-        icon: "illustrator.svg"
+        icon: icons.illustrator
     },
     {
         id: "git",
         name: "Git • Github",
-        icon: "git.svg"
+        icon: icons.github
     },
     {
         id: "insomnia",
         name: "Insomnia",
-        icon: "insomnia.svg"
+        icon: icons.insomnia
     }
 ]
 
-export const backgrounds = [
-    {
-        id: "ufla"
+/*
+export const sidebar = {
+    social: {
+        id: "social",
+        items: {
+            [SOCIAL.GITHUB]: {
+                id: personalLinks[SOCIAL.GITHUB].id,
+                tag: "ActionButtonAlt",
+                leftIcon: personalLinks[SOCIAL.GITHUB].icon,
+                rightIcon: icons.externalLink,
+                link: personalLinks[SOCIAL.GITHUB].href
+            },
+            [SOCIAL.LINKEDIN]: {
+                id: personalLinks[SOCIAL.LINKEDIN].id,
+                tag: "ActionButtonAlt",
+                leftIcon: "",
+                rightIcon: icons.externalLink,
+                link: personalLinks[SOCIAL.LINKEDIN].href
+            },
+            [SOCIAL.INSTAGRAM]: {
+                id: personalLinks[SOCIAL.INSTAGRAM].id,
+                tag: "ActionButtonAlt",
+                leftIcon: "",
+                rightIcon: icons.externalLink,
+                link: personalLinks[SOCIAL.INSTAGRAM].href
+            }
+        },
     },
-]
+    others: {
+        id: "others",
+        items: {
+            [SOCIAL.RESUME]: {
+                id: personalLinks[SOCIAL.RESUME].id,
 
-export const experiences = [
-    {
-        id: "vue01"
+            }
+        }
     }
-]
+}
+*/
+
 
 export const sidebar = [
     {
@@ -234,6 +287,7 @@ export const sidebar = [
     }
 ]
 
+
 export const mainNavigation = [
     {
         id: "home",
@@ -265,12 +319,13 @@ export const navbar = {
     items: mainNavigation
 }
 
+let PAGES;
 export const footer = {
-    personal: {
-        github: "github",
-        linkedin: "linkedin",
-        instagram: "instagram"
-    },
+    personal: [
+        personalLinks[SOCIAL.GITHUB],
+        personalLinks[SOCIAL.LINKEDIN],
+        personalLinks[SOCIAL.INSTAGRAM]
+    ],
     section: [
         {
             id: "navigation",

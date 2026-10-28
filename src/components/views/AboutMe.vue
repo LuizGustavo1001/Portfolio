@@ -1,5 +1,4 @@
 <template>
-  <!-- About Me Section -->
   <section class="section-box flex gap-05 align-center justify-center">
     <div class="container flex gap-05 justify-center translucent relative scrollTrigger">
       <div class="background-text absolute">
@@ -85,7 +84,7 @@
               <!-- Grid List Section Type -->
               <template v-else-if="section.type === 'grid-list'">
                 <div v-for="skill in skills" :key="skill.id" class="grid-item flex gap-05 align-center">
-                  <img :src="`/images/${skill.icon}`" :alt="skill.id">
+                  <Icon :icon="skill.icon" size="35px" />
 
                   <div class="flex flex-column">
                     <h3>{{ skill.name }}</h3>
@@ -97,7 +96,7 @@
               <!-- Flex List Section Type -->
               <template v-else-if="section.type === 'regular-list'">
                 <div v-for="item in section.content" :key="item.id" class="flex gap-05 align-center">
-                  <div class="vertical-line"></div>
+                  <VerticalLine variant="translucent" />
 
                   <div class="flex gap-03 flex-column">
                     <h3>{{ $tm(`aboutMe.sections.${section.id}.content.${item.id}.title`) }}</h3>
@@ -164,7 +163,7 @@
 
     background: radial-gradient(
         var(--color-bg-transparent) 90%, transparent
-    ), url("/images/paint04.webp") no-repeat center center;
+    ), url("/src/assets/images/paint04.webp") no-repeat center center;
     background-size: cover;
 
     box-shadow: 0 5px 10px var(--shadow-bolder);
@@ -276,15 +275,8 @@
     gap: 1em;
   }
 
-  .vertical-line{
-    width: 3px;
-    min-height: 80px;
-    height: 100%;
-
-    background: var(--grey);
-  }
-
-  @media(min-width: 1024px){
+  /* MEDIA QUERIES */
+  @media(min-width: 1024px) {
     .container {
       width: calc(100dvw - 3em);
       height: calc(100dvh - 200px);
@@ -330,6 +322,7 @@
 
   import Icon from "/src/components/common/Icon.vue"
   import HighlightBar from "../common/HighlightBar.vue"
+  import VerticalLine from "../common/VerticalLine.vue"
 
   // COMPOSABLES
   const { t } = useI18n()

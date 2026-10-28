@@ -1,5 +1,4 @@
 <template>
-  <!-- Contact Section -->
   <section class="section-box flex gap-05 align-center justify-center">
     <div class="container flex gap-1 flex-column align-center justify-between translucent">
       <!-- Island -->
@@ -15,7 +14,7 @@
           <p class="text-muted">{{ $t(`contact.subtitle`) }}.</p>
         </div>
 
-        <img src="/images/me.jpg" alt="Profile Picture" class="pfp">
+        <img src="/src/assets/images/me.jpg" alt="Profile Picture" class="pfp">
 
         <ul class="content flex gap-05 flex-column w-full">
           <template
@@ -53,7 +52,7 @@
   .container{
     min-height: 800px;
 
-    background: radial-gradient(var(--alpha-black-30) 90%, transparent), url("/images/paint03.webp") no-repeat center center;
+    background: radial-gradient(var(--alpha-black-30) 90%, transparent), url("/src/assets/images/paint03.webp") no-repeat center center;
     background-size: cover;
 
     box-shadow: 0 0 10px 5px var(--shadow-subtle);

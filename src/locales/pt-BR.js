@@ -1,13 +1,24 @@
+import { SOCIAL } from "./portfolioConfig.js"
+import {THEME_PREFERENCES} from "../composables/useTheme.js";
+
 export default {
     utils: {
-      certificate: "Certificado"
+        certificate: "Certificado",
+        theme: "Tema",
+        language: "Idioma",
+        currentLanguage: "Português Brasil",
+    },
+    themes: {
+        [THEME_PREFERENCES.LIGHT]: "Claro",
+        [THEME_PREFERENCES.DARK]: "Escuro",
+        [THEME_PREFERENCES.SYSTEM]: "Seguir Sistema",
     },
     personalLinks: {
-        mail: "E-mail",
-        resume: "Currículo",
-        linkedin: "LinkedIn",
-        github: "GitHub",
-        instagram: "Instagram"
+        [SOCIAL.EMAIL]: "E-mail",
+        [SOCIAL.RESUME]: "Currículo",
+        [SOCIAL.LINKEDIN]: "LinkedIn",
+        [SOCIAL.GITHUB]: "GitHub",
+        [SOCIAL.INSTAGRAM]: "Instagram"
     },
     skills: {
         title: "Habilidades",
@@ -173,12 +184,17 @@ export default {
     },
     sidebar: {
         resume: "Baixar Currículo",
-        language: "Idioma - Português",
-        lightTheme: "Tema - Claro",
-        darkTheme: "Tema - Escuro",
+        [THEME_PREFERENCES.LIGHT]: "Tema - Claro",
+        [THEME_PREFERENCES.DARK]: "Tema - Escuro",
+        [THEME_PREFERENCES.SYSTEM]: "Tema - Seguir Sistema",
         sections: {
             social: {
-                title: "Redes Sociais"
+                title: "Redes Sociais",
+                items: {
+                    [SOCIAL.GITHUB]: "GitHub",
+                    [SOCIAL.LINKEDIN]: "LinkedIn",
+                    [SOCIAL.INSTAGRAM]: "Instagram"
+                }
             },
             others: {
                 title: "Outros"
@@ -224,19 +240,19 @@ export default {
             others: {
                 title: "Outros",
                 links: {
-                    mail: {
+                    [SOCIAL.EMAIL]: {
                         label: "E-mail"
                     },
-                    resume: {
+                    [SOCIAL.RESUME]: {
                         label: "Currículo"
                     },
-                    linkedin: {
+                    [SOCIAL.LINKEDIN]: {
                         label: "LinkedIn"
                     },
-                    github: {
+                    [SOCIAL.GITHUB]: {
                         label: "GitHub"
                     },
-                    instagram: {
+                    [SOCIAL.INSTAGRAM]: {
                         label: "Instagram"
                     }
                 }

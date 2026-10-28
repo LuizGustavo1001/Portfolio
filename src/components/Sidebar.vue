@@ -1,6 +1,6 @@
 <template>
   <!-- Sidebar -->
-  <aside class="sidebar flex gap-05 flex-column">
+  <aside :ref="sidebar.sidebarRef" class="sidebar flex gap-05 flex-column">
     <!-- Main Sidebar Content -->
     <div class="flex-grow-1 flex gap-2 flex-column">
       <nav
@@ -38,21 +38,21 @@
               <ActionButton
                   :leftIcon="icons.translate"
                   :right-icon="icons.switch"
-                  :label="$t(`sidebar.language`)"
+                  :label="$t(`utils.currentLanguage`)"
                   style="justify-content: flex-start"
                   class="reverse action-btn w-full"
-                  @click="toggleLang"
+                  @click.stop="language.toggleLanguage"
               />
             </template>
 
             <template v-else>
               <ActionButton
-                  :leftIcon="props.theme === 'lightTheme'? icons.moonFilled : icons.sunFilled"
-                  :right-icon="icons.switch"
-                  :label="$t(`sidebar.${props.theme}`)"
+                  :leftIcon="leftIcon"
+                  :rightIcon="icons.switch"
+                  :label="$t(`sidebar.${theme.currentPreference.value}`)"
                   style="justify-content: flex-start"
                   class="reverse action-btn w-full"
-                  @click="toggleTheme"
+                  @click.stop="theme.toggleTheme"
               />
             </template>
           </li>
@@ -101,12 +101,27 @@
 <script setup>
   import { personalLinks, sidebar } from "/src/locales/portfolioConfig.js"
   import { icons } from "/src/assets/icons/icons.js"
+
+  import {THEME_PREFERENCES, useTheme} from "../composables/useTheme.js"
+
   import ActionButton from "/src/components/buttons/ActionButton.vue"
   import ActionButtonAlt from "/src/components/buttons/ActionButtonAlt.vue"
+  import {computed} from "vue";
+  import {useLanguage} from "../composables/useLanguage.js";
 
-  const emit  = defineEmits(['toggle-language', 'toggle-theme'])
+
   const props = defineProps(['theme'])
 
-  const toggleLang  = () => emit("toggle-language")
-  const toggleTheme = () => emit("toggle-theme")
+  // COMPOSABLES
+  const theme = useTheme()
+  const language = useLanguage()
+
+  const leftIcon = computed(() => {
+    switch(theme.currentPreference.value){
+      case THEME_PREFERENCES.LIGHT: return icons.moonFilled
+      case THEME_PREFERENCES.DARK: return icons.sunFilled
+      default: return icons["desktop-fill"]
+    }
+  })
+
 </script>

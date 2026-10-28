@@ -81,7 +81,7 @@
   }
 
   /* DARK MODE */
-  .dark-theme nav {
+  .dark nav {
     box-shadow: 0 0 5px 3px var(--shadow);
   }
 </style>

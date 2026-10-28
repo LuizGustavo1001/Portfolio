@@ -1,6 +1,8 @@
 <template>
-  <!-- Overlay -->
-  <div id="overlay"></div>
+  <div
+      id="overlay"
+      :class="{ active: isOverlayActive }"
+  />
 </template>
 
 <style scoped>
@@ -30,3 +32,11 @@
     }
   }
 </style>
+
+<script setup>
+  import { useOverlay } from "../../composables/useOverlay.js"
+  import { computed } from "vue"
+
+  const overlay = useOverlay()
+  const isOverlayActive = computed(() => overlay.isActive.value)
+</script>

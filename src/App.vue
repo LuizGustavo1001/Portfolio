@@ -1,17 +1,16 @@
 <template>
-  <Overlay :class="overlayIsOpen ? 'active' : ''"/>
-
-  <NavBar/>
+  <Overlay />
+  <NavBar />
 
   <Sidebar
-      @toggle-language="handleToggleLanguage"
-      @toggle-theme="handleToggleTheme"
-      :theme="currentTheme"
-      :class="asideIsOpen ? 'active' : ''"
-      id="sidebar"
+      :ref="sidebar.sidebarRef"
+      :class="{ active: isSidebarOpen }"
   />
 
-  <AppHeader @toggle-aside="handleToggleAside"/>
+  <AppHeader
+      toggleBtnRef="toggleBtnRef"
+      @sidebarToggle="sidebar.toggle"
+  />
 
   <main>
     <Home id="home" />
@@ -22,16 +21,17 @@
 
     <Contact id="contact" class="scroll-trigger-section" />
   </main>
-
   <AppFooter/>
 </template>
 
 <script setup>
-  import { ref, watch, onMounted, onUnmounted, nextTick } from "vue"
+  import { ref, onMounted, onUnmounted, nextTick, computed } from "vue"
   import { gsap } from "gsap"
   import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-  import { useI18n } from 'vue-i18n'
+  import { useSidebar } from "./composables/useSidebar.js"
+  import { useTheme } from "./composables/useTheme.js"
+  import { useLanguage } from "./composables/useLanguage.js"
 
   import Overlay from "./components/common/Overlay.vue"
   import Sidebar from "./components/Sidebar.vue"
@@ -46,98 +46,19 @@
   gsap.registerPlugin(ScrollTrigger)
 
   // COMPOSABLES
-  const { locale } = useI18n()
+  const sidebar = useSidebar()
+  const theme = useTheme()
+  const language = useLanguage()
 
-  // Toggle overlay
-  const overlayIsOpen = ref(false)
-
-  const toggleOverlay = () => {
-    overlayIsOpen.value = !overlayIsOpen.value
-    document.body.classList.toggle("overflow-hidden")
-  }
-
-  // Toggle language
-  const getInitLang = () => {
-    const savedLang = localStorage.getItem("lang")
-    if(savedLang) return savedLang
-
-    return locale.value
-  }
-
-  const currentLanguage = ref(getInitLang())
-  locale.value = currentLanguage.value
-
-  const handleToggleLanguage = () => {
-    const newLang = currentLanguage.value === 'ptBR' ? 'enUS' : 'ptBR'
-
-    currentLanguage.value = newLang
-    locale.value = newLang
-    localStorage.setItem("lang", newLang)
-  }
-
-
-  // Toggle theme
-  const getInitTheme = () => {
-    const savedTheme = localStorage.getItem("theme")
-    if (savedTheme) return savedTheme
-
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    return prefersDark ? 'darkTheme' : 'lightTheme'
-  }
-
-  const currentTheme = ref(getInitTheme())
-
-  watch(currentTheme, (newTheme) => {
-    if(newTheme === "darkTheme") {
-      document.body.classList.add("dark-theme")
-    }else{
-      document.body.classList.remove("dark-theme")
-    }
-
-    localStorage.setItem("theme", newTheme)
-  }, {immediate: true})
-
-  const handleToggleTheme = (theme) => {
-    if(theme){
-      currentTheme.value = theme
-    }else{
-      currentTheme.value = currentTheme.value === 'darkTheme' ? 'lightTheme' : 'darkTheme'
-    }
-  }
-
-
-  // Toggle aside
-  const asideIsOpen = ref(false)
-
-  const handleToggleAside = () => {
-    asideIsOpen.value = !asideIsOpen.value
-    toggleOverlay()
-  }
-
-  const handleClickOutside = (event) => {
-    const clickedInsideSidebar = event.target.closest('#sidebar')
-    const clickedToggleButton = event.target.closest('#sidebar-toggle-btn')
-
-    if(asideIsOpen.value && !clickedInsideSidebar && !clickedToggleButton){
-      handleToggleAside()
-    }
-  }
-
+  const isSidebarOpen = computed(() => sidebar.isActive.value)
 
   // Others
-  const reloadPage = () => {
-    window.location.reload()
-  }
-
-  const getImageUrl = (path) => {
-    return new URL(path, import.meta.url).href
-  }
-
   const container = ref(null)
   let context
 
   onMounted(async () => {
-    window.addEventListener('click', handleClickOutside)
+    theme.initToggleTheme()
+    language.initLanguage()
 
     await nextTick()
 
@@ -174,8 +95,6 @@
   })
 
   onUnmounted(() => {
-    window.removeEventListener('click', handleClickOutside)
-
     if(context) context.revert()
   })
 </script>

@@ -1,5 +1,4 @@
 <template>
-  <!-- Latest Projects Section -->
   <section class="section-box flex gap-05 align-center  justify-center">
     <div class="container flex gap-2 flex-column">
       <!-- Section Title -->
@@ -146,7 +145,7 @@
   }
 
   /* DARK MODE */
-  .dark-theme .project-image::after {
+  .dark .project-image::after {
     content: "";
     position: absolute;
 

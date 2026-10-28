@@ -1,5 +1,4 @@
 <template>
-  <!-- Home Section -->
   <section class="section-box flex gap-05 flex-column justify-center align-center relative">
     <div class="container flex gap-2 flex-column align-center text-center">
       <div class="content">
@@ -25,7 +24,7 @@
       </div>
 
       <!-- Profile Picture -->
-      <img class="pfp" src="/images/me.jpg" alt="Profile Picture"/>
+      <img class="pfp" src="/src/assets/images/me.jpg" alt="Profile Picture"/>
     </div>
 
     <div ref="scrollIndicator" class="scroll-indicator flex gap-05 align-center absolute">

@@ -13,11 +13,11 @@
 
       <!-- Sidebar Icon -->
       <IconBtn
+          :ref="toggleBtnRef"
           :icon="icons.sidebar"
           tag="button"
           size="25px"
-          id="sidebar-toggle-btn"
-          @click="toggleAside"
+          @click.stop="$emit('sidebar-toggle')"
       />
     </div>
   </header>
@@ -57,7 +57,7 @@
   }
 
   /* Dark Mode */
-  .dark-theme .header {
+  .dark .header {
     box-shadow: 0 4px 10px 2px var(--shadow);
   }
 </style>
@@ -68,7 +68,10 @@
   import IconBtn from "/src/components/buttons/IconBtn.vue"
   import Icon from "/src/components/common/Icon.vue"
 
+  const props = defineProps({
+    toggleBtnRef: String
+  })
+
   const emits = defineEmits(["toggle-aside"])
 
-  const toggleAside = () => { emits("toggle-aside") }
 </script>
