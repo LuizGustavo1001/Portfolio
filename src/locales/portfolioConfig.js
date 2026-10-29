@@ -1,63 +1,88 @@
-import { icons } from "/src/locales/icons.js"
+import { icons } from "/src/assets/icons/icons.js"
+import { THEME_PREFERENCES } from "../composables/useTheme.js"
+import { BUTTONS } from "../composables/utils.js"
+
+export const SOCIAL = {
+    GITHUB: 'github',
+    RESUME: 'resume',
+    EMAIL: 'email',
+    INSTAGRAM: 'instagram',
+    LINKEDIN: 'linkedin'
+}
 
 export const personalLinks = {
-    mail: {
-        id: "mail",
+    [SOCIAL.EMAIL]: {
+        id: SOCIAL.EMAIL,
         href: "mailto:gustavw1001@gmail.com",
         value: "gustavw1001@gmail.com",
-        icon: icons.mailFilled,
+        icon: icons["mail-fill"]
     },
-    resume: {
-        id: "resume",
+    [SOCIAL.RESUME]: {
+        id: SOCIAL.RESUME,
         href: "https://drive.google.com/drive/folders/1fGPZ3UlCj2dS8TwgPCCtXVZUbmM8z3sJ?usp=drive_link",
         value: "Portfolio",
-        icon: icons.documentFilled,
+        icon: icons["article-fill"]
     },
-    github: {
-        id: "github",
+    [SOCIAL.GITHUB]: {
+        id: SOCIAL.GITHUB,
         href: "https://github.com/LuizGustavo1001",
         value: "LuizGustavo1001",
-        icon: icons.github,
+        icon: icons.github
     },
-    instagram: {
-        id: "instagram",
+    [SOCIAL.INSTAGRAM]: {
+        id: SOCIAL.INSTAGRAM,
         href: "https://www.instagram.com/luiz_g1001/",
         value: "luiz_g1001",
-        icon: icons.instagram,
+        icon: icons["instagram-fill"]
     },
-    linkedin: {
-        id: "linkedin",
+    [SOCIAL.LINKEDIN]: {
+        id: SOCIAL.LINKEDIN,
         href: "https://www.linkedin.com/in/luizgustavo1001/",
         value: "LuizGustavo1001",
-        icon: icons.linkedinFilled,
+        icon: icons["linkedin-fill"]
+    }
+}
+
+export const themes = {
+    [THEME_PREFERENCES.LIGHT]: {
+        id: THEME_PREFERENCES.LIGHT,
+        icon: icons["moon-fill"]
+    },
+    [THEME_PREFERENCES.DARK]: {
+        id: THEME_PREFERENCES.DARK,
+        icon: icons["sun-fill"]
+    },
+    [THEME_PREFERENCES.SYSTEM]: {
+        id: THEME_PREFERENCES.SYSTEM,
+        icon: icons["desktop-fill"]
     }
 }
 
 export const projects = [
     {
+        id: "facilCare",
+        href: "url(/src/assets/images/facilCare.png)",
+        stacks: ["PWA", "Vue.js", "Dexie.js", "JavaScript", "Offline-First", "CRUD"],
+        repository: "https://github.com/LuizGustavo1001/Facil_Care",
+        demo: "https://facilcare.vercel.app/"
+    },
+    {
         id: "dictionary",
-        href: "url(/images/dicionario.png)",
+        href: "url(/src/assets/images/dicionario.png)",
         stacks: ["Node.js", "Javascript", "Docker", "npm", "JWT", "Sass", "Express.js", "MySQL", "Figma", "Cloudinary API", "RESTful API"],
         repository: "https://github.com/LuizGustavo1001/Dicionario_Estudos",
         demo: ""
     },
     {
         id: "acai",
-        href: "url(/images/acai.webp)",
+        href: "url(/src/assets/images/acai.webp)",
         stacks: ["PHP OOP", "MySQL", "HTML5", "CSS3", "Cloudinary API", "Composer", "Google Cloud API", "Figma"],
         repository: "https://github.com/LuizGustavo1001/Projeto-Acai-2.0",
         demo: ""
     },
     {
-        id: "todo",
-        href: "url(/images/todo.webp)",
-        stacks: ["JavaScript", "JSON", "Node.js", "Scrapping", "CRUD"],
-        repository: "https://github.com/LuizGustavo1001/TODO-WebPage-JS",
-        demo: "https://vercel-todo-list-js.vercel.app/"
-    },
-    {
         id: "animeList",
-        href: "url(/images/cpp.png)",
+        href: "url(/src/assets/images/cpp.png)",
         stacks: ["C++", "CSV Scrapping"],
         repository: "https://github.com/LuizGustavo1001/Anime-Catalog-in-cpp",
         demo: ""
@@ -65,20 +90,31 @@ export const projects = [
 ]
 
 export const aboutMe = {
+    controllers: [
+        {
+            color: "#a3be8c"
+        },
+        {
+            color: "#ebcb8b"
+        },
+        {
+            color: "#bf616a"
+        }
+    ],
     sections: [
         {
             id: "profile",
-            icon: icons.userIdFilled,
+            icon: icons["id-card-fill"],
             type: "text"
         },
         {
             id: "skills",
-            icon: icons.code,
+            icon: icons["code-slash"],
             type: "grid-list"
         },
         {
             id: "backgrounds",
-            icon: icons.capFilled,
+            icon: icons["graduation-cap-fill"],
             type: "regular-list",
             content: [
                 {
@@ -88,7 +124,7 @@ export const aboutMe = {
         },
         {
             id: "certificates",
-            icon: icons.pencilFilled,
+            icon: icons["certificate-fill"],
             type: "regular-list",
             content: [
                 {
@@ -116,150 +152,159 @@ export const skills = [
     {
         id: "js",
         name: "JavaScript",
-        icon: "js.svg",
+        icon: icons.js
     },
     {
         id: "node",
         name: "Node.js",
-        icon: "node.svg",
+        icon: icons.nodejs
     },
     {
         id: "docker",
         name: "Docker",
-        icon: "docker.svg"
+        icon: icons.docker
     },
     {
         id: "php",
         name: "PHP",
-        icon: "php.svg"
+        icon: icons.php
     },
     {
         id: "scss",
         name: "Scss/Sass",
-        icon: "scss.svg"
+        icon: icons.scss
     },
     {
         id: "figma",
         name: "Figma",
-        icon: "figma.svg"
+        icon: icons.figma
     },
     {
         id: "mysql",
         name: "MySQL",
-        icon: "mysql.svg"
+        icon: icons.mysql
     },
     {
         id: "html",
         name: "HTML & CSS",
-        icon: "html.svg"
+        icon: icons.html
     },
     {
         id: "cpp",
         name: "C++",
-        icon: "cpp.svg"
+        icon: icons.cpp
     },
     {
         id: "vue",
         name: "Vue.js",
-        icon: "vue.svg"
+        icon: icons.vue
     },
     {
         id: "illustrator",
         name: "Adobe Illustrator",
-        icon: "illustrator.svg"
+        icon: icons.illustrator
     },
     {
         id: "git",
         name: "Git • Github",
-        icon: "git.svg"
+        icon: icons.github
     },
     {
         id: "insomnia",
         name: "Insomnia",
-        icon: "insomnia.svg"
+        icon: icons.insomnia
     }
 ]
 
-export const backgrounds = [
-    {
-        id: "ufla"
-    },
-]
-
-export const experiences = [
-    {
-        id: "vue01"
-    }
-]
-
-export const sidebar = [
-    {
+export const sidebar = {
+    social: {
         id: "social",
-        items: [
-            {
-                id: "github"
+        items: {
+            [SOCIAL.GITHUB]: {
+                id: personalLinks[SOCIAL.GITHUB].id,
+                tag: BUTTONS.ACTION_BUTTON_ALT,
+                leftIcon: personalLinks[SOCIAL.GITHUB].icon,
+                rightIcon: icons["external-link"],
+                link: personalLinks[SOCIAL.GITHUB].href
             },
-            {
-                id: "linkedin"
+            [SOCIAL.LINKEDIN]: {
+                id: personalLinks[SOCIAL.LINKEDIN].id,
+                tag: BUTTONS.ACTION_BUTTON_ALT,
+                leftIcon: personalLinks[SOCIAL.LINKEDIN].icon,
+                rightIcon: icons["external-link"],
+                link: personalLinks[SOCIAL.LINKEDIN].href
             },
-            {
-                id: "instagram"
+            [SOCIAL.INSTAGRAM]: {
+                id: personalLinks[SOCIAL.INSTAGRAM].id,
+                tag: BUTTONS.ACTION_BUTTON_ALT,
+                leftIcon: personalLinks[SOCIAL.INSTAGRAM].icon,
+                rightIcon: icons["external-link"],
+                link: personalLinks[SOCIAL.INSTAGRAM].href
             }
-        ]
+        },
     },
-    {
+    others: {
         id: "others",
-        items: [
-            {
-                id: "resume"
+        items: {
+            [SOCIAL.RESUME]: {
+                id: personalLinks[SOCIAL.RESUME].id,
+                tag: BUTTONS.ACTION_BUTTON,
+                type: "a",
+                link: personalLinks[SOCIAL.RESUME].href,
+                leftIcon: personalLinks[SOCIAL.RESUME].icon,
+                variant: "reverse"
             },
-            {
-                id: "toggleLanguage"
+            "languages": {
+                id: "languages",
+                tag:  BUTTONS.ACTION_BUTTON,
+                leftIcon: icons.translate,
+                type: "button",
+                rightIcon: icons["toggle-line"]
             },
-            {
-                id: "toggleTheme"
+            "themes": {
+                id: "themes",
+                tag: BUTTONS.ACTION_BUTTON,
+                type: "button",
+                leftIcon: icons.translate,
+                rightIcon: icons["toggle-line"]
             }
-        ]
+        }
     }
-]
+}
 
 export const mainNavigation = [
     {
         id: "home",
         href: "#home",
-        icon: icons.home,
-        iconActive: icons.homeFilled
+        icon: icons["home-line"],
+        iconActive: icons["home-fill"]
     },
     {
         id: "aboutMe",
         href: "#aboutMe",
-        icon: icons.userFrame,
-        iconActive: icons.userFrameFilled
+        icon: icons["id-card-line"],
+        iconActive: icons["id-card-fill"]
     },
     {
         id: "projects",
         href: "#projects",
-        icon: icons.cube,
-        iconActive: icons.cubeFilled
+        icon: icons["repository-line"],
+        iconActive: icons["repository-fill"]
     },
     {
         id: "contact",
         href: "#contact",
-        icon: icons.inbox,
-        iconActive: icons.inboxFilled
+        icon: icons["inbox-line"],
+        iconActive: icons["inbox-fill"]
     }
 ]
 
-export const navbar = {
-    items: mainNavigation
-}
-
 export const footer = {
-    personal: {
-        github: "github",
-        linkedin: "linkedin",
-        instagram: "instagram"
-    },
+    personal: [
+        personalLinks[SOCIAL.GITHUB],
+        personalLinks[SOCIAL.LINKEDIN],
+        personalLinks[SOCIAL.INSTAGRAM]
+    ],
     section: [
         {
             id: "navigation",

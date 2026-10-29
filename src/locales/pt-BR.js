@@ -1,11 +1,28 @@
+import { SOCIAL } from "./portfolioConfig.js"
+import { THEME_PREFERENCES } from "../composables/useTheme.js"
+
 export default {
-    personalLinks: {
-        mail: "E-mail",
-        resume: "Currículo",
-        linkedin: "LinkedIn",
-        github: "GitHub",
-        instagram: "Instagram"
+    utils: {
+        certificate: "Certificado",
+        theme: "Tema",
+        language: "Idioma",
+        currentLanguage: "Português Brasil"
     },
+
+    themes: {
+        [THEME_PREFERENCES.LIGHT]: "Claro",
+        [THEME_PREFERENCES.DARK]: "Escuro",
+        [THEME_PREFERENCES.SYSTEM]: "Seguir Sistema"
+    },
+
+    personalLinks: {
+        [SOCIAL.EMAIL]: "E-mail",
+        [SOCIAL.RESUME]: "Currículo",
+        [SOCIAL.LINKEDIN]: "LinkedIn",
+        [SOCIAL.GITHUB]: "GitHub",
+        [SOCIAL.INSTAGRAM]: "Instagram"
+    },
+
     skills: {
         title: "Habilidades",
         content: {
@@ -50,12 +67,16 @@ export default {
             }
         }
     },
+
     projects: {
-        demo: "Demonstração",
-        repository: "Repositório",
+        facilCare: {
+            title: "FacilCare",
+            subtitle: "PWA Offline-First para Monitoramento de Saúde",
+            description: "Sistema focado em facilitar a rotina de cuidadores, permitindo gerenciar dados médicos de um paciente, garantindo a privacidade dos dados diretamente no dispositivo do usuário, eliminando custos de infraestrutura em nuvem. É possível fazer backup de dados por meio de um arquivo backup no formato JSON ou por meio de sincronização P2P (WebRTC) ao ler o código QR"
+        },
         dictionary: {
             title: "Dicionário de Estudos",
-            subtitle: "Plataforma de Gerenciamento",
+            subtitle: "Plataforma para Gerenciamento de Vocabulário",
             description: "Gerenciador de vocabulário com foco em estudantes e pesquisadores, separando termos em pastas, sendo possível filtrar e realizar operações do tipo CRUD para cada um deles. A plataforma conta com uma arquitetura de API RESTful, com autenticação JWT para cada usuário cadastrado, contando com armazenamento em nuvem utilizando Cloudinary API",
         },
         acai: {
@@ -63,21 +84,18 @@ export default {
             subtitle: "E-commerce",
             description: "Plataforma de e-commerce completa, com gerenciamento de usuários, controle de vendas e painel administrativo com suporte a operações CRUD. Aplicação desenvolvida inteiramente em PHP, garantindo organização e segurança no fluxo de informações. A cada pedido realizado, os dados da transação são automaticamente registrados em uma planilha online, incluindo informações do cliente, produtos adquiridos e locais da compra, facilitando o acompanhamento e a gestão das vendas"
         },
-        todo: {
-            title: "Lista de Tarefas",
-            subtitle: "Lista de Tarefas",
-            description: "Lista de tarefas online contendo filtros e tema escuro utilizando JavaScript. A aplicação recebe dados a partir de um arquivo JSON, responsável por armazenar informações sobre cada tarefa. Implementa um CRUD simples, permitindo criar, visualizar, atualizar e remover tarefas, além de gerenciar seus estados entre concluída e em andamento"
-        },
         animeList: {
             title: "Lista de Animes",
             subtitle: "Gerenciador de Animes",
             description: "Catálogo de anime desenvolvido em C++ utilizando lista duplamente encadeada declarada puramente. O projeto apresenta suporte a operações CRUD, mostrar um intervalo filtrado/ordenado e opção para salvar alterações"
         }
     },
+
     home: {
         role: "Desenvolvedor Web {role}",
         scrollLabel: "Role para baixo para continuar..."
     },
+
     aboutMe: {
         title: {
             medium: "Sobre",
@@ -127,7 +145,8 @@ export default {
                         title: "Vue na Prática: Fundamentos Profissionais com Projeto Real",
                         subtitle: "Udemy",
                         period: "2026",
-                        link: "https://www.udemy.com/certificate/UC-08f6e3ac-9943-40a9-ae72-e4a574766ab4/"
+                        link: "https://www.udemy.com/certificate/UC-08f6e3ac-9943-40a9-ae72-e4a574766ab4/",
+                        linkLabel: "Certificado"
                     }
                 }
             },
@@ -150,6 +169,7 @@ export default {
             }
         }
     },
+
     projectsSection: {
         title: {
             medium: "Últimos",
@@ -160,6 +180,7 @@ export default {
             github: "Outros Projetos"
         }
     },
+
     contact: {
         island: "Contato",
         title: {
@@ -168,20 +189,38 @@ export default {
         },
         subtitle: "Sinta-se à vontade para contatar-me clicando nas opções abaixo"
     },
+
     sidebar: {
-        resume: "Baixar Currículo",
-        language: "Idioma - Português",
-        lightTheme: "Tema - Claro",
-        darkTheme: "Tema - Escuro",
-        sections: {
-            social: {
-                title: "Redes Sociais"
-            },
-            others: {
-                title: "Outros"
+        social: {
+            title: "Redes Sociais",
+            items: {
+              [SOCIAL.GITHUB]: {
+                  title: "GitHub"
+              },
+              [SOCIAL.LINKEDIN]: {
+                  title: "Linkedin"
+              },
+              [SOCIAL.INSTAGRAM]: {
+                  title: "Instagram"
+              }
+            }
+        },
+        others: {
+            title: "Outros",
+            items: {
+                [SOCIAL.RESUME]: {
+                    title: "Visualizar Currículo"
+                },
+                "languages": {
+                    title: ""
+                },
+                "themes": {
+                    title: ""
+                }
             }
         }
     },
+
     navbar: {
         items: {
             home: {
@@ -198,6 +237,7 @@ export default {
             }
         }
     },
+
     footer: {
         section: {
             navigation: {
@@ -217,23 +257,22 @@ export default {
                     }
                 }
             },
-
             others: {
                 title: "Outros",
                 links: {
-                    mail: {
+                    [SOCIAL.EMAIL]: {
                         label: "E-mail"
                     },
-                    resume: {
+                    [SOCIAL.RESUME]: {
                         label: "Currículo"
                     },
-                    linkedin: {
+                    [SOCIAL.LINKEDIN]: {
                         label: "LinkedIn"
                     },
-                    github: {
+                    [SOCIAL.GITHUB]: {
                         label: "GitHub"
                     },
-                    instagram: {
+                    [SOCIAL.INSTAGRAM]: {
                         label: "Instagram"
                     }
                 }
