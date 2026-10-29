@@ -38,7 +38,7 @@
                   </div>
                 </div>
 
-                <Icon :icon="icons.externalLink" style="align-self: flex-start"/>
+                <Icon :icon="icons['external-link']" style="align-self: flex-start"/>
               </a>
             </li>
           </template>

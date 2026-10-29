@@ -12,7 +12,7 @@
         <ActionButton
             tag="a"
             :href="personalLinks.github.href"
-            :rightIcon="icons.externalLink"
+            :rightIcon="icons['external-link']"
             :leftIcon="personalLinks.github.icon"
             :label="t('projectsSection.actions.github')"
             class="action-button"
@@ -40,7 +40,7 @@
                   v-if="project.demo"
                   tag="a"
                   :link="project.demo"
-                  :icon="icons.website"
+                  :icon="icons['window-fill']"
                   class="action-button"
                   :reverseClr="true"
               />

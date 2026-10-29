@@ -15,13 +15,13 @@ export const personalLinks = {
         id: SOCIAL.EMAIL,
         href: "mailto:gustavw1001@gmail.com",
         value: "gustavw1001@gmail.com",
-        icon: icons.mailFilled
+        icon: icons["mail-fill"]
     },
     [SOCIAL.RESUME]: {
         id: SOCIAL.RESUME,
         href: "https://drive.google.com/drive/folders/1fGPZ3UlCj2dS8TwgPCCtXVZUbmM8z3sJ?usp=drive_link",
         value: "Portfolio",
-        icon: icons.documentFilled
+        icon: icons["article-fill"]
     },
     [SOCIAL.GITHUB]: {
         id: SOCIAL.GITHUB,
@@ -33,24 +33,24 @@ export const personalLinks = {
         id: SOCIAL.INSTAGRAM,
         href: "https://www.instagram.com/luiz_g1001/",
         value: "luiz_g1001",
-        icon: icons.instagram
+        icon: icons["instagram-fill"]
     },
     [SOCIAL.LINKEDIN]: {
         id: SOCIAL.LINKEDIN,
         href: "https://www.linkedin.com/in/luizgustavo1001/",
         value: "LuizGustavo1001",
-        icon: icons.linkedinFilled
+        icon: icons["linkedin-fill"]
     }
 }
 
 export const themes = {
     [THEME_PREFERENCES.LIGHT]: {
         id: THEME_PREFERENCES.LIGHT,
-        icon: icons.moonFilled
+        icon: icons["moon-fill"]
     },
     [THEME_PREFERENCES.DARK]: {
         id: THEME_PREFERENCES.DARK,
-        icon: icons.sunFilled
+        icon: icons["sun-fill"]
     },
     [THEME_PREFERENCES.SYSTEM]: {
         id: THEME_PREFERENCES.SYSTEM,
@@ -104,17 +104,17 @@ export const aboutMe = {
     sections: [
         {
             id: "profile",
-            icon: icons.userIdFilled,
+            icon: icons["id-card-fill"],
             type: "text"
         },
         {
             id: "skills",
-            icon: icons.code,
+            icon: icons["code-slash"],
             type: "grid-list"
         },
         {
             id: "backgrounds",
-            icon: icons.capFilled,
+            icon: icons["graduation-cap-fill"],
             type: "regular-list",
             content: [
                 {
@@ -124,7 +124,7 @@ export const aboutMe = {
         },
         {
             id: "certificates",
-            icon: icons.pencilFilled,
+            icon: icons["certificate-fill"],
             type: "regular-list",
             content: [
                 {
@@ -224,21 +224,21 @@ export const sidebar = {
                 id: personalLinks[SOCIAL.GITHUB].id,
                 tag: BUTTONS.ACTION_BUTTON_ALT,
                 leftIcon: personalLinks[SOCIAL.GITHUB].icon,
-                rightIcon: icons.externalLink,
+                rightIcon: icons["external-link"],
                 link: personalLinks[SOCIAL.GITHUB].href
             },
             [SOCIAL.LINKEDIN]: {
                 id: personalLinks[SOCIAL.LINKEDIN].id,
                 tag: BUTTONS.ACTION_BUTTON_ALT,
                 leftIcon: personalLinks[SOCIAL.LINKEDIN].icon,
-                rightIcon: icons.externalLink,
+                rightIcon: icons["external-link"],
                 link: personalLinks[SOCIAL.LINKEDIN].href
             },
             [SOCIAL.INSTAGRAM]: {
                 id: personalLinks[SOCIAL.INSTAGRAM].id,
                 tag: BUTTONS.ACTION_BUTTON_ALT,
                 leftIcon: personalLinks[SOCIAL.INSTAGRAM].icon,
-                rightIcon: icons.externalLink,
+                rightIcon: icons["external-link"],
                 link: personalLinks[SOCIAL.INSTAGRAM].href
             }
         },
@@ -259,14 +259,14 @@ export const sidebar = {
                 tag:  BUTTONS.ACTION_BUTTON,
                 leftIcon: icons.translate,
                 type: "button",
-                rightIcon: icons.switch
+                rightIcon: icons["toggle-line"]
             },
             "themes": {
                 id: "themes",
                 tag: BUTTONS.ACTION_BUTTON,
                 type: "button",
                 leftIcon: icons.translate,
-                rightIcon: icons.switch
+                rightIcon: icons["toggle-line"]
             }
         }
     }
@@ -276,26 +276,26 @@ export const mainNavigation = [
     {
         id: "home",
         href: "#home",
-        icon: icons.home,
-        iconActive: icons.homeFilled
+        icon: icons["home-line"],
+        iconActive: icons["home-fill"]
     },
     {
         id: "aboutMe",
         href: "#aboutMe",
-        icon: icons.userFrame,
-        iconActive: icons.userFrameFilled
+        icon: icons["id-card-line"],
+        iconActive: icons["id-card-fill"]
     },
     {
         id: "projects",
         href: "#projects",
-        icon: icons.cube,
-        iconActive: icons.cubeFilled
+        icon: icons["repository-line"],
+        iconActive: icons["repository-fill"]
     },
     {
         id: "contact",
         href: "#contact",
-        icon: icons.inbox,
-        iconActive: icons.inboxFilled
+        icon: icons["inbox-line"],
+        iconActive: icons["inbox-fill"]
     }
 ]
 

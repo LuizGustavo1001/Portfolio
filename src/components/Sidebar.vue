@@ -75,8 +75,8 @@
   // COMPUTED PROPERTIES
   const themesLeftIcon = computed(() => {
     switch(theme.currentPreference.value){
-      case THEME_PREFERENCES.LIGHT: return icons.moonFilled
-      case THEME_PREFERENCES.DARK: return icons.sunFilled
+      case THEME_PREFERENCES.LIGHT: return icons["moon-fill"]
+      case THEME_PREFERENCES.DARK: return icons["sun-fill"]
       default: return icons["desktop-fill"]
     }
   })

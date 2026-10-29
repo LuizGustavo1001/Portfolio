@@ -22,7 +22,7 @@
                 />
               </div>
 
-              <Icon :icon="icons.userIdFilled" />
+              <Icon :icon="icons['id-card-fill']" />
             </div>
             <h1 class="line-overflow">
               {{ getSectionTitle().medium }}
