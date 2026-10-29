@@ -61,28 +61,28 @@ export const themes = {
 export const projects = [
     {
         id: "facilCare",
-        href: "url(/src/assets/images/facilCare.png)",
+        href: "url(https://res.cloudinary.com/dw2eqq9kk/image/upload/v1793309881/facilCare_bmvvft.png)",
         stacks: ["PWA", "Vue.js", "Dexie.js", "JavaScript", "Offline-First", "CRUD"],
         repository: "https://github.com/LuizGustavo1001/Facil_Care",
         demo: "https://facilcare.vercel.app/"
     },
     {
         id: "dictionary",
-        href: "url(/src/assets/images/dicionario.png)",
+        href: "url(https://res.cloudinary.com/dw2eqq9kk/image/upload/v1793309853/dicionario_m9vseq.png)",
         stacks: ["Node.js", "Javascript", "Docker", "npm", "JWT", "Sass", "Express.js", "MySQL", "Figma", "Cloudinary API", "RESTful API"],
         repository: "https://github.com/LuizGustavo1001/Dicionario_Estudos",
         demo: ""
     },
     {
         id: "acai",
-        href: "url(/src/assets/images/acai.webp)",
+        href: "url(https://res.cloudinary.com/dw2eqq9kk/image/upload/v1793309853/acai_oxniqt.webp)",
         stacks: ["PHP OOP", "MySQL", "HTML5", "CSS3", "Cloudinary API", "Composer", "Google Cloud API", "Figma"],
         repository: "https://github.com/LuizGustavo1001/Projeto-Acai-2.0",
         demo: ""
     },
     {
         id: "animeList",
-        href: "url(/src/assets/images/cpp.png)",
+        href: "url(https://res.cloudinary.com/dw2eqq9kk/image/upload/v1793309853/cpp_zeli1k.png)",
         stacks: ["C++", "CSV Scrapping"],
         repository: "https://github.com/LuizGustavo1001/Anime-Catalog-in-cpp",
         demo: ""
