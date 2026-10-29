@@ -7,7 +7,7 @@
     :disabled="isButton ? props.disabled : undefined"
     :aria-disabled="isButton ? props.disabled : undefined"
     class="action-btn flex gap-05 align-center"
-    :class="reverseClr ? 'reverse' : ''"
+    :class="{ reverse: reverseClr }"
   >
     <!-- Left Icon -->
     <div class="flex-grow-1 flex gap-05 align-center">

@@ -1,20 +1,21 @@
 <template>
   <!-- Main Nav Bar -->
   <nav class="flex gap-1">
-    <button v-for="item in navbar.items"
-            :key="item.id"
-            class="medium-weight flex align-center text-muted"
-            :class="[item.id === selectedItem ? 'active' : '']"
-            :data-id="item.id"
-            style="gap: 0.2em"
-            @click="toggleSelected(item.id)"
+    <button
+        v-for="item in mainNavigation"
+        :key="item.id"
+        class="medium-weight flex align-center text-muted"
+        :class="{ active: item.id === selectedItem }"
+        :data-id="item.id"
+        style="gap: 0.2em"
+        @click="toggleSelected(item.id)"
     >
       <Icon
           :icon="item.id === selectedItem
               ? item.iconActive
               : item.icon"
       />
-      <span class="label">{{ $t(`navbar.items.${item.id}.label`) }}</span>
+      <span class="label">{{ t(`navbar.items.${item.id}.label`) }}</span>
     </button>
   </nav>
 </template>
@@ -64,17 +65,17 @@
   }
 
   @media(max-width: 768px) {
-    nav button .label{
+    nav button .label {
       display: none;
     }
   }
 
   @keyframes fade-in-upper {
-    from{
+    from {
       opacity: 0;
       transform: translate(-50%, 10dvh);
     }
-    to{
+    to {
       opacity: 1;
       transform:  translate(-50%, 0);
     }
@@ -91,12 +92,16 @@
   import { gsap } from "gsap"
   import { ScrollToPlugin } from "gsap/ScrollToPlugin"
   import { ScrollTrigger } from "gsap/ScrollTrigger"
+  import { mainNavigation } from "/src/locales/portfolioConfig.js"
 
-  import { navbar } from "/src/locales/portfolioConfig.js"
+  import { useI18n } from "vue-i18n"
 
   import Icon from "/src/components/common/Icon.vue"
 
-  const selectedItem = ref(navbar.items[0].id)
+  // COMPOSABLES
+  const { t } = useI18n()
+
+  const selectedItem = ref(mainNavigation[0].id)
 
   gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
   let isAnimating = false

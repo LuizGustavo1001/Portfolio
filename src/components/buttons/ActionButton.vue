@@ -2,12 +2,20 @@
   <component
       :is="tag"
       :href="link || undefined"
-      :target="!isButton ? target : undefined"
-      :rel="target === '__blank' ? 'external' : 'internal'"
-      :disabled="isButton ? props.disabled : undefined"
-      :aria-disabled="isButton ? props.disabled : undefined"
+      :target="!isButton
+          ? target
+          : undefined"
+      :rel="target === '__blank'
+          ? 'external'
+          : 'internal'"
+      :disabled="isButton
+          ? props.disabled
+          : undefined"
+      :aria-disabled="isButton
+          ? props.disabled
+          : undefined"
       class="action-btn"
-      :class="reverseClr ? 'reverse' : ''"
+      :class="{ reverse: variant === 'reverse' }"
   >
     <span class="btn-content">
       <!-- Left Icon -->
@@ -104,6 +112,7 @@
 <script setup>
   import { computed } from 'vue'
   import { icons } from "/src/assets/icons/icons.js"
+
   import Icon from "/src/components/common/Icon.vue"
 
   const props = defineProps({
@@ -124,7 +133,7 @@
       type: Boolean,
       default: false,
     },
-    reverseClr: {
+    variant: {
       type: Boolean,
       default: false,
     },

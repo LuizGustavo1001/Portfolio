@@ -1,6 +1,6 @@
 <template>
   <Overlay />
-  <NavBar />
+  <Navbar />
 
   <Sidebar
       :ref="sidebar.sidebarRef"
@@ -37,7 +37,7 @@
   import Sidebar from "./components/Sidebar.vue"
   import AppHeader from "./components/AppHeader.vue"
   import Home from "./components/views/Home.vue"
-  import NavBar from "./components/NavBar.vue"
+  import Navbar from "./components/Navbar.vue"
   import AboutMe from "./components/views/AboutMe.vue"
   import Projects from "./components/views/Projects.vue"
   import Contact from "./components/views/Contact.vue"
@@ -50,12 +50,12 @@
   const theme = useTheme()
   const language = useLanguage()
 
+  // COMPUTED PROPERTIES
   const isSidebarOpen = computed(() => sidebar.isActive.value)
 
-  // Others
+  // OTHERS
   const container = ref(null)
   let context
-
   onMounted(async () => {
     theme.initToggleTheme()
     language.initLanguage()

@@ -17,6 +17,11 @@ const currentTheme = ref(THEMES.LIGHT) // current applied theme
 const currentPreference = ref(THEME_PREFERENCES.SYSTEM) // user's preference selection
 
 export function useTheme() {
+    /**
+     * Sets the current theme preference from:
+     * 1. Session Storage
+     * 2. System Default
+     **/
     const initToggleTheme = () => {
         const savedPreference = getFormatted(sessionStorage.getItem("theme"))
 
@@ -40,6 +45,9 @@ export function useTheme() {
         }
     }
 
+    /*
+     * Selects the `nextTheme` based on the `themeIndex`
+     **/
     const toggleTheme = () => {
         // Go to the next theme preference
         themeIndex = (themeIndex + 1) % themePreferences.length

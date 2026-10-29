@@ -1,11 +1,20 @@
-import {SOCIAL} from "./portfolioConfig.js";
-import {THEME_PREFERENCES} from "../composables/useTheme.js";
+import { SOCIAL } from "./portfolioConfig.js";
+import { THEME_PREFERENCES } from "../composables/useTheme.js"
 
 export default {
     utils: {
         certificate: "Certificate",
-        currentLanguage: "English (US)",
+        theme: "Theme",
+        language: "Language",
+        currentLanguage: "English (US)"
     },
+
+    themes: {
+        [THEME_PREFERENCES.LIGHT]: "Light",
+        [THEME_PREFERENCES.DARK]: "Dark",
+        [THEME_PREFERENCES.SYSTEM]: "Follow System"
+    },
+
     personalLinks: {
         [SOCIAL.EMAIL]: "E-mail",
         [SOCIAL.RESUME]: "Resume",
@@ -13,6 +22,7 @@ export default {
         [SOCIAL.GITHUB]: "GitHub",
         [SOCIAL.INSTAGRAM]: "Instagram"
     },
+
     skills: {
         title: "Skills",
         content: {
@@ -57,23 +67,22 @@ export default {
             }
         }
     },
+
     projects: {
-        demo: "Demonstration",
-        repository: "Repository",
+        facilCare: {
+            title: "FacilCare",
+            subtitle: "Health Monitoring PWA Offline-First",
+            description: "A system designed to streamline the daily tasks of caregivers, enabling the management of a patient's medical data while ensuring privacy directly on the user's device—thereby eliminating cloud infrastructure costs. Data can be backed up via a JSON file or through P2P synchronization (WebRTC) by scanning a QR code",
+        },
         dictionary: {
             title: "Studies Dictionary",
             subtitle: "Management Platform",
-            description: "Vocabulary manager focused on students and researchers who need a space to centralize their knowledge, separating terms inside folders, allowing the user to filter and perform CRUD operations for each of them. The platform features RESTful API architecture, with JWT authentication for registered users, as well as cloud storage using the Cloudinary API",
+            description: "A Vocabulary manager focused on students and researchers who need a space to centralize their knowledge, separating terms inside folders, allowing the user to filter and perform CRUD operations for each of them. The platform features RESTful API architecture, with JWT authentication for registered users, as well as cloud storage using the Cloudinary API",
         },
         acai: {
             title: "Açaí Project 2.0",
             subtitle: "E-commerce",
-            description: "Complete e-commerce platform with user management, sales control, and administrative panel supporting CRUD operations. Application developed entirely using PHP, ensuring organization and security at locales flow. With each order placed, the transaction records are automatically stored in an online spreadsheet, including client details, the acquired products, and the purchase date, making it easier to track and manage sales",
-        },
-        todo: {
-            title: "ToDo List",
-            subtitle: "ToDo List",
-            description: "Online To-Do List featuring filters and dark mode, developed using JavaScript. The application retrieves locales from a JSON file responsible for storing task information. It implements a simple CRUD system, allowing users to create, view, update, and delete tasks, as well as manage their status between completed and in progressThe system works as a vocabulary manager focused on students and researchers who need a space to centralize their Knowledge, separating terms inside folders, allowing the user to filter and perform CRUD operations for each of them. The plataform features RESTful API architecture, with JWT authentication for registered user, as well as cloud storage using Cloudinary API",
+            description: "A Complete e-commerce platform with user management, sales control, and administrative panel supporting CRUD operations. Application developed entirely using PHP, ensuring organization and security at locales flow. With each order placed, the transaction records are automatically stored in an online spreadsheet, including client details, the acquired products, and the purchase date, making it easier to track and manage sales",
         },
         animeList: {
             title: "Anime List",
@@ -81,10 +90,12 @@ export default {
             description: "C++ Anime catalog developed using a purely declared double-linked list. The project features CRUD operations, shows specific sorted/filtered intervals, and a save changes option",
         }
     },
+
     home: {
         role: "{role} Web Developer",
         scrollLabel: "Scroll down to continue..."
     },
+
     aboutMe: {
         title: {
             medium: "About",
@@ -134,7 +145,8 @@ export default {
                         title: "Vue na Prática: Fundamentos Profissionais com Projeto Real",
                         subtitle: "Udemy",
                         period: "2026",
-                        link: "https://www.udemy.com/certificate/UC-08f6e3ac-9943-40a9-ae72-e4a574766ab4/"
+                        link: "https://www.udemy.com/certificate/UC-08f6e3ac-9943-40a9-ae72-e4a574766ab4/",
+                        linkLabel: "Certify"
                     }
                 }
             },
@@ -157,6 +169,7 @@ export default {
             }
         }
     },
+
     projectsSection: {
         title: {
             medium: "Latest",
@@ -167,6 +180,7 @@ export default {
             github: "More Projects"
         }
     },
+
     contact: {
         island: "Contact",
         title: {
@@ -175,21 +189,38 @@ export default {
         },
         subtitle: "Feel free to contact me by clicking on the options below"
     },
+
     sidebar: {
-        resume: "View Resume",
-        language: "Language - English",
-        [THEME_PREFERENCES.LIGHT]: "Theme - Light",
-        [THEME_PREFERENCES.DARK]: "Theme - Dark",
-        [THEME_PREFERENCES.SYSTEM]: "Theme - System",
-        sections: {
-            social: {
-                title: "Social Media"
-            },
-            others: {
-                title: "Others"
+        social: {
+            title: "Social Media",
+            items: {
+                [SOCIAL.GITHUB]: {
+                    title: "GitHub"
+                },
+                [SOCIAL.LINKEDIN]: {
+                    title: "Linkedin"
+                },
+                [SOCIAL.INSTAGRAM]: {
+                    title: "Instagram"
+                }
+            }
+        },
+        others: {
+            title: "Others",
+            items: {
+                [SOCIAL.RESUME]: {
+                    title: "View Resume"
+                },
+                "languages": {
+                    title: ""
+                },
+                "themes": {
+                    title: ""
+                }
             }
         }
     },
+
     navbar: {
         items: {
             home: {
@@ -206,6 +237,7 @@ export default {
             }
         }
     },
+
     footer: {
         section: {
             navigation: {

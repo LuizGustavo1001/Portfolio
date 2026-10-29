@@ -3,15 +3,15 @@
     <div class="container flex gap-1 flex-column align-center justify-between translucent">
       <!-- Island -->
       <div class="island flex gap-05 align-center justify-between medium-weight">
-        <span>{{ $t(`contact.island`)}}</span>
-        <Icon :icon="icons.soundwaves"></Icon>
+        <span>{{ getIslandContent().title }}</span>
+        <Icon :icon="icons.soundwaves" />
       </div>
 
       <!-- Content -->
       <div class="container-body flex gap-2 flex-column align-center justify-between">
         <div class="title flex gap-05 flex-column align-center text-center">
-          <h1 class="line-overflow medium-weight">{{ $t(`contact.title.medium`) }} <strong>{{ $t(`contact.title.bold`) }} </strong>.</h1>
-          <p class="text-muted">{{ $t(`contact.subtitle`) }}.</p>
+          <h1 class="line-overflow medium-weight">{{ getPageTitleContent().medium }} <strong>{{ getPageTitleContent().bold }} </strong>.</h1>
+          <p class="text-muted">{{ getPageTitleContent().subtitle }}.</p>
         </div>
 
         <img src="/src/assets/images/me.jpg" alt="Profile Picture" class="pfp">
@@ -33,7 +33,7 @@
                   />
 
                   <div class="flex flex-column flex-grow-1">
-                    <span class="text-muted"> {{ $t(`personalLinks.${item.id}`) }}</span>
+                    <span class="text-muted"> {{ getPersonaLinkContent(item).title }}</span>
                     <span class="medium-weight">{{ item.value }}</span>
                   </div>
                 </div>
@@ -127,5 +127,36 @@
   import { icons } from "/src/assets/icons/icons.js"
   import { personalLinks } from "/src/locales/portfolioConfig.js"
 
+  import { useI18n } from "vue-i18n"
+
   import Icon from "/src/components/common/Icon.vue"
+
+  // COMPOSABLES
+  const { t, te } = useI18n()
+
+
+  // FUNCTIONS
+  const getIslandContent = () => {
+    return {
+      title: te(`contact.island`) ? t("contact.island") : "",
+    }
+  }
+
+  const getPageTitleContent = () => {
+    const titleKey = `contact.title`
+
+    return {
+      medium: te(`${titleKey}.medium`) ? t(`${titleKey}.medium`) : "",
+      bold: te(`${titleKey}.bold`) ? t(`${titleKey}.bold`) : "",
+      subtitle: te(`contact.subtitle`) ? t(`contact.subtitle`) : "",
+    }
+  }
+
+  const getPersonaLinkContent = (item) => {
+    const key = `personalLinks.${item.id}`
+
+    return {
+      title: te(key) ? t(key) : ""
+    }
+  }
 </script>

@@ -5,7 +5,7 @@
     :target="!isButton ? target : undefined"
     :rel="target === '__blank' ? 'external' : 'internal'"
     class="icon-wrapper"
-    :class="reverseClr ? 'reverse' : ''"
+    :class="{ reverse: reverseClr }"
     v-html="icon"
   >
   </component>

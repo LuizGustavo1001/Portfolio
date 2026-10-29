@@ -4,11 +4,9 @@
       <!-- Section Title -->
       <div class="section-title flex gap-05 justify-between flex-wrap">
         <h1 class="medium-weight uppercase">
-          {{ $t("projectsSection.title.medium") }}
-
+          {{ getProjectSectionTitleData().medium }}
           <br>
-
-          <strong>{{ $t("projectsSection.title.bold") }}</strong>.
+          <strong>{{ getProjectSectionTitleData().bold }}</strong>.
         </h1>
 
         <ActionButton
@@ -16,7 +14,7 @@
             :href="personalLinks.github.href"
             :rightIcon="icons.externalLink"
             :leftIcon="personalLinks.github.icon"
-            :label="$t('projectsSection.actions.github')"
+            :label="t('projectsSection.actions.github')"
             class="action-button"
         />
       </div>
@@ -26,10 +24,17 @@
         <li v-for="project in projects"
             :key="project.id"
             class="project flex gap-05 flex-column"
-            :style="{ '--image': project.href ? project.href : '' }"
+            :style="{
+              '--image': project.href
+                  ? project.href
+                  : ''
+            }"
         >
           <div class="flex gap-05 align-center">
-            <p class="project-subtitle text-muted medium-weight flex-grow-1 uppercase"> {{ $t(`projects.${project.id}.subtitle`) }} </p>
+            <p class="project-subtitle text-muted medium-weight flex-grow-1 uppercase">
+              {{ getProjectData(project).subtitle }}
+            </p>
+
             <span class="actions flex gap-05" style="justify-content: flex-end">
               <IconBtn
                   v-if="project.demo"
@@ -54,20 +59,21 @@
           <!-- Project Title -->
           <div class="flex gap-05 flex-column flex-grow-1">
             <h2 class="project-title">
-              {{ $t(`projects.${project.id}.title`) }}
+              {{ getProjectData(project).title }}
             </h2>
 
             <p class="project-desc text-muted text-justified flex-grow-1">
-              {{ $t(`projects.${project.id}.description`) }}.
+              {{ getProjectData(project).description }}.
             </p>
           </div>
 
           <!-- Project Stacks + Image -->
           <div class="flex gap-05 flex-column">
-            <ul class="stacks flex gap-05 align-center flex-wrap">
-              <li v-for="stack in project.stacks"
-                  :key="stack.id"
-                  class="badge medium-weight text-muted"
+            <ul class="stack-list flex gap-05 align-center flex-wrap">
+              <li
+                v-for="stack in project.stacks"
+                :key="stack.id"
+                class="badge medium-weight text-muted"
               >
                 {{ stack }}
               </li>
@@ -106,11 +112,12 @@
 
     background: var(--color-bg-subtle);
     border: 2px solid var(--color-border-secondary);
+    box-shadow: 0 0 5px 1px var(--shadow-subtle);
 
     border-radius: var(--radius-md);
   }
 
-  .project .stacks .badge {
+  .project .stack-list .badge {
     padding: 0.3em;
     background: var(--badge-bg-primary);
     border-radius: var(--radius-2xs);
@@ -154,12 +161,41 @@
     background: var(--black);
     opacity: 0.15;
   }
+
+  .dark .project {
+    box-shadow: 0 0 5px 2px var(--shadow-bolder);
+  }
 </style>
 
 <script setup>
   import { icons } from "/src/assets/icons/icons.js"
   import { personalLinks, projects } from "/src/locales/portfolioConfig.js"
 
+  import { useI18n } from "vue-i18n"
+
   import IconBtn from "/src/components/buttons/IconBtn.vue"
   import ActionButton from "/src/components/buttons/ActionButton.vue"
+
+  // COMPOSABLES
+  const { t } = useI18n()
+
+  // FUNCTIONS
+  const getProjectData = (project) => {
+    const key = `projects.${project.id}`
+
+    return {
+      subtitle: t(`${key}.subtitle`) ?? "",
+      title: t(`${key}.title`) ?? "",
+      description: t(`${key}.description`) ?? ""
+    }
+  }
+
+  const getProjectSectionTitleData = () => {
+    const key = `projectsSection.title`
+
+    return {
+      medium: t(`${key}.medium`) ?? "",
+      bold: t(`${key}.bold`) ?? ""
+    }
+  }
 </script>

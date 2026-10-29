@@ -1,5 +1,6 @@
 import { icons } from "/src/assets/icons/icons.js"
-import {THEME_PREFERENCES} from "../composables/useTheme.js";
+import { THEME_PREFERENCES } from "../composables/useTheme.js"
+import { BUTTONS } from "../composables/utils.js"
 
 export const SOCIAL = {
     GITHUB: 'github',
@@ -59,6 +60,13 @@ export const themes = {
 
 export const projects = [
     {
+        id: "facilCare",
+        href: "url(/src/assets/images/facilCare.png)",
+        stacks: ["PWA", "Vue.js", "Dexie.js", "JavaScript", "Offline-First", "CRUD"],
+        repository: "https://github.com/LuizGustavo1001/Facil_Care",
+        demo: "https://facilcare.vercel.app/"
+    },
+    {
         id: "dictionary",
         href: "url(/src/assets/images/dicionario.png)",
         stacks: ["Node.js", "Javascript", "Docker", "npm", "JWT", "Sass", "Express.js", "MySQL", "Figma", "Cloudinary API", "RESTful API"],
@@ -71,13 +79,6 @@ export const projects = [
         stacks: ["PHP OOP", "MySQL", "HTML5", "CSS3", "Cloudinary API", "Composer", "Google Cloud API", "Figma"],
         repository: "https://github.com/LuizGustavo1001/Projeto-Acai-2.0",
         demo: ""
-    },
-    {
-        id: "todo",
-        href: "url(/src/assets/images/todo.webp)",
-        stacks: ["JavaScript", "JSON", "Node.js", "Scrapping", "CRUD"],
-        repository: "https://github.com/LuizGustavo1001/TODO-WebPage-JS",
-        demo: "https://vercel-todo-list-js.vercel.app/"
     },
     {
         id: "animeList",
@@ -156,7 +157,7 @@ export const skills = [
     {
         id: "node",
         name: "Node.js",
-        icon: icons.nodejs,
+        icon: icons.nodejs
     },
     {
         id: "docker",
@@ -215,29 +216,28 @@ export const skills = [
     }
 ]
 
-/*
 export const sidebar = {
     social: {
         id: "social",
         items: {
             [SOCIAL.GITHUB]: {
                 id: personalLinks[SOCIAL.GITHUB].id,
-                tag: "ActionButtonAlt",
+                tag: BUTTONS.ACTION_BUTTON_ALT,
                 leftIcon: personalLinks[SOCIAL.GITHUB].icon,
                 rightIcon: icons.externalLink,
                 link: personalLinks[SOCIAL.GITHUB].href
             },
             [SOCIAL.LINKEDIN]: {
                 id: personalLinks[SOCIAL.LINKEDIN].id,
-                tag: "ActionButtonAlt",
-                leftIcon: "",
+                tag: BUTTONS.ACTION_BUTTON_ALT,
+                leftIcon: personalLinks[SOCIAL.LINKEDIN].icon,
                 rightIcon: icons.externalLink,
                 link: personalLinks[SOCIAL.LINKEDIN].href
             },
             [SOCIAL.INSTAGRAM]: {
                 id: personalLinks[SOCIAL.INSTAGRAM].id,
-                tag: "ActionButtonAlt",
-                leftIcon: "",
+                tag: BUTTONS.ACTION_BUTTON_ALT,
+                leftIcon: personalLinks[SOCIAL.INSTAGRAM].icon,
                 rightIcon: icons.externalLink,
                 link: personalLinks[SOCIAL.INSTAGRAM].href
             }
@@ -248,45 +248,29 @@ export const sidebar = {
         items: {
             [SOCIAL.RESUME]: {
                 id: personalLinks[SOCIAL.RESUME].id,
-
+                tag: BUTTONS.ACTION_BUTTON,
+                type: "a",
+                link: personalLinks[SOCIAL.RESUME].href,
+                leftIcon: personalLinks[SOCIAL.RESUME].icon,
+                variant: "reverse"
+            },
+            "languages": {
+                id: "languages",
+                tag:  BUTTONS.ACTION_BUTTON,
+                leftIcon: icons.translate,
+                type: "button",
+                rightIcon: icons.switch
+            },
+            "themes": {
+                id: "themes",
+                tag: BUTTONS.ACTION_BUTTON,
+                type: "button",
+                leftIcon: icons.translate,
+                rightIcon: icons.switch
             }
         }
     }
 }
-*/
-
-
-export const sidebar = [
-    {
-        id: "social",
-        items: [
-            {
-                id: "github"
-            },
-            {
-                id: "linkedin"
-            },
-            {
-                id: "instagram"
-            }
-        ]
-    },
-    {
-        id: "others",
-        items: [
-            {
-                id: "resume"
-            },
-            {
-                id: "toggleLanguage"
-            },
-            {
-                id: "toggleTheme"
-            }
-        ]
-    }
-]
-
 
 export const mainNavigation = [
     {
@@ -315,11 +299,6 @@ export const mainNavigation = [
     }
 ]
 
-export const navbar = {
-    items: mainNavigation
-}
-
-let PAGES;
 export const footer = {
     personal: [
         personalLinks[SOCIAL.GITHUB],

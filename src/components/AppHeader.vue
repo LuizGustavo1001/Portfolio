@@ -1,5 +1,4 @@
 <template>
-  <!-- AppHeader -->
   <header class="header w-full">
     <div class="content flex gap-05 align-center w-full">
       <!-- Logo -->
@@ -24,7 +23,7 @@
 </template>
 
 <style scoped>
-  .header{
+  .header {
     position: fixed;
 
     padding: 0.5em;
@@ -35,12 +34,12 @@
     z-index: 3;
   }
 
-  .content{
+  .content {
     max-width: 1500px;
     margin-inline: auto;
   }
 
-  .header::before{
+  .header::before {
     content: '';
     position: absolute;
     inset: 0;
@@ -50,8 +49,8 @@
     z-index: -1;
   }
 
-  @media(min-width: 1024px){
-    .header{
+  @media(min-width: 1024px) {
+    .header {
       padding-inline: 3em;
     }
   }
@@ -68,10 +67,8 @@
   import IconBtn from "/src/components/buttons/IconBtn.vue"
   import Icon from "/src/components/common/Icon.vue"
 
-  const props = defineProps({
+  // PROPS
+  defineProps({
     toggleBtnRef: String
   })
-
-  const emits = defineEmits(["toggle-aside"])
-
 </script>

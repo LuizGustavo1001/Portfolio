@@ -2,7 +2,7 @@
   <section class="section-box flex gap-05 align-center justify-center">
     <div class="container flex gap-05 justify-center translucent relative scrollTrigger">
       <div class="background-text absolute">
-        <span>{{ getSectionTitle() }}</span>
+        <span>{{ getSectionTitle().medium }} {{ getSectionTitle().bold }}</span>
       </div>
 
       <div class="container-body w-full">
@@ -24,7 +24,10 @@
 
               <Icon :icon="icons.userIdFilled" />
             </div>
-            <h1 class="line-overflow">{{ $t(`aboutMe.title.medium`) }} <strong>{{ $t(`aboutMe.title.bold`) }} </strong>.</h1>
+            <h1 class="line-overflow">
+              {{ getSectionTitle().medium }}
+              <strong>{{ getSectionTitle().bold }}</strong>.
+            </h1>
           </div>
 
           <menu v-if="aboutMe.sections" class="menu">
@@ -32,9 +35,9 @@
                 v-for="item in aboutMe.sections"
                 :key="item.id"
                 class="menu-item translucent flex gap-05 align-center item medium-weight"
-                :class="item.id === selectedItem
-                    ? 'active'
-                    : undefined"
+                :class="{
+                  active: item.id === selectedItem
+                }"
                 :data-id="item.id"
                 @click="toggleSelected(item.id)"
             >
@@ -45,7 +48,7 @@
 
               <Icon :icon="item.icon" />
 
-              <p class="flex-grow-1">{{ $t(`aboutMe.sections.${item.id}.title`) }}</p>
+              <p class="flex-grow-1">{{ getMenuOption(item) }}</p>
             </li>
           </menu>
         </nav>
@@ -57,7 +60,7 @@
                 v-show="section.id === selectedItem"
                 class="flex gap-15 flex-column content-panel-animation overflow-hidden"
           >
-            <h2>{{ $t(`aboutMe.sections.${section.id}.title`) }}</h2>
+            <h2>{{ getContentData(section).title }}</h2>
             <div class="content flex-grow-1 overflow-auto"
                   :class="[
                      section.type === 'grid-list' ? 'grid-list' : undefined,
@@ -68,7 +71,7 @@
               <!-- Regular Text Section Type -->
               <template v-if="section.type === 'text'">
                 <template
-                    v-for="paragraph in $tm(`aboutMe.sections.${section.id}.content.paragraphs`)"
+                    v-for="paragraph in getContentData(section).paragraphs"
                     :key="paragraph.tag"
                 >
                   <component
@@ -88,40 +91,38 @@
 
                   <div class="flex flex-column">
                     <h3>{{ skill.name }}</h3>
-                    <p class="text-muted medium-weight">{{ $t(`skills.content.${skill.id}.category`) }}</p>
+                    <p class="text-muted medium-weight">{{ getSkillLabel(skill) }}</p>
                   </div>
                 </div>
               </template>
 
               <!-- Flex List Section Type -->
               <template v-else-if="section.type === 'regular-list'">
-                <div v-for="item in section.content" :key="item.id" class="flex gap-05 align-center">
+                <div v-for="entry in section.content" :key="entry.id" class="flex gap-05 align-center">
                   <VerticalLine variant="translucent" />
 
                   <div class="flex gap-03 flex-column">
-                    <h3>{{ $tm(`aboutMe.sections.${section.id}.content.${item.id}.title`) }}</h3>
-                    <p class="text-muted medium-weight">
-                      {{ $tm(`aboutMe.sections.${section.id}.content.${item.id}.subtitle`) }}
+                      <h3>{{ getFlexListContent(section, entry).title }}</h3>
+                      <p class="text-muted medium-weight">
+                        {{ getFlexListContent(section, entry).subtitle }}
+                        <span v-if="getFlexListContent(section, entry).period">• {{
+                            getFlexListContent(section, entry).period
+                          }}</span>
+                      </p>
 
-                      <span v-if="$t(`aboutMe.sections.${section.id}.content.${item.id}.period`)">
-                        • <em>({{ $t(`aboutMe.sections.${section.id}.content.${item.id}.period`) }})</em>
-                      </span>
-                    </p>
+                      <p v-if="getFlexListContent(section, entry).description">
+                        {{ getFlexListContent(section, entry).description }}</p>
 
-                    <p v-if="$te(`aboutMe.sections.${section.id}.content.${item.id}.description`)">
-                      {{ $t(`aboutMe.sections.${section.id}.content.${item.id}.description`) }}
-                    </p>
-
-                    <a
-                        v-if="$te(`aboutMe.sections.${section.id}.content.${item.id}.link`)"
-                       :href="$t(`aboutMe.sections.${section.id}.content.${item.id}.link`)"
-                       rel="noopener noreferrer"
-                       target="_blank"
-                       style="width: fit-content"
-                       class="text-muted medium-weight"
-                    >
-                      {{ $t(`utils.certificate`) }}
-                    </a>
+                      <a
+                          v-if="getFlexListContent(section, entry).link"
+                          :href="getFlexListContent(section, entry).link"
+                          rel="noopener noreferrer"
+                          target="_blank"
+                          style="width: fit-content"
+                          class="text-muted medium-weight"
+                      >
+                        {{ getFlexListContent(section, entry).linkLabel }}
+                      </a>
                   </div>
                 </div>
               </template>
@@ -325,7 +326,7 @@
   import VerticalLine from "../common/VerticalLine.vue"
 
   // COMPOSABLES
-  const { t } = useI18n()
+  const { t, tm, te } = useI18n()
 
   const selectedItem = ref(localStorage.getItem("selectedItemAboutMe") ?? aboutMe.sections[0].id)
 
@@ -335,6 +336,53 @@
   }
 
   const getSectionTitle = () => {
-    return `${t(`aboutMe.title.medium`) ?? ""} ${t(`aboutMe.title.bold`) ?? ""}`
+    const key = `aboutMe.title`
+
+    return {
+      medium: t(`${key}.medium`) ?? "",
+      bold: t(`${key}.bold`) ?? ""
+    }
+  }
+
+  const getMenuOption = (item) => {
+    return t(`aboutMe.sections.${item.id}.title`) ?? ""
+  }
+
+  const getContentData = (section) => {
+    const key = `aboutMe.sections.${section.id}`
+
+    return {
+      title: t(`${key}.title`) ?? "",
+      paragraphs: tm(`${key}.content.paragraphs`)
+    }
+  }
+
+  const getSkillLabel = (skill) => {
+    return t(`skills.content.${skill.id}.category`) ?? ""
+  }
+
+  const getFlexListContent = (section, item) => {
+    const key = `aboutMe.sections.${section.id}.content.${item.id}`
+
+    return {
+      title: te(`${key}.title`)
+          ? t(`${key}.title`)
+          : "",
+      subtitle: te(`${key}.subtitle`)
+          ? t(`${key}.subtitle`)
+          : "",
+      period: te(`${key}.period`)
+          ? t(`${key}.period`)
+          : "",
+      description: te(`${key}.description`)
+          ? t(`${key}.description`)
+          : "",
+      link: te(`${key}.link`)
+          ? t(`${key}.link`)
+          : "",
+      linkLabel: te(`${key}.linkLabel`)
+          ? t(`${key}.linkLabel`)
+          : ""
+    }
   }
 </script>

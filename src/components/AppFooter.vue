@@ -84,6 +84,6 @@
 </style>
 
 <script setup>
-  import { footer, personalLinks } from "/src/locales/portfolioConfig.js"
+  import { footer } from "/src/locales/portfolioConfig.js"
   import IconBtn from "/src/components/buttons/IconBtn.vue"
 </script>
