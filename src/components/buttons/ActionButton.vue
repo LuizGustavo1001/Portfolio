@@ -127,7 +127,7 @@
     },
     rightIcon: {
       type: String,
-      default: icons.arrowRight,
+      default: icons["arrow-right"],
     },
     disabled: {
       type: Boolean,
