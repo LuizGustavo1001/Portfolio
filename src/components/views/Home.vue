@@ -24,11 +24,11 @@
       </div>
 
       <!-- Profile Picture -->
-      <img class="pfp" src="/src/assets/images/me.jpg" alt="Profile Picture"/>
+      <img class="pfp" src="/src/assets/images/me.jpg" alt="Profile Picture" />
     </div>
 
     <div ref="scrollIndicator" class="scroll-indicator flex gap-05 align-center absolute">
-      <Icon :icon="icons.swipeDown" size="30px"></Icon>
+      <Icon :icon="icons['swipe-down']" size="30px" />
       <span aria-hidden="false">{{ $t("home.scrollLabel") }}</span>
     </div>
   </section>
