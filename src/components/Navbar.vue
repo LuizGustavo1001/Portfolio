@@ -1,22 +1,20 @@
 <template>
   <!-- Main Nav Bar -->
   <nav class="flex gap-1">
-    <button
+    <a
         v-for="item in mainNavigation"
         :key="item.id"
-        class="medium-weight flex align-center text-muted"
+        class="medium-weight flex align-center text-muted gap-03"
         :class="{ active: item.id === selectedItem }"
-        :data-id="item.id"
-        style="gap: 0.2em"
-        @click="toggleSelected(item.id)"
+        :href="item.href"
     >
       <Icon
           :icon="item.id === selectedItem
               ? item.iconActive
               : item.icon"
       />
-      <span class="label">{{ t(`navbar.items.${item.id}.label`) }}</span>
-    </button>
+      <span class="label">{{ utils.getTranslate(`navbar.items.${item.id}.label`) }}</span>
+    </a>
   </nav>
 </template>
 
@@ -28,10 +26,10 @@
     transform: translateX(-50%);
 
     width: max-content;
-    padding: 0.5em;
+    padding: var(--spacing-xs);
 
     background: var(--color-bg-primary);
-    box-shadow: 0 0 5px 3px var(--shadow-lighter);
+    box-shadow: var(--shadow-sm);
 
     border-radius: var(--radius-md);
 
@@ -39,33 +37,33 @@
     animation: fade-in-upper 1s ease;
   }
 
-  button {
-    text-decoration: none;
+  a {
     border: none;
     background: none;
 
-    padding: 0.8em;
+    padding: var(--spacing-sm);
 
-    border-radius: 8px;
-    font-size: 0.8em;
+    border-radius: var(--radius-sm);
+    font-size: var(--font-button-sm);
 
-    transition: 0.2s ease;
+    transition: var(--transition-normal);
     cursor: pointer;
   }
 
-  button.active,
-  button:hover,
-  button:active {
+  a.active,
+  a:hover,
+  a:active,
+  a:focus{
     background: var(--color-bg-primary-hover);
   }
 
-  button:hover,
-  button:active {
+  a:hover,
+  a:active {
     transform: scale(1.05);
   }
 
   @media(max-width: 768px) {
-    nav button .label {
+    nav a .label {
       display: none;
     }
   }
@@ -83,80 +81,53 @@
 
   /* DARK MODE */
   .dark nav {
-    box-shadow: 0 0 5px 3px var(--shadow);
+    box-shadow: var(--shadow-md);
   }
 </style>
 
-<script setup>
-  import { ref, onMounted } from "vue"
+<script setup lang="ts">
+  import { ref, onMounted, onUnmounted } from "vue"
   import { gsap } from "gsap"
   import { ScrollToPlugin } from "gsap/ScrollToPlugin"
   import { ScrollTrigger } from "gsap/ScrollTrigger"
-  import { mainNavigation } from "/src/locales/portfolioConfig.js"
+  import { mainNavigation } from "../locales/portfolioConfig"
 
-  import { useI18n } from "vue-i18n"
-
-  import Icon from "/src/components/common/Icon.vue"
+  import Icon from "../components/common/Icon.vue"
+  import { useUtils } from "../composables/useUtils.ts"
 
   // COMPOSABLES
-  const { t } = useI18n()
+  const utils = useUtils()
 
+  // STATE
   const selectedItem = ref(mainNavigation[0].id)
 
+  // GSAP
   gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
-  let isAnimating = false
+  let context: gsap.Context | undefined
 
-  const toggleSelected = (newValue) => {
-    const element = document.getElementById(newValue)
-
-    if(element){
-      selectedItem.value = newValue
-      isAnimating = true
-
-      gsap.to(window, {
-        duration: 0.8,
-        ease: "expo.inOut",
-        scrollTo: {
-          y: element,
-          autoKill: true,
-          offsetY: 100
-        },
-        onComplete: () => {
-          isAnimating = false
-        },
-        onInterrupt: () => {
-          isAnimating = false
-        }
-      })
-    }
+  // NAVIGATION
+  const selectNavigationItem = (id: string): void => {
+    selectedItem.value = id
   }
 
-  let context
-
   onMounted(() => {
-    toggleSelected(selectedItem.value)
-
     context = gsap.context(() => {
-      const mainSections = gsap.utils.toArray('.section-box')
+      const mainSections = gsap.utils.toArray<HTMLElement>(".section-box")
 
       mainSections.forEach(section => {
-        const containerInside = section.querySelector(".container")
-        const target = containerInside || section
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top 50%",
+          end: "bottom 60%",
 
-        gsap.fromTo(
-            target, {},
-            {
-              scrollTrigger: {
-                trigger: section,
-                start: "start 50%",
-                end: "bottom 80%",
-                toggleActions: "play none none reverse",
-                onEnter: () => toggleSelected(section.id),
-                onEnterBack: () => toggleSelected(section.id),
-              }
-            }
-        )
+          onEnter: () => selectNavigationItem(section.id),
+          onEnterBack: () => selectNavigationItem(section.id)
+        })
       })
     })
+  })
+
+  onUnmounted(() => {
+    context?.revert()
   })
 </script>

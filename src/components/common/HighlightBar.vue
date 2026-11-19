@@ -41,27 +41,24 @@
 
 </style>
 
-<script setup>
+<script setup lang="ts">
   import { computed } from "vue"
+  import type { HighlightBar } from "../../types/components/common"
+  import { HIGHLIGHT_BAR_VARIANTS } from "../../constants/components/common"
 
-  const props = defineProps({
-    isActive: {
-      type: Boolean,
-      default: false
-    },
-    variant: {
-      type: String,
-      default: 'primary'
-    }
+  interface Props {
+    isActive?: boolean
+    variant?: HighlightBar
+  }
+
+  const props = withDefaults(defineProps<Props>(), {
+    isActive: false,
+    variant: HIGHLIGHT_BAR_VARIANTS.PRIMARY
   })
 
-  const VARIANTS = ['primary', 'translucent', 'reverse']
-
   const computedVariant = computed(() => {
-    if(!VARIANTS.includes(props.variant)){
-      return 'primary'
-    }
-
-    return props.variant
+    return Object.values(HIGHLIGHT_BAR_VARIANTS).includes(props.variant)
+        ? props.variant
+        : HIGHLIGHT_BAR_VARIANTS.PRIMARY
   })
 </script>

@@ -1,0 +1,120 @@
+
+/* OVERFLOW TYPES */
+.overflow-hidden {
+    overflow: hidden;
+}
+.overflow-auto {
+    overflow: auto;
+}
+
+/* POSITION */
+.relative {
+    position: relative;
+}
+.absolute {
+    position: absolute;
+}
+
+/* TEXT */
+.text-justified {
+    text-align: justify;
+}
+.text-center {
+    text-align: center;
+}
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-muted {
+    color: var(--color-text-muted);
+}
+
+
+.medium-weight {
+    font-weight: var(--text-medium-weight);
+}
+.bold-weight {
+    font-weight: var(--text-bold-weight);
+}
+
+/* DISPLAY */
+.flex {
+    display: flex;
+}
+.flex-grow-1 {
+    flex: 1;
+}
+
+.gap-03 {
+    gap: 0.3em;
+}
+.gap-05 {
+    gap: 0.5em;
+}
+.gap-1 {
+    gap: 1em;
+}
+.gap-15 {
+    gap: 1.5em;
+}
+.gap-2 {
+    gap: 2em;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+.flex-column {
+    flex-direction: column;
+}
+
+.align-center {
+    align-items: center;
+}
+.justify-between {
+    justify-content: space-between;
+}
+.justify-center {
+    justify-content: center;
+}
+
+/* OTHERS */
+.dot {
+    width: var(--size, 20px);
+    height: var(--size, 20px);
+    background: var(--color, red);
+
+    border-radius: var(--radius-full);
+}
+
+.buttons-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3em;
+}
+.buttons-wrapper > * {
+    border-radius: var(--radius-2xs);
+}
+.buttons-wrapper > *:first-child {
+    border-top-left-radius: var(--radius-xl);
+    border-top-right-radius: var(--radius-xl);
+}
+.buttons-wrapper > *:last-child {
+    border-bottom-left-radius: var(--radius-xl);
+    border-bottom-right-radius: var(--radius-xl);
+}
+
+.w-full {
+    width: 100%;
+}
+
+.line-overflow {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.blur-bg {
+    backdrop-filter: blur(10px);
+}

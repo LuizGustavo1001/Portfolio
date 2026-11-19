@@ -13,25 +13,22 @@
   />
 
   <main>
-    <Home id="home" />
-
+    <Home id="home" class="scroll-trigger-section" />
     <AboutMe id="aboutMe" class="scroll-trigger-section" />
-
     <Projects id="projects" class="scroll-trigger-section" />
-
     <Contact id="contact" class="scroll-trigger-section" />
   </main>
   <AppFooter/>
 </template>
 
-<script setup>
+<script setup lang="ts">
   import { ref, onMounted, onUnmounted, nextTick, computed } from "vue"
   import { gsap } from "gsap"
   import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-  import { useSidebar } from "./composables/useSidebar.js"
-  import { useTheme } from "./composables/useTheme.js"
-  import { useLanguage } from "./composables/useLanguage.js"
+  import { useSidebar } from "./composables/useSidebar"
+  import { useTheme } from "./composables/useTheme"
+  import { useLanguage } from "./composables/useLanguage"
 
   import Overlay from "./components/common/Overlay.vue"
   import Sidebar from "./components/Sidebar.vue"
@@ -50,25 +47,23 @@
   const theme = useTheme()
   const language = useLanguage()
 
-  // COMPUTED PROPERTIES
-  const isSidebarOpen = computed(() => sidebar.isActive.value)
+  // COMPUTED
+  const isSidebarOpen = computed<boolean>(() => sidebar.isActive.value)
 
-  // OTHERS
-  const container = ref(null)
-  let context
-  onMounted(async () => {
-    theme.initToggleTheme()
-    language.initLanguage()
+  // REFERENCES
+  const container = ref<HTMLElement | null>(null)
 
-    await nextTick()
+  // GSAP
+  let context: gsap.Context | undefined
 
-    // scroll trigger main views animation
-    context = gsap.context( () => {
-      const mainSections = gsap.utils.toArray('.scroll-trigger-section')
+  function initScrollAnimations(): void {
+    if(!container.value) return
 
-      mainSections.forEach(section => {
-        const containerInside = section.querySelector(".container")
-        const target = containerInside || section
+    context = gsap.context(() => {
+      const sections = gsap.utils.toArray<HTMLElement>(".scroll-trigger-section")
+
+      sections.forEach(section => {
+        const target = section.querySelector<HTMLElement>(".container") ?? section
 
         gsap.fromTo(
             target,
@@ -80,21 +75,31 @@
               opacity: 1,
               scale: 1,
               duration: 0.75,
-              ease: 'power2.out',
+              ease: "power2.out",
               scrollTrigger: {
                 trigger: section,
                 start: "top 80%",
                 toggleActions: "play none none reverse",
-              }
+              },
             }
         )
       })
     }, container.value)
 
     ScrollTrigger.refresh()
+  }
+
+  // LIFECYCLE
+  onMounted(async () => {
+    theme.initToggleTheme()
+    language.initLanguage()
+
+    await nextTick()
+
+    initScrollAnimations()
   })
 
   onUnmounted(() => {
-    if(context) context.revert()
+    context?.revert()
   })
 </script>

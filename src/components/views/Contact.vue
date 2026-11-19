@@ -1,39 +1,38 @@
 <template>
-  <section class="section-box flex gap-05 align-center justify-center">
+  <section class="section-box flex gap-05" style="align-items: flex-end">
     <div class="container flex gap-1 flex-column align-center justify-between translucent">
       <!-- Island -->
-      <div class="island flex gap-05 align-center justify-between medium-weight">
-        <span>{{ getIslandContent().title }}</span>
+      <div class="island flex gap-05 align-center medium-weight">
+        <span class="flex-grow-1">{{ getIslandContent().title }}</span>
         <Icon :icon="icons.soundwaves" />
       </div>
 
       <!-- Content -->
-      <div class="container-body flex gap-2 flex-column align-center justify-between">
+      <div class="container-body flex gap-2 flex-column align-center">
         <div class="title flex gap-05 flex-column align-center text-center">
-          <h1 class="line-overflow medium-weight">{{ getPageTitleContent().medium }} <strong>{{ getPageTitleContent().bold }} </strong>.</h1>
-          <p class="text-muted">{{ getPageTitleContent().subtitle }}.</p>
+          <h2 class="line-overflow medium-weight">{{ getPageTitleContent().medium }} <strong>{{ getPageTitleContent().bold }} </strong>.</h2>
+          <p class="text-muted medium-weight">{{ getPageTitleContent().subtitle }}.</p>
         </div>
 
         <img src="/src/assets/images/me.jpg" alt="Profile Picture" class="pfp">
 
-        <ul class="content flex gap-05 flex-column w-full">
+        <ul class="content buttons-wrapper w-full">
           <template
-              v-for="item in personalLinks"
+              v-for="item in contactCategory.buttons"
               :key="item.id"
           >
-            <li v-if="item.id !== 'resume'" class="item">
+            <li class="item">
               <a :href="item.href" rel="external" target="_blank" class="flex gap-05 align-center">
                 <div class="flex gap-05 align-center flex-grow-1">
                   <Icon
-                      :have-padding="true"
-                      padding="8px"
-                      :icon="item.icon"
+                      padding="xs"
+                      :icon="item.iconLine"
                       size="30px"
                       class="icon"
                   />
 
                   <div class="flex flex-column flex-grow-1">
-                    <span class="text-muted"> {{ getPersonaLinkContent(item).title }}</span>
+                    <span class="text-muted medium-weight">{{ getPersonaLinkContent(item.id).title }}</span>
                     <span class="medium-weight">{{ item.value }}</span>
                   </div>
                 </div>
@@ -49,28 +48,24 @@
 </template>
 
 <style scoped>
-  .container{
+  .container {
     min-height: 800px;
 
-    background: radial-gradient(var(--alpha-black-30) 90%, transparent), url("/src/assets/images/paint03.webp") no-repeat center center;
+    background: radial-gradient(var(--alpha-black-30) 90%, transparent), url("/src/assets/images/paint02.jpg") no-repeat center center;
     background-size: cover;
 
-    box-shadow: 0 0 10px 5px var(--shadow-subtle);
+    box-shadow: var(--shadow-md);
     border-radius: var(--radius-md);
   }
 
-  a {
-    text-decoration: none;
-  }
-
   .island {
-    padding: 0.8em;
+    padding: var(--spacing-sm);
     min-width: 200px;
 
     background: var(--black);
-    box-shadow: 0 0 10px 5px var(--shadow);
+    box-shadow: var(--shadow-lg);
 
-    border-radius: 12px;
+    border-radius: var(--radius-md);
     cursor: default;
 
     transition: 0.3s cubic-bezier(1, -0.56, 0.33, 0.94);
@@ -84,32 +79,24 @@
     width: fit-content;
 
     background: var(--transparent-gradient);
-    box-shadow: 0 0 5px var(--shadow);
-    border: 2px solid var(--color-border-transparent-subtle-alt);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border-translucent-subtle);
 
     border-radius: var(--radius-md);
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(15px);
   }
-  .container-body .title h1 {
-    font-size: clamp(1.5em, 3dvw, 2em);
-  }
-  .container-body .title p {
-    font-size: clamp(0.8em, 2dvw, 1em);
-  }
+
   .container-body .pfp {
     width: 150px;
     border-radius: var(--radius-md);
-    box-shadow: 0 0 5px 5px var(--shadow-subtle);
+    box-shadow: var(--shadow-md);
   }
 
   .content .item {
-    padding: 0.5em;
+    padding: var(--spacing-xs);
 
     background: var(--transparent-gradient);
-    border: 2px solid var(--color-border-transparent-subtle-alt);
-
-    border-radius: 8px;
-    font-size: clamp(0.8em, 2dvw, 0.9em);
+    font-size: var(--font-body-sm);
 
     transition: 0.3s cubic-bezier(1, -0.56, 0.33, 0.94);
   }
@@ -118,27 +105,25 @@
   }
 
   .content .item .icon {
-    background: var(--color-bg-transparent);
-    border-radius: var(--radius-sm);
+    background: var(--color-bg-translucent);
+    border-radius: var(--radius-md);
   }
 </style>
 
-<script setup>
-  import { icons } from "/src/assets/icons/icons.js"
-  import { personalLinks } from "/src/locales/portfolioConfig.js"
+<script setup lang="ts">
+  import { icons } from "../../assets/icons/icons"
+  import { contactCategory } from "../../locales/portfolioConfig"
+  import { useUtils } from "../../composables/useUtils.ts"
 
-  import { useI18n } from "vue-i18n"
-
-  import Icon from "/src/components/common/Icon.vue"
+  import Icon from "../../components/common/Icon.vue"
 
   // COMPOSABLES
-  const { t, te } = useI18n()
-
+  const utils = useUtils()
 
   // FUNCTIONS
   const getIslandContent = () => {
     return {
-      title: te(`contact.island`) ? t("contact.island") : "",
+      title: utils.getTranslate(`contact.island`),
     }
   }
 
@@ -146,17 +131,17 @@
     const titleKey = `contact.title`
 
     return {
-      medium: te(`${titleKey}.medium`) ? t(`${titleKey}.medium`) : "",
-      bold: te(`${titleKey}.bold`) ? t(`${titleKey}.bold`) : "",
-      subtitle: te(`contact.subtitle`) ? t(`contact.subtitle`) : "",
+      medium: utils.getTranslate(`${titleKey}.medium`),
+      bold: utils.getTranslate(`${titleKey}.bold`),
+      subtitle: utils.getTranslate(`contact.subtitle`)
     }
   }
 
-  const getPersonaLinkContent = (item) => {
-    const key = `personalLinks.${item.id}`
+  const getPersonaLinkContent = (itemId: string) => {
+    const key = `personalLinks.${itemId}`
 
     return {
-      title: te(key) ? t(key) : ""
+      title: utils.getTranslate(key)
     }
   }
 </script>

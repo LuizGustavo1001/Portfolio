@@ -1,0 +1,69 @@
+/* =-=-=-=-= LIGHT THEME =-=-=-=-= */
+body {
+    color-scheme: light;
+
+    /* Backgrounds */
+    --color-bg-primary: var(--cream-100);
+    --color-bg-primary-hover: var(--cream-300);
+    --color-bg-subtle: var(--cream-200);
+
+    --color-bg-reverse: var(--slate-800);
+    --color-bg-reverse-hover: var(--slate-700);
+
+    --color-bg-disabled: var(--slate-500);
+
+    /* Borders */
+    --color-border-primary: var(--cream-400);
+    --color-border-subtle: var(--cream-300);
+    --color-border-secondary: var(--cream-200);
+
+    --color-border-reverse: var(--slate-800);
+    --color-border-reverse-subtle: var(--slate-600);
+
+    /* Text */
+    --color-text-primary: var(--slate-800);
+    --color-text-muted: var(--slate-700);
+    --color-text-disabled: var(--slate-600);
+
+    --color-text-reverse: var(--cream-100);
+    --color-text-reverse-muted: var(--slate-600);
+
+    /* Others */
+    --markup-color: var(--cream-200);
+    --horizontal-line-color: var(--slate-700);
+}
+
+/* =-=-=-=-= DARK THEME =-=-=-=-= */
+body.dark {
+    color-scheme: dark;
+
+    /* Backgrounds */
+    --color-bg-primary: var(--slate-900);
+    --color-bg-primary-hover: var(--slate-700);
+    --color-bg-subtle: var(--slate-800);
+
+    --color-bg-reverse: var(--cream-100);
+    --color-bg-reverse-hover: var(--cream-300);
+
+    --color-bg-disabled: var(--slate-700);
+
+    /* Borders */
+    --color-border-primary: var(--slate-700);
+    --color-border-secondary: var(--slate-600);
+    --color-border-subtle: var(--slate-800);
+
+    --color-border-reverse: var(--cream-200);
+    --color-border-reverse-subtle: var(--slate-700);
+
+    /* Texts */
+    --color-text-primary: var(--cream-100);
+    --color-text-muted: var(--slate-500);
+    --color-text-disabled: var(--slate-600);
+
+    --color-text-reverse: var(--slate-800);
+    --color-text-reverse-muted: var(--slate-700);
+
+    /* Others */
+    --markup-color: var(--slate-800);
+    --horizontal-line-color: var(--cream-300);
+}

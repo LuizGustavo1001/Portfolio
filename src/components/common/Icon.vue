@@ -1,54 +1,57 @@
 <template>
   <i
       class="icon-wrapper"
+      :style="[computedPadding]"
       v-html="props.icon"
   />
 </template>
 
 <style scoped>
-  .icon-wrapper{
+  .icon-wrapper {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
 
     width: fit-content;
-    padding: v-bind(resolvedPadding);
 
-    transition: all 0.3s ease;
+    transition: var(--transition-normal);
   }
 
-  .icon-wrapper :deep(svg){
+  .icon-wrapper :deep(svg) {
     display: block;
 
     width: v-bind(size);
     height: v-bind(size);
 
-    transition: all 0.3s ease;
+    transition: var(--transition-normal);
   }
 </style>
 
-<script setup>
+<script setup lang="ts">
   import { computed } from "vue"
+  import type { PaddingType } from "../../types/styles.ts"
+  import { icons } from "../../assets/icons/icons"
+  import { useUtils } from "../../composables/useUtils.ts"
+  import type { ComponentSize } from "../../types/components/common.ts"
 
-  const props = defineProps({
-    icon: {
-      type: String,
-      required: true
-    },
-    havePadding: {
-      type: Boolean,
-      default: false
-    },
-    padding: {
-      type: String,
-      default: '0.5em'
-    },
-    size: {
-      type: String,
-      default: "20px"
-    }
+  const utils = useUtils()
+
+  interface IconProps {
+    icon: string
+    padding?: PaddingType
+    size?: ComponentSize
+  }
+
+  const props = withDefaults(defineProps<IconProps>(), {
+    padding: undefined,
+    size: "20px",
+    icon: icons.logo
   })
 
-  const resolvedPadding = computed(() => props.havePadding ? props.padding : 0)
+  const computedPadding = computed(() =>
+      props.padding
+          ? utils.getPaddingStyle(props.padding)
+          : {}
+  )
 </script>

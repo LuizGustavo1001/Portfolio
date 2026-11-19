@@ -5,10 +5,10 @@
         <!-- Title -->
         <div class="title relative">
           <h1>Portfolio.</h1>
-          <div class="markup absolute"></div>
+          <div class="markup absolute" />
         </div>
 
-        <div class="sub-title flex gap-05 flex-column text-muted">
+        <div class="subtitle flex gap-05 flex-column text-muted">
           <p><strong>Luiz Gustavo</strong> de Almeida Lopes</p>
 
           <i18n-t keypath="home.role"
@@ -27,8 +27,11 @@
       <img class="pfp" src="/src/assets/images/me.jpg" alt="Profile Picture" />
     </div>
 
-    <div ref="scrollIndicator" class="scroll-indicator flex gap-05 align-center absolute">
-      <Icon :icon="icons['swipe-down']" size="30px" />
+    <div ref="scrollIndicator" class="scroll-indicator flex gap-05 align-center absolute text-muted">
+      <Icon
+          :icon="icons['swipe-down']"
+          size="25px"
+      />
       <span aria-hidden="false">{{ $t("home.scrollLabel") }}</span>
     </div>
   </section>
@@ -37,33 +40,24 @@
 <style scoped>
   .container {
     padding: 1em 3em;
-    text-align: center;
-    justify-content: center;
-
     animation: fade-in-home 0.75s cubic-bezier(.45,-0.04,0,.95);
   }
   .container h1 {
-    font-family: var(--font-styling);
-    font-size: clamp(3.8em, 8vw, 8em);
+    font-size: var(--font-hero);
     letter-spacing: 0.5dvw;
   }
   .container p {
-    font-size: clamp(1em, 2dvw, 1.2em);
+    font-size: var(--font-body-lg);
   }
   .container .pfp {
     width: 30dvw;
     min-width: 200px;
     max-width: 400px;
 
-    box-shadow: 0 0 20px var(--shadow);
+    box-shadow: var(--shadow-xl);
     border-radius: var(--radius-lg);
 
     animation: pfp 5s cubic-bezier(.45,-0.04,0,.95) infinite;
-  }
-
-  .title {
-    width: fit-content;
-    margin: 0 auto;
   }
 
   .markup {
@@ -79,7 +73,6 @@
 
   .scroll-indicator {
     bottom: 0;
-    color: var(--color-text-muted);
     animation: opacity 3s ease-out infinite;
   }
 
@@ -90,9 +83,6 @@
       justify-content: space-between;
       flex-direction: row;
     }
-    .content {
-      width: fit-content;
-    }
     .right {
       text-align: right;
     }
@@ -100,7 +90,7 @@
 
   @media(min-width: 1300px) {
     .markup {
-      bottom: 25px;
+      bottom: 20px;
     }
   }
 
@@ -124,31 +114,32 @@
   }
 </style>
 
-<script setup>
-  import { onMounted, onUnmounted, ref } from "vue"
+<script setup lang="ts">
+  import { onMounted, onUnmounted, type Ref, ref } from "vue"
 
-  import { icons } from "/src/assets/icons/icons.js"
+  import { icons } from "../../assets/icons/icons"
   import { gsap } from "gsap"
   import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-  import Icon from "/src/components/common/Icon.vue"
+  import type { Context } from "node:vm"
+  import Icon from "../../components/common/Icon.vue"
 
   gsap.registerPlugin(ScrollTrigger)
 
-  const scrollIndicator = ref(null)
-  let context
+  const scrollIndicator: Ref<HTMLElement | null> = ref(null)
+  let context: Context | undefined
 
-  onMounted(async () => {
+  onMounted(() => {
     context = gsap.context(() => {
       gsap.fromTo(
           scrollIndicator.value,
           {
-            display: "inherit"
+            autoAlpha: 1
           },
           {
-            display: "none",
+            autoAlpha: 0,
             duration: 0.75,
-            ease: 'power2.out',
+            ease: "power2.out",
             scrollTrigger: {
               trigger: scrollIndicator.value,
               start: "top 50%",
@@ -157,6 +148,7 @@
           }
       )
     })
+
     ScrollTrigger.refresh()
   })
 

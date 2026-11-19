@@ -12,7 +12,7 @@
 
       <!-- Sidebar Icon -->
       <IconBtn
-          :ref="toggleBtnRef"
+          :ref="props.toggleBtnRef"
           :icon="icons.sidebar"
           tag="button"
           size="25px"
@@ -26,9 +26,9 @@
   .header {
     position: fixed;
 
-    padding: 0.5em;
+    padding: var(--spacing-xs);
 
-    box-shadow: 0 4px 10px 2px var(--shadow-lighter);
+    box-shadow: var(--shadow-sm);
     backdrop-filter: blur(8px);
 
     z-index: 3;
@@ -57,18 +57,20 @@
 
   /* Dark Mode */
   .dark .header {
-    box-shadow: 0 4px 10px 2px var(--shadow);
+    box-shadow: var(--shadow-md);
   }
 </style>
 
-<script setup>
-  import { icons } from "/src/assets/icons/icons.js"
+<script setup lang="ts">
+  import { icons } from "../assets/icons/icons"
 
-  import IconBtn from "/src/components/buttons/IconBtn.vue"
-  import Icon from "/src/components/common/Icon.vue"
+  import IconBtn from "../components/buttons/IconBtn.vue"
+  import Icon from "../components/common/Icon.vue"
 
   // PROPS
-  defineProps({
-    toggleBtnRef: String
-  })
+  interface AppHeaderProps {
+    toggleBtnRef: string
+  }
+
+  const props = defineProps<AppHeaderProps>()
 </script>
