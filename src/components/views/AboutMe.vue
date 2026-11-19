@@ -1,12 +1,14 @@
 <template>
-  <section class="section-box flex gap-05 align-center justify-center">
-    <div class="container flex gap-05 justify-center translucent relative scrollTrigger">
-      <div class="background-text absolute">
+  <section class="section-box flex gap-05" style="align-items: flex-end">
+    <!--  ABOUT ME -->
+    <div class="container flex gap-05 justify-center relative scrollTrigger">
+      <div class="background-text w-full text-center absolute">
         <span>{{ getSectionTitle().medium }} {{ getSectionTitle().bold }}</span>
       </div>
 
-      <div class="container-body w-full">
-        <!-- Sidebar -->
+      <!-- MAIN CONTAINER -->
+      <div class="container-body w-full translucent">
+        <!-- CATEGORIES LIST -->
         <nav
             class="sidebar flex gap-1 flex-column"
             role="navigation"
@@ -15,7 +17,7 @@
             <div class="flex gap-05 align-center">
               <div class="flex gap-05 align-center flex-grow-1">
                 <span
-                    v-for="dot in aboutMe.controllers"
+                    v-for="dot in aboutMeCategory.controllers"
                     :key="dot.color"
                     class="dot"
                     :style="`--color: ${dot.color}`"
@@ -24,22 +26,21 @@
 
               <Icon :icon="icons['id-card-fill']" />
             </div>
-            <h1 class="line-overflow">
+            <h1 class="line-overflow menu-title">
               {{ getSectionTitle().medium }}
               <strong>{{ getSectionTitle().bold }}</strong>.
             </h1>
           </div>
 
-          <menu v-if="aboutMe.sections" class="menu">
+          <menu v-if="aboutMeCategory.categories" class="menu flex-grow-1">
             <li
-                v-for="item in aboutMe.sections"
+                v-for="item in aboutMeCategory.categories"
                 :key="item.id"
-                class="menu-item translucent flex gap-05 align-center item medium-weight"
+                class="menu-item flex gap-05 align-center item medium-weight"
                 :class="{
                   active: item.id === selectedItem
                 }"
-                :data-id="item.id"
-                @click="toggleSelected(item.id)"
+                @click="selectedItem = item.id as AboutMeCardType"
             >
               <HighlightBar
                 variant="translucent"
@@ -48,86 +49,20 @@
 
               <Icon :icon="item.icon" />
 
-              <p class="flex-grow-1">{{ getMenuOption(item) }}</p>
+              <p class="flex-grow-1">{{ getMenuOption(item.id) }}</p>
             </li>
           </menu>
         </nav>
 
         <!-- Content -->
-        <div class="content-panel flex gap-05 flex-column flex-grow-1 overflow-hidden relative">
-          <div v-for="section in aboutMe.sections"
-                :key="section.id"
-                v-show="section.id === selectedItem"
-                class="flex gap-15 flex-column content-panel-animation overflow-hidden"
-          >
-            <h2>{{ getContentData(section).title }}</h2>
-            <div class="content flex-grow-1 overflow-auto"
-                  :class="[
-                     section.type === 'grid-list' ? 'grid-list' : undefined,
-                     section.type === 'text' ? ['flex', 'gap-05', 'flex-column'] : undefined,
-                     section.type === 'regular-list' ? ['flex', 'gap-05', 'flex-column', 'regular-list'] : undefined
-                  ]"
-            >
-              <!-- Regular Text Section Type -->
-              <template v-if="section.type === 'text'">
-                <template
-                    v-for="paragraph in getContentData(section).paragraphs"
-                    :key="paragraph.tag"
-                >
-                  <component
-                      :is="paragraph.tag ?? 'p'"
-                      :class="paragraph.classes ?? ''"
-                      class="paragraph"
-                  >
-                    {{ paragraph.content ?? '' }}.
-                  </component>
-                </template>
-              </template>
+        <div class="content-panel flex gap-1 flex-column flex-grow-1 overflow-auto relative">
+          <h2>{{ getContentData(selectedItem).title }}</h2>
 
-              <!-- Grid List Section Type -->
-              <template v-else-if="section.type === 'grid-list'">
-                <div v-for="skill in skills" :key="skill.id" class="grid-item flex gap-05 align-center">
-                  <Icon :icon="skill.icon" size="35px" />
-
-                  <div class="flex flex-column">
-                    <h3>{{ skill.name }}</h3>
-                    <p class="text-muted medium-weight">{{ getSkillLabel(skill) }}</p>
-                  </div>
-                </div>
-              </template>
-
-              <!-- Flex List Section Type -->
-              <template v-else-if="section.type === 'regular-list'">
-                <div v-for="entry in section.content" :key="entry.id" class="flex gap-05 align-center">
-                  <VerticalLine variant="translucent" />
-
-                  <div class="flex gap-03 flex-column">
-                      <h3>{{ getFlexListContent(section, entry).title }}</h3>
-                      <p class="text-muted medium-weight">
-                        {{ getFlexListContent(section, entry).subtitle }}
-                        <span v-if="getFlexListContent(section, entry).period">• {{
-                            getFlexListContent(section, entry).period
-                          }}</span>
-                      </p>
-
-                      <p v-if="getFlexListContent(section, entry).description">
-                        {{ getFlexListContent(section, entry).description }}</p>
-
-                      <a
-                          v-if="getFlexListContent(section, entry).link"
-                          :href="getFlexListContent(section, entry).link"
-                          rel="noopener noreferrer"
-                          target="_blank"
-                          style="width: fit-content"
-                          class="text-muted medium-weight"
-                      >
-                        {{ getFlexListContent(section, entry).linkLabel }}
-                      </a>
-                  </div>
-                </div>
-              </template>
-            </div>
-          </div>
+          <ProfessionalProfile class="content-panel-animation" v-show="selectedItem === ABOUT_ME.PROFILE" />
+          <SkillsGrid class="content-panel-animation" variant="translucent" v-show="selectedItem === ABOUT_ME.SKILLS" />
+          <AcademicBackgrounds class="content-panel-animation" v-show="selectedItem === ABOUT_ME.BACKGROUNDS" />
+          <CertificatesList class="content-panel-animation" v-show="selectedItem === ABOUT_ME.CERTIFICATES" />
+          <Languages class="content-panel-animation" v-show="selectedItem === ABOUT_ME.LANGUAGES" />
         </div>
       </div>
     </div>
@@ -140,16 +75,13 @@
     left: 50%;
     transform: translate(-50%, -70%);
 
-    width: 100%;
-
     font-size: clamp(3em, 15dvw, 12em);
-    font-weight: bold;
-    text-align: center;
+    font-weight: var(--text-bold-weight);
 
     z-index: -1;
   }
   .background-text span {
-    opacity: 0.4;
+    opacity: 0.5;
 
     background: linear-gradient(to bottom, var(--color-text-primary), transparent);
     background-clip: text;
@@ -163,11 +95,11 @@
     max-height: 750px;
 
     background: radial-gradient(
-        var(--color-bg-transparent) 90%, transparent
-    ), url("/src/assets/images/paint04.webp") no-repeat center center;
+        var(--color-bg-translucent) 90%, transparent
+    ), url("/src/assets/images/paint01.jpg") no-repeat center center;
     background-size: cover;
 
-    box-shadow: 0 5px 10px var(--shadow-bolder);
+    box-shadow: var(--shadow-md);
     border-radius: var(--radius-md);
   }
 
@@ -177,15 +109,14 @@
     gap: 1em;
 
     max-width: 1200px;
-    padding: 0.5em;
+    padding: var(--spacing-xs);
 
     background: var(--transparent-gradient);
-    box-shadow: 0 0 5px var(--shadow);
+    box-shadow: var(--shadow-xl);
+    border: 2px solid var(--color-border-translucent-subtle);
 
-    border: 2px solid var(--color-border-transparent-subtle);
     border-radius: var(--radius-md);
-
-    backdrop-filter: blur(20px);
+    backdrop-filter: blur(15px);
   }
 
   .sidebar {
@@ -196,21 +127,25 @@
   }
   .sidebar h1 {
     padding-bottom: 0.2em;
-    border-bottom: 2px solid var(--color-border-transparent-subtle);
+    border-bottom: 2px solid var(--color-border-translucent-subtle);
     font-weight: var(--text-medium-weight);
+  }
+
+  .menu-title {
+    font-size: var(--font-heading-2);
   }
 
   .menu {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 1em;
+    gap: 0.5em;
     overflow: scroll;
   }
 
   .menu-item {
-    padding: 0.6em 0.6em 0.6em 0;
+    padding: var(--spacing-sm) var(--spacing-sm) var(--spacing-sm) 0;
 
-    color: var(--color-text-translucent);
+    color: var(--color-text-translucent-muted);
 
     border-radius: var(--radius-2xs);
     transition: all 0.2s ease;
@@ -218,62 +153,23 @@
   }
   .menu-item.active,
   .menu-item:hover {
-    background: var(--color-bg-transparent-hover);
-    color: var(--white);
+    background: var(--color-bg-translucent-hover);
+    color: var(--color-text-translucent);
   }
 
   .content-panel {
-    padding: 1em;
+    padding: var(--spacing-md);
     max-height: 100%;
     min-height: 0;
 
     background: var(--transparent-gradient);
 
-    border: 2px solid var(--color-border-transparent-subtle-alt);
+    border: 2px solid var(--color-border-translucent-subtle-alt);
     border-radius: var(--radius-lg);
   }
-  .content-panel h2 {
-    font-size: clamp(1.5em, 3dvw, 1.8em);
-    padding-bottom: 0.2em;
-    border-bottom: 3px dashed var(--color-border-transparent-subtle);
-  }
-  
+
   .content-panel-animation {
     animation: fade-in-item 0.5s cubic-bezier(1, -0.3, 0.3, 0.94);
-  }
-
-  .content h3 {
-    font-size: clamp(0.9em, 2dvw, 1em);
-  }
-  .content p {
-    font-size: clamp(0.8em, 1.5dvw, 0.9em);
-  }
-  .content .paragraph {
-    text-align: justify;
-    font-size: clamp(0.9em, 2vw, 1.1em);
-    word-spacing: 5px;
-    line-height: 1.7em;
-  }
-
-  .grid-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1em;
-  }
-  .grid-item {
-    padding: 0.5em;
-    background: var(--color-border-transparent-subtle);
-    border-radius: var(--radius-2xs);
-  }
-  .grid-item h3 {
-    font-size: 0.9em;
-  }
-  .grid-item p {
-    font-size: 0.75em;
-  }
-
-  .regular-list {
-    gap: 1em;
   }
 
   /* MEDIA QUERIES */
@@ -297,7 +193,7 @@
     }
 
     .content-panel {
-      padding: 2em;
+      padding: var(--spacing-lg);
     }
   }
 
@@ -314,75 +210,54 @@
   }
 </style>
 
-<script setup>
+<script setup lang="ts">
   import { ref } from "vue"
-  import { icons } from "/src/assets/icons/icons.js"
-  import { aboutMe, skills } from "/src/locales/portfolioConfig.js"
+  import { icons } from "../../assets/icons/icons"
+  import { aboutMeCategory } from "../../locales/portfolioConfig"
 
   import { useI18n } from "vue-i18n"
+  import { useUtils } from "../../composables/useUtils.ts"
 
-  import Icon from "/src/components/common/Icon.vue"
+  import { ABOUT_ME } from "../../constants/aboutMeCard"
+
+  import type { AboutMeCardType } from "../../types/components/AboutMeCard"
+
+  import Icon from "../common/Icon.vue"
   import HighlightBar from "../common/HighlightBar.vue"
-  import VerticalLine from "../common/VerticalLine.vue"
+  import SkillsGrid from "../aboutMeCards/SkillsGrid.vue"
+  import ProfessionalProfile from "../aboutMeCards/ProfessionalProfile.vue"
+  import AcademicBackgrounds from "../aboutMeCards/AcademicBackgrounds.vue"
+  import CertificatesList from "../aboutMeCards/CertificatesList.vue"
+  import Languages from "../aboutMeCards/Languages.vue"
 
   // COMPOSABLES
-  const { t, tm, te } = useI18n()
+  const { tm } = useI18n()
+  const utils = useUtils()
 
-  const selectedItem = ref(localStorage.getItem("selectedItemAboutMe") ?? aboutMe.sections[0].id)
+  // VARIABLES
+  const selectedItem = ref<AboutMeCardType>(ABOUT_ME.PROFILE)
 
-  const toggleSelected = (newValue) => {
-    localStorage.setItem("selectedItemAboutMe", newValue)
-    selectedItem.value = newValue
-  }
-
+  // FUNCTIONS
   const getSectionTitle = () => {
     const key = `aboutMe.title`
 
     return {
-      medium: t(`${key}.medium`) ?? "",
-      bold: t(`${key}.bold`) ?? ""
+      medium: utils.getTranslate(`${key}.medium`),
+      bold:  utils.getTranslate(`${key}.bold`)
     }
   }
 
-  const getMenuOption = (item) => {
-    return t(`aboutMe.sections.${item.id}.title`) ?? ""
+  const getMenuOption = (itemId: string) => {
+    const key = `aboutMe.categories.${itemId}.title`
+    return utils.getTranslate(key)
   }
 
-  const getContentData = (section) => {
-    const key = `aboutMe.sections.${section.id}`
+  const getContentData = (sectionId: string) => {
+    const key = `aboutMe.categories.${sectionId}`
 
     return {
-      title: t(`${key}.title`) ?? "",
-      paragraphs: tm(`${key}.content.paragraphs`)
-    }
-  }
-
-  const getSkillLabel = (skill) => {
-    return t(`skills.content.${skill.id}.category`) ?? ""
-  }
-
-  const getFlexListContent = (section, item) => {
-    const key = `aboutMe.sections.${section.id}.content.${item.id}`
-
-    return {
-      title: te(`${key}.title`)
-          ? t(`${key}.title`)
-          : "",
-      subtitle: te(`${key}.subtitle`)
-          ? t(`${key}.subtitle`)
-          : "",
-      period: te(`${key}.period`)
-          ? t(`${key}.period`)
-          : "",
-      description: te(`${key}.description`)
-          ? t(`${key}.description`)
-          : "",
-      link: te(`${key}.link`)
-          ? t(`${key}.link`)
-          : "",
-      linkLabel: te(`${key}.linkLabel`)
-          ? t(`${key}.linkLabel`)
-          : ""
+      title: utils.getTranslate(`${key}.title`),
+      paragraphs: tm(`${key}.content.paragraphs`) as string[]
     }
   }
 </script>

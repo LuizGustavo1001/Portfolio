@@ -1,18 +1,18 @@
 <template>
-  <aside :ref="sidebar.sidebarRef" class="sidebar flex gap-05 flex-column">
+  <aside ref="sidebarRef" class="sidebar flex gap-05 flex-column">
     <div class="flex-grow-1 flex gap-2 flex-column">
       <nav
           v-for="nav in sidebar"
           :key="nav.id"
           class="flex gap-05 flex-column"
       >
-        <h2 class="title medium-weight text-muted"> {{ $t(`sidebar.${nav.id}.title`) }}</h2>
+        <h4 class="title text-muted" style="text-transform: uppercase"> {{ $t(`sidebar.${nav.id}.title`) }}</h4>
 
         <ul class="flex gap-05 flex-column">
-          <li v-for="item in nav.items">
+          <li v-for="item in nav.items" :key="item.id">
             <component
-              :is="item.tag"
-              v-bind="getButtonProps(item, nav)"
+              :is="item.component"
+              v-bind="getButtonProps(item, nav.id)"
             />
           </li>
         </ul>
@@ -32,7 +32,8 @@
     min-height: 100dvh;
     width: 450px;
     max-width: 65dvw;
-    padding: 2em 1em 1em 1em;
+    padding: var(--spacing-lg);
+    padding-top: var(--spacing-xl);
 
     background: var(--color-bg-primary);
 
@@ -42,35 +43,41 @@
   .sidebar.active {
     transform: translateX(0);
   }
-
-  h2 {
-    font-size: clamp(0.9em, 2dvw, 1.2em);
-  }
-
-  .action-btn {
-    font-size: 0.85em;
-  }
-
-  .footer {
-    font-size: clamp(0.8em, 2dvw, 1em);
-  }
 </style>
 
-<script setup>
-  import { computed } from "vue"
-  import { sidebar } from "/src/locales/portfolioConfig.js"
-  import { icons } from "/src/assets/icons/icons.js"
-  import { BUTTONS } from "../composables/utils.js"
+<script setup lang="ts">
+  import { computed, ref } from "vue"
+  import { sidebar } from "../locales/portfolioConfig"
+  import { icons } from "../assets/icons/icons"
 
-  import { THEME_PREFERENCES, useTheme } from "../composables/useTheme.js"
-  import { useLanguage } from "../composables/useLanguage.js"
+  import { useTheme } from "../composables/useTheme"
+  import { useLanguage } from "../composables/useLanguage"
   import { useI18n } from "vue-i18n"
+  import { useUtils } from "../composables/useUtils.ts"
 
+  import { THEME_PREFERENCES } from "../constants/sysTheme"
+  import { BUTTONS } from "../constants/components/buttons"
+  import type { ActionBtnType, ButtonComponent, ButtonTag } from "../types/components/buttons"
 
   // COMPOSABLES
-  const { t, te } = useI18n()
+  const { t } = useI18n()
   const theme = useTheme()
   const language = useLanguage()
+  const utils = useUtils()
+
+  // INTERFACES
+  interface SidebarItem {
+    id: string
+    component?: ButtonComponent
+    tag?: ButtonTag
+    href?: string
+    leftIcon?: string
+    iconFill?: string
+    rightIcon?: string
+    variant?: ActionBtnType
+  }
+
+  const sidebarRef = ref<HTMLElement | null>(null)
 
   // COMPUTED PROPERTIES
   const themesLeftIcon = computed(() => {
@@ -82,67 +89,63 @@
   })
 
   const themeTitle = computed(() => {
-    return te(`themes.${theme.currentPreference.value}`)
-        ? t(`themes.${theme.currentPreference.value}`)
-        : ""
+    const key = `themes.${theme.currentPreference.value}`
+    return utils.getTranslate(key)
   })
 
   const langTitle = computed(() => {
-    return te(`utils.currentLanguage`)
-        ? t(`utils.currentLanguage`)
-        : ""
+    const key = `utils.currentLanguage`
+    return utils.getTranslate(key)
   })
 
-  const getButtonProps = (item, nav) => {
+  const getButtonProps = (item: SidebarItem, navId: string) => {
     return {
       leftIcon: getLeftIcon(item),
-      rightIcon: item.rightIcon ?? undefined,
-      link: item.link ?? undefined,
-      label: getItemLabel(item, nav),
+      rightIcon: item.rightIcon,
+      href: item.href,
+      label: getItemLabel(item.id, navId),
       class: "w-full",
-      onClick: getButtonEvent(item),
-      variant: item.variant ?? undefined,
-      tag: item.type ?? undefined,
-      style: item.tag === BUTTONS.ACTION_BUTTON ? "justify-content: flex-start" : ""
+      onClick: getButtonEvent(item.id),
+      variant: item.variant,
+      tag: item.tag,
+      fontSize: "small",
+      style: item.component === BUTTONS.ACTION_BUTTON
+          ? "justify-content: flex-start"
+          : undefined
     }
   }
 
-  const getLeftIcon = (item) => {
-    if(item.id === "themes"){
+  const getLeftIcon = (item: SidebarItem) => {
+    if(item.id === "themes") {
       return themesLeftIcon.value
     }
 
-    return item.leftIcon ?? ""
+    return item.leftIcon ?? item.iconFill ?? ""
   }
 
-  const getItemLabel = (item, nav) => {
-    if(item.id === "themes"){
+  const getItemLabel = (itemId: string, navId: string): string => {
+    if(itemId === "themes") {
       return `${t('utils.theme')} - ${themeTitle.value}`
     }
 
-    if(item.id === "languages"){
+    if(itemId === "languages") {
       return `${t('utils.language')} - ${langTitle.value}`
     }
 
-    const key = `sidebar.${nav.id}.items.${item.id}.title`
-
-    return te(key) ? t(key) : ""
+    const key = `sidebar.${navId}.items.${itemId}.title`
+    return utils.getTranslate(key)
   }
 
+  const getButtonEvent = (itemId: string) => {
+    switch (itemId) {
+      case "themes":
+        return theme.toggleTheme
 
-  const getButtonEvent = (item) => {
-    if (["themes", "languages"].includes(item.id)) {
-      return (event) => {
-        event?.stopPropagation()
+      case "languages":
+        return language.toggleLanguage
 
-        if (item.id === "themes") {
-          theme.toggleTheme()
-        } else {
-          language.toggleLanguage()
-        }
-      }
+      default:
+        return undefined
     }
-
-    return undefined
   }
 </script>

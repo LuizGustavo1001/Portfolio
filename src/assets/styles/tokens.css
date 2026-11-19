@@ -1,0 +1,114 @@
+/* -=-=-=- PRIMAL TOKENS -=-=-=- */
+:root {
+    /* 1. COLORS */
+
+    /* Slate */
+    --slate-950: #1e1e1d;
+    --slate-900: #282827;
+    --slate-800: #3C3B3A;
+    --slate-700: #766E6A;
+    --slate-600: #AAA6A0;
+    --slate-500: #c0bcb6;
+
+    /* Cream */
+    --cream-500: #d8d6bf;
+    --cream-400: #e1dfc8;
+    --cream-300: #e1e0ce;
+    --cream-200: #eeebd6;
+    --cream-100: #f5f4e2;
+
+    /* Neutral */
+    --white: #FFFFFF;
+    --black: #000000;
+    --grey: #C2C2C2;
+
+    /* Feedback */
+    --red: #bf616a;
+    --yellow: #ebcb8b;
+    --green: #a3be8c;
+
+    /* 2. ALPHA COLORS */
+    --alpha-black-05: rgb(0 0 0 / 5%);
+    --alpha-black-10: rgb(0 0 0 / 10%);
+    --alpha-black-20: rgb(0 0 0 / 20%);
+    --alpha-black-30: rgb(0 0 0 / 30%);
+    --alpha-black-40: rgb(0 0 0 / 40%);
+    --alpha-black-50: rgb(0 0 0 / 50%);
+
+    --alpha-gray-20: rgb(219 219 219 / 20%);
+    --alpha-gray-30: rgb(219 219 219 / 30%);
+    --alpha-gray-50: rgb(219 219 219 / 50%);
+
+    /* 4. SPACING */
+    --spacing-3xs: 2px;
+    --spacing-2xs: 4px;
+    --spacing-xs: 8px;
+    --spacing-sm: 12px;
+    --spacing-md: 16px;
+    --spacing-lg: 20px;
+    --spacing-xl: 24px;
+    --spacing-2xl: 32px;
+    --spacing-3xl: 40px;
+    --spacing-4xl: 48px;
+    --spacing-5xl: 64px;
+    --spacing-6xl: 80px;
+    --spacing-7xl: 96px;
+    --spacing-8xl: 128px;
+
+    /* 5. BORDER */
+    /* Border Radius */
+    --radius-2xs: 4px;
+    --radius-xs: 6px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 20px;
+    --radius-2xl: 24px;
+    --radius-3xl: 32px;
+    --radius-full: 9999px;
+
+    /* Border Weight */
+    --border-width-thin: 1px;
+    --border-width-medium: 2px;
+    --border-width-thick: 4px;
+
+    /* 6. SHADOWS */
+    --shadow-xs: 0 0px 4px 1px var(--alpha-black-05);
+    --shadow-sm: 0 0px 8px 1px var(--alpha-black-10);
+    --shadow-md: 0 0px 16px 1px var(--alpha-black-20);
+    --shadow-lg: 0 0px 32px 1px var(--alpha-black-30);
+    --shadow-xl: 0 0px 64px 1px var(--alpha-black-20);
+
+    /* 7. TRANSITIONS */
+    --transition-fast: 150ms ease;
+    --transition-normal: 250ms ease;
+    --transition-slow: 400ms ease;
+}
+
+/* =-=-=-=-= COMMON SEMANTIC TOKENS (Shared between themes) =-=-=-=-= */
+:root {
+    /* Translucent backgrounds */
+    --color-bg-translucent-strong: var(--alpha-black-40);
+    --color-bg-translucent: var(--alpha-black-30);
+    --color-bg-translucent-subtle: var(--alpha-black-20);
+    --color-bg-translucent-hover: var(--alpha-gray-20);
+
+    /* Translucent borders */
+    --color-border-translucent: var(--alpha-gray-50);
+    --color-border-translucent-subtle: var(--alpha-gray-30);
+    --color-border-translucent-subtle-alt: var(--alpha-gray-20);
+
+    /* Translucent text */
+    --color-text-translucent: var(--white);
+    --color-text-translucent-muted: var(--grey);
+
+    /* Feedback */
+    --color-feedback-success: var(--green);
+    --color-feedback-warning: var(--yellow);
+    --color-feedback-error: var(--red);
+
+    /* Gradients */
+    --radial-gradient: radial-gradient(transparent, black);
+    --transparent-gradient:
+            linear-gradient(277.8deg, var(--alpha-black-30), var(--alpha-black-10));
+}
