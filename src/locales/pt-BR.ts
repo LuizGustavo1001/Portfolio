@@ -1,5 +1,5 @@
 import { THEME_PREFERENCES } from "../constants/sysTheme"
-import { ABOUT_ME } from "../constants/aboutMeCard"
+import { ABOUT_ME } from "../constants/components/aboutMeCard.ts"
 import { SOCIAL_LINK } from "../constants/socialLinks"
 import { LANGUAGES } from "../constants/sysLanguages.ts"
 

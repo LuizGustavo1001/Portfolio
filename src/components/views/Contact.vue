@@ -51,10 +51,10 @@
   .container {
     min-height: 800px;
 
-    background: radial-gradient(var(--alpha-black-30) 90%, transparent), url("/src/assets/images/paint02.jpg") no-repeat center center;
+    background: url("/src/assets/images/paint02.jpg") no-repeat center center;
     background-size: cover;
 
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
     border-radius: var(--radius-md);
   }
 

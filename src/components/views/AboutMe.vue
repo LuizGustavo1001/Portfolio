@@ -99,7 +99,7 @@
     ), url("/src/assets/images/paint01.jpg") no-repeat center center;
     background-size: cover;
 
-    box-shadow: var(--shadow-md);
+    box-shadow: var(--shadow-lg);
     border-radius: var(--radius-md);
   }
 
@@ -218,7 +218,7 @@
   import { useI18n } from "vue-i18n"
   import { useUtils } from "../../composables/useUtils.ts"
 
-  import { ABOUT_ME } from "../../constants/aboutMeCard"
+  import { ABOUT_ME } from "../../constants/components/aboutMeCard.ts"
 
   import type { AboutMeCardType } from "../../types/components/AboutMeCard"
 

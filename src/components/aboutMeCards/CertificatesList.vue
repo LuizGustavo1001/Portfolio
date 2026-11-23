@@ -35,7 +35,7 @@
 
 <script setup lang="ts">
   import { aboutMeCategory } from "../../locales/portfolioConfig"
-  import { ABOUT_ME } from "../../constants/aboutMeCard"
+  import { ABOUT_ME } from "../../constants/components/aboutMeCard.ts"
   import { useUtils } from "../../composables/useUtils.ts"
   import { icons } from "../../assets/icons/icons.ts"
 

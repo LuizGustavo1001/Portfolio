@@ -1,7 +1,7 @@
 import { THEME_PREFERENCES } from "../constants/sysTheme"
 import { ACTION_BUTTON_VARIANTS, BUTTON_TAGS, BUTTONS } from "../constants/components/buttons"
 import { SOCIAL_LINK } from "../constants/socialLinks"
-import { ABOUT_ME } from "../constants/aboutMeCard"
+import { ABOUT_ME } from "../constants/components/aboutMeCard.ts"
 import { LANGUAGES } from "../constants/sysLanguages.ts"
 
 import { icons } from "../assets/icons/icons"
@@ -161,14 +161,19 @@ export const skills = [
         icon: icons.ts
     },
     {
+        id: "vue",
+        name: "Vue.js",
+        icon: icons.vue
+    },
+    {
         id: "node",
         name: "Node.js",
         icon: icons.nodejs
     },
     {
-        id: "docker",
-        name: "Docker",
-        icon: icons.docker
+        id: "figma",
+        name: "Figma",
+        icon: icons.figma
     },
     {
         id: "java",
@@ -186,9 +191,9 @@ export const skills = [
         icon: icons.scss
     },
     {
-        id: "figma",
-        name: "Figma",
-        icon: icons.figma
+        id: "docker",
+        name: "Docker",
+        icon: icons.docker
     },
     {
         id: "mysql",
@@ -204,11 +209,6 @@ export const skills = [
         id: "cpp",
         name: "C++",
         icon: icons.cpp
-    },
-    {
-        id: "vue",
-        name: "Vue.js",
-        icon: icons.vue
     },
     {
         id: "illustrator",

@@ -47,14 +47,14 @@
     letter-spacing: 0.5dvw;
   }
   .container p {
-    font-size: var(--font-body-lg);
+    font-size: var(--font-body-md);
   }
   .container .pfp {
     width: 30dvw;
     min-width: 200px;
     max-width: 400px;
 
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-lg);
     border-radius: var(--radius-lg);
 
     animation: pfp 5s cubic-bezier(.45,-0.04,0,.95) infinite;
@@ -83,6 +83,11 @@
       justify-content: space-between;
       flex-direction: row;
     }
+
+    .container p {
+      font-size: var(--font-body-lg);
+    }
+
     .right {
       text-align: right;
     }
