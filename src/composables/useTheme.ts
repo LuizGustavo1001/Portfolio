@@ -85,6 +85,7 @@ export function useTheme() {
         )
     }
 
+    /* Format the old version values to the new version */
     const getFormatted = (theme: string | null): SysTheme | null => {
         if(!theme) return null
 

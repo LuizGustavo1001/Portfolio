@@ -26,22 +26,28 @@
 <style scoped>
   .sidebar {
     position: fixed;
-    right: 0;
-    transform: translateX(100%);
+    right: 0.5em;
+    top: 0.5em;
+    transform: translateX(110%);
 
-    min-height: 100dvh;
+    min-height: calc(100dvh - 1em);
     width: 450px;
     max-width: 65dvw;
-    padding: var(--spacing-lg);
+    padding: var(--spacing-md);
     padding-top: var(--spacing-xl);
+    border-radius: var(--radius-md);
 
     background: var(--color-bg-primary);
 
     z-index: 5;
-    transition: transform 0.4s cubic-bezier(1, -0.56, 0.33, 0.94);
+    transition: transform 0.5s cubic-bezier(1, -0.56, 0.33, 0.94);
   }
   .sidebar.active {
     transform: translateX(0);
+  }
+
+  .footer {
+    font-family: var(--font-styling);
   }
 </style>
 
@@ -109,9 +115,12 @@
       variant: item.variant,
       tag: item.tag,
       fontSize: "small",
-      style: item.component === BUTTONS.ACTION_BUTTON
+      style: [
+          item.component === BUTTONS.ACTION_BUTTON
           ? "justify-content: flex-start"
-          : undefined
+          : undefined,
+          "padding: var(--spacing-sm)"
+      ]
     }
   }
 

@@ -34,9 +34,10 @@
     --font-heading-1: var(--font-size-900);
     --font-heading-2: var(--font-size-800);
     --font-heading-3: var(--font-size-700);
-    --font-heading-4: var(--font-size-600);
+    --font-heading-4: var(--font-size-500);
 
     /* Body */
+    --font-body-lg: var(--font-size-600);
     --font-body-md: var(--font-size-500);
     --font-body-sm: var(--font-size-400);
     --font-body-xs: var(--font-size-300);

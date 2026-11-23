@@ -1,10 +1,10 @@
 <template>
   <!-- Main Nav Bar -->
-  <nav class="flex gap-1">
+  <nav class="main-nav-bar flex gap-1">
     <a
         v-for="item in mainNavigation"
         :key="item.id"
-        class="medium-weight flex align-center text-muted gap-03"
+        class="nav-item medium-weight flex align-center text-muted gap-03"
         :class="{ active: item.id === selectedItem }"
         :href="item.href"
     >
@@ -19,7 +19,7 @@
 </template>
 
 <style scoped>
-  nav {
+ .main-nav-bar {
     position: fixed;
     bottom: 1.5em;
     left: 50%;
@@ -37,7 +37,7 @@
     animation: fade-in-upper 1s ease;
   }
 
-  a {
+  .nav-item {
     border: none;
     background: none;
 
@@ -50,20 +50,23 @@
     cursor: pointer;
   }
 
-  a.active,
-  a:hover,
-  a:active,
-  a:focus{
+  .nav-item.active,
+  .nav-item:focus {
+    background: var(--color-bg-subtle);
+  }
+
+  .nav-item:hover,
+  .nav-item:focus {
     background: var(--color-bg-primary-hover);
   }
 
-  a:hover,
-  a:active {
+  .nav-item:hover,
+  .nav-item:active {
     transform: scale(1.05);
   }
 
   @media(max-width: 768px) {
-    nav a .label {
+    .nav-item .label {
       display: none;
     }
   }
@@ -80,7 +83,7 @@
   }
 
   /* DARK MODE */
-  .dark nav {
+  .dark .main-nav-bar {
     box-shadow: var(--shadow-md);
   }
 </style>

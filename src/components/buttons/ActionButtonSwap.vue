@@ -35,11 +35,7 @@
 </template>
 
 <style scoped>
-  a {
-    text-decoration: none;
-  }
-
-  .action-btn-swap {
+ .action-btn-swap {
     position: relative;
 
     display: inline-flex;
@@ -155,7 +151,7 @@
   const computedFontSize = computed(() => {
     return props.fontSize === "normal"
         ? { fontSize: `var(--font-button-lg)` }
-        : { fontSize: `var(--font-button-md)` };
+        : { fontSize: `var(--font-button-sm)` };
   })
 
   const isButton = computed<boolean>(() => props.tag === 'button')
